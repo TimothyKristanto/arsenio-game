@@ -9,36 +9,27 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.arsenio.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextView textBtnMoveRegister;
-    Button buttonMasukLogin;
+    private TextInputLayout txtInputEmail, txtInputPassword;
+    private Button btnMasukLogin, btnDaftar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        onClickListener();
-
+        initView();
+        setListener();
     }
 
-    public void onClickListener(){
-        initView();
-        textBtnMoveRegister.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-            startActivity(intent);
-            finish();
-        });
+    public void setListener(){
 
-        buttonMasukLogin.setOnClickListener(v -> {
-            //Login Logic
-        });
     }
 
     private void initView() {
-        textBtnMoveRegister = findViewById(R.id.textBtnMoveRegister);
-        buttonMasukLogin = findViewById(R.id.buttonMasukLogin);
+
     }
 }

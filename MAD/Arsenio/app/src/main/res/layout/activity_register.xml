@@ -49,7 +49,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/judul" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/InputNamaRegister"
+                android:id="@+id/txtInputNamaRegister"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="72dp"
@@ -76,15 +76,15 @@
                 android:textColor="@color/wood_brown_dark2"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/InputNamaRegister"
-                app:layout_constraintTop_toBottomOf="@+id/InputNamaRegister" />
+                app:layout_constraintStart_toStartOf="@+id/txtInputNamaRegister"
+                app:layout_constraintTop_toBottomOf="@+id/txtInputNamaRegister" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/InputEmailRegister"
+                android:id="@+id/txtInputEmailRegister"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/wood_brown_light3"
-                app:layout_constraintEnd_toEndOf="@+id/InputNamaRegister"
+                app:layout_constraintEnd_toEndOf="@+id/txtInputNamaRegister"
                 app:layout_constraintStart_toStartOf="@+id/tampilan2"
                 app:layout_constraintTop_toBottomOf="@+id/tampilan2">
 
@@ -106,15 +106,15 @@
                 android:textColor="@color/wood_brown_dark2"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/InputEmailRegister"
-                app:layout_constraintTop_toBottomOf="@+id/InputEmailRegister" />
+                app:layout_constraintStart_toStartOf="@+id/txtInputEmailRegister"
+                app:layout_constraintTop_toBottomOf="@+id/txtInputEmailRegister" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/InputPassRegister"
+                android:id="@+id/txtInputPasswordRegister"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:textColorHint="@color/wood_brown_light3"
-                app:layout_constraintEnd_toEndOf="@+id/InputEmailRegister"
+                app:layout_constraintEnd_toEndOf="@+id/txtInputEmailRegister"
                 app:layout_constraintStart_toStartOf="@+id/tampilan3"
                 app:layout_constraintTop_toBottomOf="@+id/tampilan3"
                 app:passwordToggleEnabled="true"
@@ -139,15 +139,15 @@
                 android:textColor="@color/wood_brown_dark2"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/InputPassRegister"
-                app:layout_constraintTop_toBottomOf="@+id/InputPassRegister" />
+                app:layout_constraintStart_toStartOf="@+id/txtInputPasswordRegister"
+                app:layout_constraintTop_toBottomOf="@+id/txtInputPasswordRegister" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/InputKonfPassRegister"
+                android:id="@+id/txtInputKonfirmasiPasswordRegister"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:textColorHint="@color/wood_brown_light3"
-                app:layout_constraintEnd_toEndOf="@+id/InputPassRegister"
+                app:layout_constraintEnd_toEndOf="@+id/txtInputPasswordRegister"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/tampilan4"
                 app:layout_constraintTop_toBottomOf="@+id/tampilan4"
@@ -164,7 +164,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/ButtonDaftarRegister"
+                android:id="@+id/btnDaftarRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -175,21 +175,21 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/InputKonfPassRegister" />
+                app:layout_constraintTop_toBottomOf="@+id/txtInputKonfirmasiPasswordRegister" />
 
             <TextView
-                android:id="@+id/TextBtnMoveLogin"
+                android:id="@+id/txtLoginRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login"
                 android:textColor="@color/wood_brown_light2"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/ButtonDaftarRegister"
-                app:layout_constraintEnd_toEndOf="@+id/InputKonfPassRegister"
+                app:layout_constraintBottom_toBottomOf="@+id/btnDaftarRegister"
+                app:layout_constraintEnd_toEndOf="@+id/txtInputKonfirmasiPasswordRegister"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/ButtonDaftarRegister"
-                app:layout_constraintTop_toTopOf="@+id/ButtonDaftarRegister" />
+                app:layout_constraintStart_toEndOf="@+id/btnDaftarRegister"
+                app:layout_constraintTop_toTopOf="@+id/btnDaftarRegister" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
