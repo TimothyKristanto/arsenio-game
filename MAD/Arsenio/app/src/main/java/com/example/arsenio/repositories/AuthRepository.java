@@ -2,6 +2,7 @@ package com.example.arsenio.repositories;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.arsenio.models.RegisterResponse;
@@ -68,6 +69,7 @@ public class AuthRepository {
                 if(response.isSuccessful()){
                     if(response.code() == 200){
                         if(response.body() != null){
+                            Log.d(TAG, "onResponse: " + response.body().getAccess_token());
                             loginResult.postValue(response.body());
                         }
                     }

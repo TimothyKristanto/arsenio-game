@@ -1,13 +1,13 @@
-package com.example.arsenio.View;
+package com.example.arsenio.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,7 +17,6 @@ import com.example.arsenio.R;
 import com.example.arsenio.helper.SharedPreferenceHelper;
 import com.example.arsenio.models.TokenResponse;
 import com.example.arsenio.viewmodels.AuthViewModel;
-import com.example.arsenio.views.MainActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onChanged(TokenResponse tokenResponse) {
             if(tokenResponse != null) {
+                sharedPreferenceHelper.saveAccessToken(tokenResponse.getAuthorization());
+                Log.d(TAG, "token: " + sharedPreferenceHelper.getAccessToken());
                 Toast.makeText(LoginActivity.this, "Login berhasil!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
