@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/xampp/htdocs/uas-mad-webdev-db-project/MAD/Arsenio/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/xampp/htdocs/uas-mad-webdev-db-project/MAD/Arsenio/app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="..\:/xampp/htdocs/uas-mad-webdev-db-project/MAD/Arsenio/app/src/main/res/layout/activity_login.xml" value="0.25025641025641027" />
+        <entry key="..\:/xampp/htdocs/uas-mad-webdev-db-project/MAD/Arsenio/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/xampp/htdocs/uas-mad-webdev-db-project/MAD/Arsenio/app/src/main/res/layout/activity_register.xml" value="0.25025641025641027" />
       </map>
     </option>
   </component>
