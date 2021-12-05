@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.RegisterActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/judul"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Daftarkan Dirimu dan Jadilah Legenda!"
+                android:textColor="@color/wood_brown_dark2"
+                android:textSize="20sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tampilan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="72dp"
+                android:layout_marginTop="12dp"
+                android:text="Nama :"
+                android:textColor="@color/wood_brown_dark2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/judul" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputNamaRegister"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="72dp"
+                android:textColorHint="@color/wood_brown_light3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tampilan"
+                app:layout_constraintTop_toBottomOf="@+id/tampilan">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#00000000"
+                    android:hint="Isikan nama yang mencerminkan kepahlawananmu!"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tampilan2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:text="Email:"
+                android:textColor="@color/wood_brown_dark2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/InputNamaRegister"
+                app:layout_constraintTop_toBottomOf="@+id/InputNamaRegister" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputEmailRegister"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/wood_brown_light3"
+                app:layout_constraintEnd_toEndOf="@+id/InputNamaRegister"
+                app:layout_constraintStart_toStartOf="@+id/tampilan2"
+                app:layout_constraintTop_toBottomOf="@+id/tampilan2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#00000000"
+                    android:hint="Masukkan alamat surat elektronikmu!"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tampilan3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:text="Kata Sandi:"
+                android:textColor="@color/wood_brown_dark2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/InputEmailRegister"
+                app:layout_constraintTop_toBottomOf="@+id/InputEmailRegister" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputPassRegister"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:textColorHint="@color/wood_brown_light3"
+                app:layout_constraintEnd_toEndOf="@+id/InputEmailRegister"
+                app:layout_constraintStart_toStartOf="@+id/tampilan3"
+                app:layout_constraintTop_toBottomOf="@+id/tampilan3"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/wood_brown_dark1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:hint="Sstt! Jaga rahasia kata sandimu ya!"
+                    android:inputType="textPassword"
+                    android:password="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tampilan4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:text="Konfirmasi Kata Sandi:"
+                android:textColor="@color/wood_brown_dark2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/InputPassRegister"
+                app:layout_constraintTop_toBottomOf="@+id/InputPassRegister" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputKonfPassRegister"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:textColorHint="@color/wood_brown_light3"
+                app:layout_constraintEnd_toEndOf="@+id/InputPassRegister"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tampilan4"
+                app:layout_constraintTop_toBottomOf="@+id/tampilan4"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/wood_brown_dark1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:hint="Coba ulangi lagi, pastikan tidak ada salah penulisan ya!"
+                    android:inputType="textPassword"
+                    android:password="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/ButtonDaftarRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:backgroundTint="#00000000"
+                android:text="Daftar"
+                android:textColor="@color/wood_brown_dark2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/InputKonfPassRegister" />
+
+            <TextView
+                android:id="@+id/TextBtnMoveLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textColor="@color/wood_brown_light2"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ButtonDaftarRegister"
+                app:layout_constraintEnd_toEndOf="@+id/InputKonfPassRegister"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/ButtonDaftarRegister"
+                app:layout_constraintTop_toTopOf="@+id/ButtonDaftarRegister" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

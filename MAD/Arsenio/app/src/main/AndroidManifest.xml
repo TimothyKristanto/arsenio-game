@@ -10,6 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Arsenio">
         <activity
+            android:name=".View.LoginActivity"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".View.RegisterActivity"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+
+        <activity
             android:name=".views.MainActivity"
             android:exported="true">
             <intent-filter>
