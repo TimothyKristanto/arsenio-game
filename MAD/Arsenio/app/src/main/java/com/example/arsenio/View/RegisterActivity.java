@@ -55,6 +55,16 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        txtLoginRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private Observer<RegisterResponse> showRegisterResult = new Observer<RegisterResponse>() {

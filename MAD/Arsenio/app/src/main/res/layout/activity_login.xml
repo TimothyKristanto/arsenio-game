@@ -11,10 +11,10 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="SpeakableTextPresentCheck">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,7 +68,6 @@
                 android:id="@+id/tampilan5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="24dp"
                 android:text="Kata Sandi:"
                 android:textColor="@color/wood_brown_dark1"
@@ -99,7 +98,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/buttonMasukLogin"
+                android:id="@+id/btnMasukLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="42dp"
@@ -115,17 +114,18 @@
                 app:layout_constraintVertical_bias="1.0" />
 
             <TextView
-                android:id="@+id/textBtnMoveRegister"
+                android:id="@+id/txtDaftarLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="80dp"
                 android:text="Daftar"
                 android:textColor="@color/wood_brown_light2"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/buttonMasukLogin"
+                app:layout_constraintBottom_toBottomOf="@+id/btnMasukLogin"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/buttonMasukLogin" />
+                app:layout_constraintTop_toTopOf="@+id/btnMasukLogin"
+                app:layout_constraintVertical_bias="0.666" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
