@@ -37,7 +37,10 @@ public class AuthRepository {
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
                 if(response.isSuccessful()){
                     if(response.code() == 200){
+                        Log.d(TAG, "onResponse: " + response.code());
+
                         if(response.body() != null){
+                            Log.d(TAG, "onResponse: " + response.body());
                             registerResult.postValue(response.body());
                         }
                     }

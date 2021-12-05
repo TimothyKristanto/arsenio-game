@@ -70,7 +70,15 @@ public class RegisterActivity extends AppCompatActivity {
     private Observer<RegisterResponse> showRegisterResult = new Observer<RegisterResponse>() {
         @Override
         public void onChanged(RegisterResponse registerResponse) {
-            Toast.makeText(RegisterActivity.this, "Register berhasil!", Toast.LENGTH_SHORT).show();
+            if(registerResponse != null) {
+                Toast.makeText(RegisterActivity.this, "Register berhasil!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }else{
+                Toast.makeText(RegisterActivity.this, "Register gagal!", Toast.LENGTH_SHORT).show();
+            }
         }
     };
 
