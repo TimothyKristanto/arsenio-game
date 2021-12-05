@@ -41,7 +41,7 @@ class LoginController extends Controller
                             'is_login'=>'1',
                         ]);
     
-                        $response = Http::asForm()->post('http://art.test/oauth/token', [
+                        $response = Http::asForm()->post('http://arsenio.test/oauth/token', [
                             'grant_type' => 'password',
                             'client_id' => $this->client->id,
                             'client_secret' => $this->client->secret,
@@ -88,7 +88,7 @@ class LoginController extends Controller
             'refresh_token'=>'refresh token diperlukan',
         ]);
 
-        $response = Http::asForm()->post('http://art.test/oauth/token', [
+        $response = Http::asForm()->post('http://arsenio.test/oauth/token', [
             'grant_type' => 'refresh_token',
             'refresh_token' => $request->refresh_token,
             'client_id' => $this->client->id,

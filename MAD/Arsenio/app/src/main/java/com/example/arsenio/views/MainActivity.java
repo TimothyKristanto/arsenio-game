@@ -1,8 +1,10 @@
-package com.example.arsenio;
+package com.example.arsenio.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.arsenio.R;
 
 public class MainActivity extends AppCompatActivity {
 
