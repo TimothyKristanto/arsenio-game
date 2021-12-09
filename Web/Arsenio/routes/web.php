@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -20,3 +21,5 @@ Route::get('/', [LoginController::class, 'index']);
 Route::post('/', [LoginController::class, 'login']);
 
 Route::resource('register', RegisterController::class);
+
+Route::resource('home', HomeController::class);

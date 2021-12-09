@@ -12,6 +12,18 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+    <style name="AppTheme" parent="Theme.Arsenio">
+        <item name="android:textViewStyle">@style/MedievalSharpTextViewStyle</item>
+        <item name="android:buttonStyle">@style/MedievalSharpButtonStyle</item>
+    </style>
+    <style name="MedievalSharpTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/medievalsharp</item>
+    </style>
+    <style name="MedievalSharpButtonStyle" parent="android:Widget.Button">
+        <item name="android:fontFamily">@font/medievalsharp</item>
     </style>
 
 <!--    <style name="Theme.Arsenio" parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
