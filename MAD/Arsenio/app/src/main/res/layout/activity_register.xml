@@ -54,7 +54,7 @@
                 android:id="@+id/txtInputNamaRegister"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="45dp"
                 android:textColorHint="@color/wood_brown_light3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tampilan"
@@ -62,7 +62,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:background="#00000000"
                     android:inputType="text"
                     tools:ignore="SpeakableTextPresentCheck" />
@@ -91,7 +91,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:background="#00000000"
                     android:inputType="textEmailAddress"
                     tools:ignore="SpeakableTextPresentCheck" />
@@ -122,7 +122,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:background="#00000000"
                     android:inputType="textPassword"
                     android:password="true"
@@ -155,7 +155,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:background="#00000000"
                     android:inputType="textPassword"
                     android:password="true" />
@@ -169,8 +169,10 @@
                 android:layout_marginBottom="8dp"
                 android:backgroundTint="@color/wood_brown_dark2"
                 android:enabled="true"
+                android:fontFamily="@font/medievalsharp"
                 android:text="Daftar"
                 android:textColor="@color/wood_brown_light2"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/txtInputKonfirmasiPasswordRegister"
                 app:layout_constraintStart_toStartOf="@+id/txtInputKonfirmasiPasswordRegister"
@@ -183,7 +185,7 @@
         android:id="@+id/txtLoginRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
+        android:layout_marginEnd="117dp"
         android:layout_marginBottom="8dp"
         android:text="Login"
         android:textColor="@color/wood_brown_light2"
