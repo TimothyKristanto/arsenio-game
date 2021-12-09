@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AbyssController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -22,4 +23,7 @@ Route::post('/', [LoginController::class, 'login']);
 
 Route::resource('register', RegisterController::class);
 
+
 Route::resource('home', HomeController::class);
+
+Route::get('/abyss', [AbyssController::class, 'index']);
