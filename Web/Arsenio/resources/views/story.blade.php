@@ -12,7 +12,7 @@
         <button type="button" class="btn btn-primary">1-5</button>
     </div>
     
-
+@include('template.footer')
 </body>
 
 
