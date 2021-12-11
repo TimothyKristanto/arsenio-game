@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AbyssController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -24,3 +25,5 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 Route::resource('register', RegisterController::class)->middleware('guest');
 
 Route::resource('home', HomeController::class)->middleware('auth');
+
+Route::get('/abyss', [AbyssController::class, 'index']);
