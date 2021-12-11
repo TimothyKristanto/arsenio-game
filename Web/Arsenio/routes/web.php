@@ -19,15 +19,14 @@ use App\Http\Controllers\StoryController;
 */
 
 
-Route::get('/', [LoginController::class, 'index']);
+Route::get('/', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
-Route::resource('register', RegisterController::class);
+Route::resource('register', RegisterController::class)->middleware('guest');
 
-
-Route::resource('home', HomeController::class);
-
-Route::get('/abyss', [AbyssController::class, 'index']);
-
+Route::resource('home', HomeController::class)->middleware('auth');
 
 Route::get('/story', [StoryController::class, 'index']);
+
+Route::get('/abyss', [AbyssController::class, 'index'])->middleware('auth');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,7 @@ class RegisterController extends Controller
                 'password'=>'required|min:8'
             ]);
         
-            User::create([
+            $user = User::create([
                 'name'=>$request->name,
                 'email'=>$request->email,
                 'password'=>bcrypt($request->password),
@@ -55,6 +56,15 @@ class RegisterController extends Controller
                 'is_login'=>'0',
                 'is_active'=>'1'
             ]);
+
+            // Student::create([
+            //     'story_on_progress'=>1,
+            //     'exp_id'=>1,
+            //     'user_id'=>$user->id,
+            //     'golds'=>0,
+            //     'total_exp'=>0,
+            //     'abyss_point'=>0
+            // ]);
     
             return redirect('/');
         }else{

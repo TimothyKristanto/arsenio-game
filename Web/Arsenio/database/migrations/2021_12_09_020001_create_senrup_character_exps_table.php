@@ -17,7 +17,7 @@ class CreateSenrupCharacterExpsTable extends Migration
             $table->id('exp_id');
             $table->integer('health');
             $table->bigInteger('level_up_exp');
-            $table->bigInteger('damage');
+            $table->integer('damage');
             $table->timestamps();
         });
     }
