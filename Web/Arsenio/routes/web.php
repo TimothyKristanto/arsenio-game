@@ -17,9 +17,10 @@ use App\Http\Controllers\RegisterController;
 */
 
 
-Route::get('/', [LoginController::class, 'index']);
+Route::get('/', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
-Route::resource('register', RegisterController::class);
+Route::resource('register', RegisterController::class)->middleware('guest');
 
-Route::resource('home', HomeController::class);
+Route::resource('home', HomeController::class)->middleware('auth');
