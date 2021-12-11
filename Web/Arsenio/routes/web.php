@@ -5,6 +5,7 @@ use App\Http\Controllers\AbyssController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\StoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +26,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 Route::resource('register', RegisterController::class)->middleware('guest');
 
 Route::resource('home', HomeController::class)->middleware('auth');
+
+Route::get('/story', [StoryController::class, 'index']);
 
 Route::get('/abyss', [AbyssController::class, 'index'])->middleware('auth');
