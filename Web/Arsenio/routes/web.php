@@ -5,6 +5,7 @@ use App\Http\Controllers\AbyssController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\StoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,6 @@ Route::resource('register', RegisterController::class);
 Route::resource('home', HomeController::class);
 
 Route::get('/abyss', [AbyssController::class, 'index']);
+
+
+Route::get('/story', [StoryController::class, 'index']);
