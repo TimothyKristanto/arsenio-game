@@ -15,7 +15,7 @@ class CreateSenrupStudentsTable extends Migration
     {
         Schema::create('senrup_students', function (Blueprint $table) {
             $table->id('student_id');
-            $table->string('finished_story');
+            $table->unsignedBigInteger('story_on_progress');
             $table->bigInteger('golds');
             $table->bigInteger('total_exp');
             $table->bigInteger('abyss_point');
@@ -32,6 +32,11 @@ class CreateSenrupStudentsTable extends Migration
 
             $table->foreign('user_id')
             ->references('id')->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
+            $table->foreign('story_on_progress')
+            ->references('story_id')->on('senrup_stories')
             ->onDelete('cascade')
             ->onUpdate('cascade');
         });
