@@ -1,9 +1,13 @@
 <div class="footer">
     <div class="float-start">
-        <img src="/images/ShopIcon.png" class="shop">
+        <a href="#">
+            <img src="/images/ShopIcon.png" class="shop">
+        </a>
     </div>
     
     <div class="float-end">
-        <img src="/images/AbyssIcon.png" class="abyss">
+        <a href="/abyss">
+            <img src="/images/AbyssIcon.png" class="abyss">
+        </a>
     </div>
 </div>

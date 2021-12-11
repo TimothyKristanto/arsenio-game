@@ -26,4 +26,4 @@ Route::resource('register', RegisterController::class)->middleware('guest');
 
 Route::resource('home', HomeController::class)->middleware('auth');
 
-Route::get('/abyss', [AbyssController::class, 'index']);
+Route::get('/abyss', [AbyssController::class, 'index'])->middleware('auth');
