@@ -1,7 +1,6 @@
 body {
     font-family: "MedievalSharp", cursive;
     font-weight: bolder;
-
     overflow: hidden;
 }
 
@@ -185,9 +184,6 @@ nav {
     background: url("/images/backgroundAbyss.png") no-repeat center center fixed;
     background-repeat: no-repeat;
     background-size: cover;
-    font-family: "MedievalSharp", cursive;
-    font-weight: bolder;
-
     overflow: hidden;
 }
 
@@ -195,4 +191,36 @@ nav {
     top: 210px;
     left: 245px;
     position: relative;
+}
+
+.story-bg {
+    background: url("/images/StoryHutan.png") no-repeat center center fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background-color: #7f4f24;
+    border: none;
+    padding: 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 80px;
+    margin: 0px 17px;
+    border-radius: 50%;
+    width: 200px;
+}
+
+.btn-primary:hover {
+    background-color: #7f4f24;
+}
+
+.container {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
