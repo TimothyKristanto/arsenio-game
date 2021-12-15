@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Story;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class RegisterController extends Controller
     {
         //
         return view('register', [
-
+            
         ]);
     }
 
@@ -57,6 +58,15 @@ class RegisterController extends Controller
                 'is_active'=>'1'
             ]);
 
+            Student::create([
+                'story_on_progress'=>1,
+                'exp_id'=>1,
+                'user_id'=>$user->id,
+                'golds'=>0,
+                'total_exp'=>0,
+                'abyss_point'=>0
+            ]);
+
             // Student::create([
             //     'story_on_progress'=>1,
             //     'exp_id'=>1,
@@ -92,7 +102,7 @@ class RegisterController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
         //
     }
@@ -104,7 +114,7 @@ class RegisterController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
         //
     }

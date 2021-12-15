@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
-use App\Models\User;
+use App\Models\StoryLevel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class BattleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,14 +15,8 @@ class HomeController extends Controller
     public function index()
     {
         //
-        $student = Student::where('user_id', Auth::id())->first();
-
-        $user = User::findOrFail(Auth::id())->first();
-
-        return view('home', [
-            'page'=>'BERANDA',
-            'student'=>$student,
-            'user'=>$user
+        return view('battle', [
+            
         ]);
     }
 
@@ -52,10 +44,10 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\StoryLevel  $storyLevel
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
         //
     }
@@ -63,10 +55,10 @@ class HomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\StoryLevel  $storyLevel
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
         //
     }
@@ -75,10 +67,10 @@ class HomeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\StoryLevel  $storyLevel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -86,10 +78,10 @@ class HomeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\StoryLevel  $storyLevel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(StoryLevel $storyLevel)
     {
         //
     }

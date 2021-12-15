@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AbyssController;
+use App\Http\Controllers\BattleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -27,6 +28,8 @@ Route::resource('register', RegisterController::class)->middleware('guest');
 
 Route::resource('home', HomeController::class)->middleware('auth');
 
-Route::get('/story', [StoryController::class, 'index']);
+Route::get('/story/{id}', [StoryController::class, 'index'])->middleware('auth');
 
 Route::get('/abyss', [AbyssController::class, 'index'])->middleware('auth');
+
+Route::resource('battle', BattleController::class);
