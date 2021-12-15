@@ -95,7 +95,6 @@ nav {
 .home-bg {
     background: url("/images/TavernBG.png") no-repeat center center fixed;
     background-size: cover;
-
     overflow: hidden;
 }
 
@@ -207,7 +206,7 @@ nav {
 }
 
 .btn-primary:hover {
-    background-color: #7f4f24;
+    background-color: #e9aa4c;
 }
 
 .container {
