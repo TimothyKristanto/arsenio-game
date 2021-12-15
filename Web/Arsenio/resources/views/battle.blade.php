@@ -26,7 +26,7 @@
 <body>
     
     <div class="battle-area">
-        <a href="/story" class="pause-battle btn btn-danger">
+        <a href="#" onclick="history.back()" class="pause-battle btn btn-danger">
             Exit
         </a>
         <img src="/images/BattleCharacter.png" class="battle-character">
