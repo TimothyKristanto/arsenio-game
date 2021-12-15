@@ -4,6 +4,13 @@ body {
     overflow: hidden;
 }
 
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+}
+
 nav {
     background-color: #f4bc73;
 }
@@ -41,7 +48,6 @@ nav {
 }
 
 .logout {
-    color: #7f4f24;
     font-size: 20px;
     margin-top: -3px;
 }
@@ -53,16 +59,49 @@ nav {
 .story-carousel {
     height: 500px;
     margin-top: 30px;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 28%;
+    margin-right: 28%;
 }
 
 .carousel-image {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 70px;
-    width: 85%;
+    margin-top: 90px;
+    width: 95%;
+    transition: 0.3s;
+}
+
+.story-icon {
+    font-size: 30px;
+    margin-top: 20px;
+    margin-right: 10px;
+    transition: 0.3s;
+    background-color: #7f4f24;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.story-icon:hover {
+    transform: scale(1.2);
+    transition: 0.3s;
+}
+
+.story-desc {
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.story-text {
+    font-size: 20px;
+    font-family: "MedievalSharp", cursive;
+    font-weight: bolder;
+}
+
+.carousel-image:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
 }
 
 .carousel-caption {
@@ -70,13 +109,22 @@ nav {
 }
 
 .story-progress {
-    margin-left: 29%;
+    margin-left: 350px;
     margin-top: 2px;
 }
 
 .abyss-score {
     margin-top: 2px;
-    margin-left: 33%;
+    margin-left: 150px;
+    width: 300px;
+}
+
+.disabled-link {
+    opacity: 0.5;
+}
+
+.disabled-link:hover {
+    transform: scale(1) !important;
 }
 
 .footer {
@@ -90,6 +138,12 @@ nav {
     background-color: transparent;
     border-color: transparent;
     margin-top: -2px;
+    transition: 0.3s;
+}
+
+.btn-logout:hover {
+    color: #7f4f24;
+    transition: 0.3s;
 }
 
 .home-bg {
@@ -137,7 +191,7 @@ nav {
 
 .chara-level-text {
     color: white;
-    margin-right: 30px;
+    margin-right: 18px;
 }
 
 .carousel-control-prev-icon,
@@ -185,9 +239,14 @@ nav {
     position: relative;
 }
 
-.story-bg {
+.story-bg1 {
     background: url("/images/StoryHutan.png") no-repeat center center fixed;
-    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.story-bg2 {
+    background: url("/images/StoryGua.png") no-repeat center center fixed;
     background-size: cover;
     overflow: hidden;
 }
@@ -199,13 +258,16 @@ nav {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 80px;
+    font-size: 65px;
     margin: 0px 17px;
     border-radius: 50%;
-    width: 200px;
+    width: 180px;
+    transition: 0.3s;
 }
 
 .btn-primary:hover {
+    transform: scale(1.2);
+    transition: 0.3s;
     background-color: #e9aa4c;
 }
 
@@ -214,5 +276,129 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 60vh;
+}
+
+.character-hp {
+    position: absolute;
+    top: 357px;
+    left: 80px;
+    font-size: 30px;
+}
+
+.question {
+    color: white;
+    font-size: 18px;
+}
+
+.btn-answer {
+    background-color: #f4bc73;
+    font-size: 17px;
+    margin-top: 15px;
+    width: 250px;
+    transition: 0.3s;
+    font-weight: bolder;
+}
+
+.btn-answer:hover {
+    background-color: #ee9a2c;
+    transition: 0.3s;
+}
+
+.item2 {
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.btn-answer-left {
+    margin-left: 100px;
+    clear: both;
+    float: left;
+}
+
+.btn-answer-right {
+    margin-right: 100px;
+    float: right;
+}
+
+.pause-battle {
+    position: absolute;
+    top: 15px;
+    width: 80px;
+    left: 15px;
+}
+
+.enemy-hp {
+    position: absolute;
+    top: 357px;
+    right: 80px;
+    font-size: 30px;
+}
+
+.battle-character {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    z-index: 1;
+    top: 170px;
+    left: 150px;
+    float: left;
+}
+
+.heart-icon {
+    color: red;
+}
+
+.battle-enemy {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    right: 150px;
+    top: 170px;
+}
+
+.battle-background {
+    width: 100%;
+    height: 400px;
+    z-index: -1;
+}
+
+.question-area {
+    background-color: #7f4f24;
+    height: 1000px;
+}
+
+.home-icon {
+    font-size: 20px;
+    margin-left: 5px;
+    text-decoration: none;
+    color: black;
+    transition: 0.3s;
+}
+
+.back-icon {
+    font-size: 20px;
+    margin-right: 5px;
+    text-decoration: none;
+    color: black;
+    transition: 0.3s;
+}
+
+.back-icon:hover {
+    color: #7f4f24;
+    transition: 0.3s;
+}
+
+.home-icon:hover {
+    color: #7f4f24;
+    transition: 0.3s;
+}
+
+.battle-items {
+    clear: both;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
 }
