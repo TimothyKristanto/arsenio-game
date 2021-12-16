@@ -16,7 +16,7 @@
     
               <h6 class="username">{{ $user->name }}</h6>
               
-              <h6 class="story-progress">Story: Chapter {{ $student->story_on_progress }}</h6>
+              <h6 class="story-progress">Story: Chapter {{ floor($student->story_level_progress / 10) }}</h6>
   
               <h6 class="abyss-score text-end">Abyss Score: {{ $student->abyss_point }}</h6>
             
@@ -39,12 +39,12 @@
                 </a>
               </div>
               <div class="carousel-item">
-                @if ($student->story_on_progress >= 2)  
+                @if ($student->story_level_progress >= 20)  
                   <a href="/story/2/f">
                     <img src="/images/Story2BG.png" class="carousel-image">
                   </a>
                 @else
-                  <img src="/images/Story2BGLocked.png" class="carousel-image disabled-link">
+                  <img src="/images/Story2BGLocked.png" id="locked-story" class="carousel-image">
                 @endif
               </div>
             </div>

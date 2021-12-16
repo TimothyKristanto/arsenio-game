@@ -29,6 +29,10 @@
         <a href="#" onclick="history.back()" class="pause-battle btn btn-danger">
             Exit
         </a>
+        <div class="question-countdown">
+            <h1><i class="fas fa-hourglass-half"></i></h1> &nbsp; &nbsp;
+            <h1>30</h1>
+        </div>
         <img src="/images/BattleCharacter.png" class="battle-character">
         <img src="/images/MonsterSkeleton.png" class="battle-enemy">
         <div class="character-hp">
@@ -73,16 +77,16 @@
         </form>
 
         <div class="battle-items">
-            <div class="">
-                <img src="/images/Scroll.png" width="80" height="80">
+            <div class="item">
+                <img src="/images/BandageItem.png" width="80" height="80">
                 <h4 class="text-center">0</h4>
             </div>
-            <div class="item2">
-                <img src="/images/Scroll.png" width="80" height="80">
+            <div class="item2 item">
+                <img src="/images/HourglassItem.png" width="80" height="80">
                 <h4 class="text-center">0</h4>
             </div>
-            <div class="">
-                <img src="/images/Scroll.png" width="80" height="80">
+            <div class="item">
+                <img src="/images/JamuItem.png" width="80" height="80">
                 <h4 class="text-center">0</h4>  
             </div>
         </div>

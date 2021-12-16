@@ -30,10 +30,6 @@ class LoginController extends Controller
             if($check->is_active == '1'){
                 if($check->is_login =='0'){
                     if(Auth::attempt($dataValidation)){
-                        User::findOrFail(Auth::id())->update([
-                            'is_login'=>'1'
-                        ]);
-
                         $request->session()->regenerate();
                         return redirect()->intended('/home');
                     }
@@ -51,10 +47,6 @@ class LoginController extends Controller
     }
 
     public function logout(Request $request){
-        User::findOrFail(Auth::id())->update([
-            'is_login'=>'0'
-        ]);
-
         Auth::logout();
 
         $request->session()->invalidate();
