@@ -12,8 +12,18 @@
     @endif
     "
 >
+    @if(session()->has('storyDesc'))
+        <div class="d-flex justify-content-end">
+            <div class="alert alert-warning alert-dismissible fade show story-desc-alert" role="alert">
+                {{ session('storyDesc') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        
+    @endif
+
     <div class="story-desc text-end">
-        <a href="#">
+        <a href="/story/{{ $story->story_id }}/t">
             <i class="fas fa-book text-center story-icon">
                 <br> <span class="story-text">Story</span> 
             </i> 

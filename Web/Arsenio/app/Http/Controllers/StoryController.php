@@ -10,10 +10,14 @@ use App\Models\Story;
 class StoryController extends Controller
 {
 
-    public function index($id){
-        $student = Student::where('user_id', Auth::id())->first();
+    public function index($id, $storyDesc){
+        $student = Student::where('user_id', Auth::user()->id)->first();
 
         $story = Story::where('story_id', $id)->first();
+
+        if($storyDesc == 't'){
+            return back()->with('storyDesc', $story->story_desc);
+        }
 
         return view('story', [
             'page' => 'STORY MODE',

@@ -16,11 +16,124 @@ class CharacterExpSeeder extends Seeder
     {
         //
         DB::table('senrup_character_exps')->insert([
-            'health'=>100,
-            'level_up_exp'=>5,
-            'damage'=>20,
+            'health'=>105,
+            'level_up_exp'=>10,
+            'damage'=>25,
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>110,
+            'level_up_exp'=>15,
+            'damage'=>25,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>115,
+            'level_up_exp'=>25,
+            'damage'=>30,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>130,
+            'level_up_exp'=>40,
+            'damage'=>35,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>140,
+            'level_up_exp'=>60,
+            'damage'=>40,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>145,
+            'level_up_exp'=>90,
+            'damage'=>45,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>150,
+            'level_up_exp'=>140,
+            'damage'=>50,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>160,
+            'level_up_exp'=>190,
+            'damage'=>55,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>170,
+            'level_up_exp'=>250,
+            'damage'=>60,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>180,
+            'level_up_exp'=>310,
+            'damage'=>65,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>190,
+            'level_up_exp'=>380,
+            'damage'=>70,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>200,
+            'level_up_exp'=>450,
+            'damage'=>75,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>200,
+            'level_up_exp'=>530,
+            'damage'=>85,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>210,
+            'level_up_exp'=>610,
+            'damage'=>90,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>210,
+            'level_up_exp'=>700,
+            'damage'=>100,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
     }
 }

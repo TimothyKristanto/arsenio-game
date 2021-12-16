@@ -29,7 +29,7 @@ Route::resource('register', RegisterController::class)->middleware('guest');
 
 Route::resource('home', HomeController::class)->middleware('auth');
 
-Route::get('/story/{id}', [StoryController::class, 'index'])->middleware('auth');
+Route::get('/story/{id}/{storyDesc}', [StoryController::class, 'index'])->middleware('auth');
 
 Route::get('/abyss', [AbyssController::class, 'index'])->middleware('auth');
 

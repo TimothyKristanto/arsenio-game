@@ -5,18 +5,20 @@
 @section('mainContent')
     <body class="home-bg">
         <div class="profile rounded-pill">
-
-            <form action="/logout" method="POST" class="logout mx-3">
-                @csrf
-                <button type="submit" class="btn-logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-               
-            </form>
+            
+              <form action="/logout" method="POST" class="logout mx-3">
+                  @csrf
+                  <button type="submit" class="btn-logout">
+                      <i class="fas fa-sign-out-alt"></i>
+                  </button>
+                
+              </form>
     
-            <h6 class="username">{{ $user->name }}</h6>
-            <h6 class="story-progress">Story: Chapter {{ $student->story_on_progress }}</h6>
-            <h6 class="abyss-score text-end">Abyss Score: {{ $student->abyss_point }}</h6>
+              <h6 class="username">{{ $user->name }}</h6>
+              
+              <h6 class="story-progress">Story: Chapter {{ $student->story_on_progress }}</h6>
+  
+              <h6 class="abyss-score text-end">Abyss Score: {{ $student->abyss_point }}</h6>
             
         </div>
 
@@ -32,17 +34,17 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <a href="/story/1">
+                <a href="/story/1/f">
                   <img src="/images/Story1BG.png" class="carousel-image">
                 </a>
               </div>
               <div class="carousel-item">
                 @if ($student->story_on_progress >= 2)  
-                  <a href="/story/2">
+                  <a href="/story/2/f">
                     <img src="/images/Story2BG.png" class="carousel-image">
                   </a>
                 @else
-                  <img src="/images/Story2BG.png" class="carousel-image disabled-link">
+                  <img src="/images/Story2BGLocked.png" class="carousel-image disabled-link">
                 @endif
               </div>
             </div>
