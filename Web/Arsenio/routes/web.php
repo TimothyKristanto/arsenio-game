@@ -6,6 +6,7 @@ use App\Http\Controllers\BattleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StoryController;
 
 /*
@@ -33,3 +34,5 @@ Route::get('/story/{id}', [StoryController::class, 'index'])->middleware('auth')
 Route::get('/abyss', [AbyssController::class, 'index'])->middleware('auth');
 
 Route::resource('battle', BattleController::class);
+
+Route::resource('shop', ShopController::class);
