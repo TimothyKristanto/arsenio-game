@@ -10,7 +10,7 @@ class AbyssController extends Controller
 {
 
     public function index(){
-        $student = Student::where('user_id', Auth::id())->first();
+        $student = Student::where('user_id', Auth::user()->id)->first();
 
         return view('abyss', [
             'page'=>'ABYSS',

@@ -14,7 +14,6 @@ class Enemy extends Model
     protected $fillable = [
         'name',
         'image',
-        'health',
         'damage'
     ];
 

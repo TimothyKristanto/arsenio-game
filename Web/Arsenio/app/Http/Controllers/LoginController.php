@@ -13,16 +13,6 @@ class LoginController extends Controller
 {
     //
     public function index(){
-        
-        if(Auth::id() != null){
-            $student = Student::where('user_id', Auth::id())->first();
-
-            return view('home', [
-                'page'=>'BERANDA',
-                'student'=>$student
-            ]);
-        }
-
         return view('login', [
 
         ]);

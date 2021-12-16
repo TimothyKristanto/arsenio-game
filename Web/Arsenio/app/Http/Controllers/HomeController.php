@@ -17,9 +17,9 @@ class HomeController extends Controller
     public function index()
     {
         //
-        $student = Student::where('user_id', Auth::id())->first();
+        $student = Student::where('user_id', Auth::user()->id)->first();
 
-        $user = User::findOrFail(Auth::id())->first();
+        $user = User::where('id', Auth::user()->id)->first();
 
         return view('home', [
             'page'=>'BERANDA',

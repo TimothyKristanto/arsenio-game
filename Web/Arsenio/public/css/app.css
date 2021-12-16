@@ -40,11 +40,13 @@ nav {
 .profile {
     display: flex;
     margin-left: 240px;
-    margin-right: 220px;
+    /* margin-right: 220px; */
     margin-top: 55px;
     width: 70%;
     background-color: #f4bc73;
     padding: 10px 2px 2px 2px;
+    justify-content: center;
+    align-items: center;
 }
 
 .logout {
@@ -93,6 +95,12 @@ nav {
     margin-right: 20px;
 }
 
+.story-desc-alert {
+    position: absolute;
+    top: 50px;
+    width: 900px;
+}
+
 .story-text {
     font-size: 20px;
     font-family: "MedievalSharp", cursive;
@@ -109,18 +117,19 @@ nav {
 }
 
 .story-progress {
-    margin-left: 350px;
+    /* margin-left: 320px; */
     margin-top: 2px;
+    margin-left: 310px;
+    margin-right: 150px;
 }
 
 .abyss-score {
     margin-top: 2px;
-    margin-left: 150px;
+    /* margin-left: 130px; */
     width: 300px;
 }
 
 .disabled-link {
-    opacity: 0.5;
 }
 
 .disabled-link:hover {

@@ -44,7 +44,7 @@ class RegisterController extends Controller
         
         if($request->passwordConfirmation == $request->password){
             $request->validate([
-                'name'=>'required|min:4|max:14',
+                'name'=>'required|min:4|max:10',
                 'email'=>'required|email:dns|unique:users',
                 'password'=>'required|min:8'
             ]);

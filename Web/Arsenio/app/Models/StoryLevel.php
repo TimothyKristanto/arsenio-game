@@ -12,6 +12,7 @@ class StoryLevel extends Model
     protected $table = 'senrup_story_levels';
 
     protected $fillable = [
+        'level_id',
         'story_id',
         'open_status',
         'title',
