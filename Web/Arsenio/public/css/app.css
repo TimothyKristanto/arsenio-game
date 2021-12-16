@@ -101,6 +101,10 @@ nav {
     width: 900px;
 }
 
+.alert {
+    z-index: 1 !important;
+}
+
 .story-text {
     font-size: 20px;
     font-family: "MedievalSharp", cursive;
@@ -116,6 +120,16 @@ nav {
     color: black !important;
 }
 
+.question-countdown {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    color: white;
+}
+
 .story-progress {
     /* margin-left: 320px; */
     margin-top: 2px;
@@ -129,10 +143,23 @@ nav {
     width: 300px;
 }
 
+.item {
+    background-color: #e9aa4c;
+    border-radius: 20px;
+    padding: 5px 5px 0px 5px;
+    color: black;
+}
+
 .disabled-link {
+    opacity: 0.5;
 }
 
 .disabled-link:hover {
+    transform: scale(1) !important;
+    background-color: #7f4f24 !important;
+}
+
+#locked-story:hover {
     transform: scale(1) !important;
 }
 
@@ -335,6 +362,7 @@ nav {
     top: 15px;
     width: 80px;
     left: 15px;
+    z-index: 1;
 }
 
 .enemy-hp {
@@ -409,9 +437,9 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 40px;
+    padding-top: 30px;
 }
 
-.shop-bg{
+.shop-bg {
     background: url("/images/TokoBG.png") no-repeat center center fixed;
 }

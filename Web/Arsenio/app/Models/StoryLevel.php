@@ -14,8 +14,6 @@ class StoryLevel extends Model
     protected $fillable = [
         'level_id',
         'story_id',
-        'open_status',
-        'title',
         'level_finished',
         'enemy_id'
     ];
@@ -34,5 +32,9 @@ class StoryLevel extends Model
 
     public function rewards(){
         return $this->belongsToMany(Reward::class, 'senrup_levels_rewards', 'level_id', 'reward_id');
+    }
+
+    public function students(){
+        return $this->hasMany(Student::class, 'story_level_progress', 'level_id');
     }
 }

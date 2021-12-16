@@ -16,9 +16,6 @@ class CreateSenrupStoryLevelsTable extends Migration
         Schema::create('senrup_story_levels', function (Blueprint $table) {
             $table->id('level_id');
             $table->unsignedBigInteger('story_id');
-            $table->boolean('open_status');
-            $table->string('title');
-            $table->boolean('level_finished');
             $table->unsignedBigInteger('enemy_id');
             $table->timestamps();
         });

@@ -17,10 +17,6 @@ class Story extends Model
         'image'
     ];
 
-    public function students(){
-        return $this->hasMany(Student::class, 'story_on_progress', 'story_id');
-    }
-
     public function storyLevels(){
         return $this->hasMany(StoryLevel::class, 'story_id', 'story_id');
     }

@@ -15,7 +15,7 @@ class Student extends Model
         'golds',
         'total_exp',
         'abyss_point',
-        'story_on_progress',
+        'story_level_progress',
         'exp_id',
         'user_id',
     ];
@@ -36,7 +36,7 @@ class Student extends Model
         return $this->hasMany(GameLog::class, 'student_id', 'student_id');
     }
 
-    public function story(){
-        return $this->belongsTo(Story::class, 'story_on_progress', 'story_id');
+    public function storyLevel(){
+        return $this->belongsTo(StoryLevel::class, 'story_level_progress', 'level_id');
     }
 }
