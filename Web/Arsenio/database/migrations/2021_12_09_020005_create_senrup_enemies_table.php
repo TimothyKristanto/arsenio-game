@@ -17,7 +17,6 @@ class CreateSenrupEnemiesTable extends Migration
             $table->id('enemy_id');
             $table->string('name');
             $table->string('image');
-            $table->integer('health');
             $table->integer('damage');
             $table->timestamps();
         });
