@@ -411,3 +411,7 @@ nav {
     align-items: center;
     padding-top: 40px;
 }
+
+.shop-bg{
+    background: url("/images/TokoBG.png") no-repeat center center fixed;
+}
