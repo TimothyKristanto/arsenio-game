@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\StoryLevel;
 use Illuminate\Http\Request;
+use App\Models\Student;
+use Illuminate\Support\Facades\Auth;
 
 class BattleController extends Controller
 {
@@ -15,9 +17,7 @@ class BattleController extends Controller
     public function index()
     {
         //
-        return view('battle', [
-            
-        ]);
+        
     }
 
     /**
@@ -50,6 +50,15 @@ class BattleController extends Controller
     public function show($id)
     {
         //
+        $storyLevel = StoryLevel::where('level_id', $id)->first();
+
+        $student = Student::where('student_id', Auth::user()->id)->first();
+
+        return view('battle', [
+            'bgBattle'=>$storyLevel->story->image,
+            'userHealth'=>$student->characterExp->health,
+            'enemyAttack'=>$storyLevel->enemy->damage
+        ]);
     }
 
     /**

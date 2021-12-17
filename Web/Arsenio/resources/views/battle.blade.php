@@ -27,23 +27,23 @@
     
     <div class="battle-area">
         <a href="#" onclick="history.back()" class="pause-battle btn btn-danger">
-            Exit
+            <i class="fas fa-pause"></i>
         </a>
         <div class="question-countdown">
             <h1><i class="fas fa-hourglass-half"></i></h1> &nbsp; &nbsp;
-            <h1>30</h1>
+            <h1>20</h1>
         </div>
         <img src="/images/BattleCharacter.png" class="battle-character">
         <img src="/images/MonsterSkeleton.png" class="battle-enemy">
         <div class="character-hp">
             <i class="fas fa-heart heart-icon"></i>
-            100
+            {{ $userHealth }}
         </div>
         <div class="enemy-hp">
             100
             <i class="fas fa-heart heart-icon"></i>
         </div>
-        <img src="/images/StoryHutan.png" class="battle-background">
+        <img src="{{ $bgBattle }}" class="battle-background">
     </div>
 
     <div class="question-area">

@@ -18,7 +18,7 @@ class CharacterExpSeeder extends Seeder
         DB::table('senrup_character_exps')->insert([
             'health'=>105,
             'level_up_exp'=>10,
-            'damage'=>25,
+            'damage'=>20,
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);

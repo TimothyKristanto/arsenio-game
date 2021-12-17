@@ -35,18 +35,19 @@
         @php
             $i = 1;
         @endphp
+
         @foreach ($storyLevel as $level)
 
             @if ($student->story_level_progress >= $level->level_id)
-                <a href="{{ route('battle.index') }}" type="button" class="btn btn-primary">{{ $storyLevel[0]->story_id }}-{{ $i }}</a>
+                <a href="{{ route('battle.show', $level->level_id) }}" type="button" class="btn btn-primary">{{ $storyLevel[0]->story_id }}-{{ $i }}</a>
             @else
                 <span class="btn btn-primary disabled-link">{{ $storyLevel[0]->story_id }}-{{ $i }}</span>
             @endif
-           
 
             @php
                 $i++
             @endphp
+
         @endforeach
     </div>
 
