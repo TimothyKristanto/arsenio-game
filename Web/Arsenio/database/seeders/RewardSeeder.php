@@ -22,7 +22,7 @@ class RewardSeeder extends Seeder
         ]);
         DB::table('senrup_rewards')->insert([
             'name' => 'Exp',
-        
+            'image' => '/images/Exp.png'
         ]);
     }
 }
