@@ -33,6 +33,6 @@ Route::get('/story/{id}/{storyDesc}', [StoryController::class, 'index'])->middle
 
 Route::get('/abyss', [AbyssController::class, 'index'])->middleware('auth');
 
-Route::resource('battle', BattleController::class);
+Route::get('/battle/{id}/{mode}/{answerCorrect}/{questionId}/{userHealth}/{firstAnim}', [BattleController::class, 'show'])->middleware('auth');
 
-Route::resource('shop', ShopController::class);
+Route::resource('shop', ShopController::class)->middleware('auth');

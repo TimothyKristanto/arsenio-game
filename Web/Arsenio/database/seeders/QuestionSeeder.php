@@ -75,7 +75,7 @@ class QuestionSeeder extends Seeder
             'answer_b'=>'teknik pembuatannya',
             'answer_c'=>'fungsi pakai dibandingkan keindahan',
             'answer_d'=>'keindahan dibandingkan nilai komersilnya',
-            'level_id'=>'11',
+            'level_id'=>'12',
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
@@ -86,7 +86,7 @@ class QuestionSeeder extends Seeder
             'answer_b'=>'Posisi',
             'answer_c'=>'Figuratif',
             'answer_d'=>'Proporsi',
-            'level_id'=>'11',
+            'level_id'=>'12',
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
@@ -97,7 +97,7 @@ class QuestionSeeder extends Seeder
             'answer_b'=>'mewarnai',
             'answer_c'=>'Gambar',
             'answer_d'=>'Batik',
-            'level_id'=>'11',
+            'level_id'=>'12',
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
@@ -108,7 +108,7 @@ class QuestionSeeder extends Seeder
             'answer_b'=>'cat pastel',
             'answer_c'=>'Pensil warna',
             'answer_d'=>'Water colour',
-            'level_id'=>'11',
+            'level_id'=>'12',
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
@@ -119,7 +119,7 @@ class QuestionSeeder extends Seeder
             'answer_b'=>'Foto',
             'answer_c'=>'Lukisan',
             'answer_d'=>'Kaligrafi',
-            'level_id'=>'11',
+            'level_id'=>'12',
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
@@ -130,7 +130,7 @@ class QuestionSeeder extends Seeder
             'answer_b'=>'nilai keindahannya',
             'answer_c'=>'keindahan dibangdinkan fungsi pakainya',
             'answer_d'=>'keindahan dibandingkan nilai komersilnya',
-            'level_id'=>'11',
+            'level_id'=>'13',
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
@@ -141,7 +141,7 @@ class QuestionSeeder extends Seeder
             'answer_b'=>'patung mainan',
             'answer_c'=>'Religi',
             'answer_d'=>'Arsitektur',
-            'level_id'=>'11',
+            'level_id'=>'13',
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
@@ -152,7 +152,7 @@ class QuestionSeeder extends Seeder
             'answer_b'=>'Lukisan',
             'answer_c'=>'Kartun',
             'answer_d'=>'Dekoratif',
-            'level_id'=>'11',
+            'level_id'=>'13',
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
@@ -163,7 +163,7 @@ class QuestionSeeder extends Seeder
             'answer_b'=>'Geometris',
             'answer_c'=>'Representatif',
             'answer_d'=>'Abstrak',
-            'level_id'=>'11',
+            'level_id'=>'13',
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
@@ -174,7 +174,7 @@ class QuestionSeeder extends Seeder
             'answer_b'=>'Representatif',
             'answer_c'=>'Ekspresi',
             'answer_d'=>'Komposisi',
-            'level_id'=>'11',
+            'level_id'=>'13',
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
