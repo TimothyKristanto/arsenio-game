@@ -9,11 +9,15 @@
         
         <div class="abyss-parent">
             <img class="mt-3 img-fluid abyss-leaderboard" src="/images/leaderboard.png" alt="Leaderboard" width="280">
-            <h3 class="abyss-text1">1. Arsenio</h3>
-            <h3 class="abyss-text2">2. Andreas</h3>
-            <h3 class="abyss-text3">3. Averill</h3>
-            <h3 class="abyss-text4">4. Joey</h3>
-            <h3 class="abyss-text5">5. Timothy</h3>
+            <div class="abyss-text">
+            @foreach ($studentPoint as $sp)
+                @if ($loop->index < 5)
+                    <h5>{{ $loop->index+1 }}. {{ $sp->user->name}} ({{ $sp['abyss_point']}} pt)</h5>   
+                @else
+                    @break             
+                @endif          
+            @endforeach
+            </div>
         </div>
 
         <a href="{{ route('battle.index') }}"><img class="m-4 img-fluid abyss-btn" src="/images/buttonAbyss.png" alt="button" width="160"/></a>
