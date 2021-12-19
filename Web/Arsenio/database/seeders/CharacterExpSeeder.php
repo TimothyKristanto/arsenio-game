@@ -135,5 +135,44 @@ class CharacterExpSeeder extends Seeder
             'updated_at'=>\Carbon\Carbon::now()
         ]);
 
+        DB::table('senrup_character_exps')->insert([
+                'health'=>230,
+                'level_up_exp'=>800,
+                'damage'=>100,
+                'created_at'=>\Carbon\Carbon::now(),
+                'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>240,
+            'level_up_exp'=>900,
+            'damage'=>105,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>250,
+            'level_up_exp'=>1000,
+            'damage'=>110,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>260,
+            'level_up_exp'=>1100,
+            'damage'=>115,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_character_exps')->insert([
+            'health'=>270,
+            'level_up_exp'=>1200,
+            'damage'=>120,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now()
+        ]);
     }
 }

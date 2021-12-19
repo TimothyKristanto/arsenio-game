@@ -17,7 +17,7 @@ class EnemySeeder extends Seeder
         DB::table('senrup_enemies')->insert([
             'name' => 'Tulang Belulang',
             'image' => '/images/MonsterSkeleton.png',
-            'damage' => 30,
+            'damage' => 25,
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
@@ -25,7 +25,7 @@ class EnemySeeder extends Seeder
         DB::table('senrup_enemies')->insert([
             'name' => 'Iblis Kecil',
             'image' => '/images/MonsterIblis.png',
-            'damage' => 35,
+            'damage' => 30,
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
@@ -33,7 +33,7 @@ class EnemySeeder extends Seeder
         DB::table('senrup_enemies')->insert([
             'name' => 'Serigala Kekar',
             'image' => '/images/MonsterSerigala.png',
-            'damage' => 40,
+            'damage' => 35,
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
@@ -41,9 +41,15 @@ class EnemySeeder extends Seeder
         DB::table('senrup_enemies')->insert([
             'name' => 'Penyihir Licik',
             'image' => '/images/MonsterPenyihir.png',
-            'damage' => 50,
+            'damage' => 40,
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
+        ]);
+
+        DB::table('senrup_enemies')->insert([
+            'name' => 'Iblis Kekal',
+            'image' => '/images/monsterAbyss.png',
+            'damage' => 50
         ]);
     }
 }

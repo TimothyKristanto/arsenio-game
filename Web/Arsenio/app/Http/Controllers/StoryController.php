@@ -23,7 +23,8 @@ class StoryController extends Controller
         return view('story', [
             'page' => 'STORY MODE',
             'student'=>$student,
-            'storyLevel'=>$storyLevel
+            'storyLevel'=>$storyLevel,
+            'userHealth'=>$student->characterExp->health
         ]);
     }
 
