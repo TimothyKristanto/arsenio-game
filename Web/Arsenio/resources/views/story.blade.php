@@ -39,7 +39,7 @@
         @foreach ($storyLevel as $level)
 
             @if ($student->story_level_progress >= $level->level_id)
-                <a href="/battle/{{ $level->level_id }}/story/n/n/{{ $userHealth }}/t" type="button" class="btn btn-primary">{{ $level->story_id }}-{{ $i }}</a>
+                <a href="/battle/{{ $level->level_id }}/story/n/n/{{ $userHealth }}/t/n" type="button" class="btn btn-primary">{{ $level->story_id }}-{{ $i }}</a>
             @else
                 <span class="btn btn-primary disabled-link">{{ $level->story_id }}-{{ $i }}</span>
             @endif

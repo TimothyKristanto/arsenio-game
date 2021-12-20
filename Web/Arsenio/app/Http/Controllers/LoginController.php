@@ -28,13 +28,9 @@ class LoginController extends Controller
 
         if($check != null){
             if($check->is_active == '1'){
-                if($check->is_login =='0'){
-                    if(Auth::attempt($dataValidation)){
-                        $request->session()->regenerate();
-                        return redirect()->intended('/home');
-                    }
-                }else{
-                    return back()->with('loginError', 'Akun anda sedang digunakan');
+                if(Auth::attempt($dataValidation)){
+                    $request->session()->regenerate();
+                    return redirect()->intended('/home');
                 }
             }else{
                 return back()->with('loginError', 'Akun anda telah di non-aktifkan');

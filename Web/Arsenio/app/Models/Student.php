@@ -11,6 +11,8 @@ class Student extends Model
 
     protected $table = 'senrup_students';
 
+    protected $primaryKey = 'student_id';
+
     protected $fillable = [
         'golds',
         'total_exp',
@@ -21,7 +23,7 @@ class Student extends Model
     ];
 
     public function user(){
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function items(){
