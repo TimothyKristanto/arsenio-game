@@ -35,4 +35,4 @@ Route::get('/abyss', [AbyssController::class, 'index'])->middleware('auth');
 
 Route::resource('battle', BattleController::class);
 
-Route::resource('shop', ShopController::class);
+Route::get('/shop/{item_id}/{amount}', [ShopController::class, 'index']);

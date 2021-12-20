@@ -18,7 +18,7 @@ class RegisterController extends Controller
     {
         //
         return view('register', [
-            
+
         ]);
     }
 
@@ -41,14 +41,14 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         //
-        
+
         if($request->passwordConfirmation == $request->password){
             $request->validate([
                 'name'=>'required|min:4|max:10',
                 'email'=>'required|email:dns|unique:users',
                 'password'=>'required|min:8'
             ]);
-        
+
             $user = User::create([
                 'name'=>$request->name,
                 'email'=>$request->email,
@@ -75,7 +75,7 @@ class RegisterController extends Controller
             //     'total_exp'=>0,
             //     'abyss_point'=>0
             // ]);
-    
+
             return redirect('/');
         }else{
             return back()->with('registerError', 'Konfirmasi password salah!');

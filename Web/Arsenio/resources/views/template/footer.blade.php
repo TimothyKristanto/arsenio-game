@@ -1,6 +1,6 @@
 <div class="footer">
     <div class="float-start">
-        <a href= "{{route('shop.index')}}">
+        <a href= "/shop/0/0">
             <img src="/images/ShopIcon.png" class="shop">
         </a>
     </div>
