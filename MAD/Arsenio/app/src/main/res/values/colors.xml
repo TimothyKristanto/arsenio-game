@@ -17,4 +17,6 @@
 <!--    Mono    -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="navbar">#f4bc73</color>
+
 </resources>
