@@ -239,11 +239,24 @@ nav {
     width: 30%;
 }
 
+.abyss-battle-score {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    color: white;
+}
+
 .item {
     background-color: #e9aa4c;
     border-radius: 20px;
     padding: 5px 5px 0px 5px;
     color: black;
+}
+
+.monster-abyss {
+    width: 250px !important;
+    height: 250px !important;
+    top: 110px !important;
 }
 
 .disabled-link {
@@ -370,6 +383,7 @@ nav {
     top: 410px;
     position: relative;
     z-index: 3;
+    transition: 0.3s;
 }
 
 .abyss-leaderboard {
@@ -466,7 +480,7 @@ nav {
     background-color: #f4bc73;
     font-size: 17px;
     margin-top: 15px;
-    width: 250px;
+    width: 450px;
     transition: 0.3s;
     font-weight: bolder;
 }
@@ -481,14 +495,27 @@ nav {
     margin-right: 60px;
 }
 
+.score-update {
+    background-color: #ee9a2c;
+    padding: 5px 5px 0px 5px;
+    border-radius: 20px;
+    height: 50px;
+    margin-top: -5px;
+    font-size: 30px !important;
+    color: black !important;
+    display: none;
+    animation: fade-in 1s;
+    z-index: 1000;
+}
+
 .btn-answer-left {
-    margin-left: 100px;
+    margin-left: 50px;
     clear: both;
     float: left;
 }
 
 .btn-answer-right {
-    margin-right: 100px;
+    margin-right: 50px;
     float: right;
 }
 
@@ -596,6 +623,14 @@ nav {
     width: 100%;
     height: 400px;
     z-index: -1;
+}
+
+.reward-character {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 170px;
+    height: 170px;
 }
 
 .question-area {

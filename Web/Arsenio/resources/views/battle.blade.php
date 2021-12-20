@@ -114,23 +114,36 @@
         clearInterval(timer);
 
         function showUserHealthDeductInfo(){
-            blackBg.style.display = 'none';
             checkAnswer.style.display = 'none';
             wrongIcon.style.display = 'none';
 
             let userHealthDeduct = document.getElementById('user-health-deduct');
+            let battleCharacter = document.getElementById('battle-character');
 
             userHealthDeduct.style.display = 'block'
+            userHealthDeduct.style.zIndex = '1000'
+            battleCharacter.style.zIndex = '1000'
         }
 
         function showEnemyHealthDeductInfo(){
-            blackBg.style.display = 'none';
             checkAnswer.style.display = 'none';
             correctIcon.style.display = 'none';
 
-            let enemyHealthDeduct = document.getElementById('enemy-health-deduct');
+            if('{{ $mode }}' == 'story'){
+                let enemyHealthDeduct = document.getElementById('enemy-health-deduct');
+                let battleEnemy = document.getElementById('battle-enemy');
 
-            enemyHealthDeduct.style.display = 'block'
+                enemyHealthDeduct.style.display = 'block'
+                enemyHealthDeduct.style.zIndex = '1000'
+                battleEnemy.style.zIndex = '1000'
+            }else{
+                let scoreUpdate = document.getElementById('score-update');
+                let abyssScoreInfo = document.getElementById('abyss-score-info');
+
+                scoreUpdate.style.display = 'block'
+                abyssScoreInfo.style.zIndex = '1000'
+            }
+            
         }
     }
 
@@ -138,17 +151,36 @@
         @php
             $questionId .= '-' . $battleQuestionId
         @endphp
-        window.location.href = '/battle/{{ $storyLevel->level_id }}/{{ $mode }}/t/{{ $questionId }}/{{ $userHealth }}/f'
+        
+        if('{{ $mode }}' == 'story'){
+            window.location.href = '/battle/{{ $levelId }}/{{ $mode }}/t/{{ $questionId }}/{{ $userHealth }}/f/n'
+        }else if('{{ $mode }}' == 'abyss'){
+            window.location.href = '/battle/n/{{ $mode }}/t/n/{{ $userHealth }}/f/{{ $abyssScore }}'
+        }
+        
     }
 
     function changePageWithWrongAnswer(){
-        window.location.href = '/battle/{{ $storyLevel->level_id }}/{{ $mode }}/f/{{ $questionId }}/{{ $userHealth }}/f'
+        if('{{ $mode }}' == 'story'){
+            window.location.href = '/battle/{{ $levelId }}/{{ $mode }}/f/{{ $questionId }}/{{ $userHealth }}/f/n'
+        }else if('{{ $mode }}' == 'abyss'){
+            window.location.href = '/battle/n/{{ $mode }}/f/n/{{ $userHealth }}/f/{{ $abyssScore }}'
+        }
     }
 </script>
 
 <body>
     <div id="black-bg" class="black-bg"></div>
     <div class="battle-area">
+        @if ($mode == 'abyss')
+            <div class="abyss-battle-score d-flex">
+                <h1 id="abyss-score-info">Score: {{ $abyssScore }}</h1>
+                <span id="score-update" class="score-update mx-4">
+                    <p>+250</p>
+                </span>
+            </div>
+        @endif
+        
         <button onclick="pauseGame()" class="pause-battle btn btn-danger">
             <i class="fas fa-pause"></i>
         </button>
@@ -160,21 +192,23 @@
             <span>-{{ $enemyAttack }}</span> 
             <i class="fas fa-heart heart-icon"></i>
         </div>
-        <img src="/images/BattleCharacter.png" class="battle-character {{ $firstAnim == 't' ? 'slide-right' : '' }} {{ $battleStatus == 'lose' ? 'lose' : '' }}">
+        <img id="battle-character" src="/images/BattleCharacter.png" class="battle-character {{ $firstAnim == 't' ? 'slide-right' : '' }} {{ $battleStatus == 'lose' ? 'lose' : '' }}">
         <div id="enemy-health-deduct" class="enemy-health-deduct">
             <span>-20</span> 
             <i class="fas fa-heart heart-icon"></i>
         </div>
-        <img src="{{ $storyLevel->enemy->image }}" class="battle-enemy {{ $firstAnim == 't' ? 'slide-left' : '' }} {{ $battleStatus == 'win' ? 'lose' : '' }}">
+        <img id="battle-enemy" src="{{ $mode == 'story' ? $storyLevel->enemy->image : $enemy->image }}" class="battle-enemy {{ $mode == 'abyss' ? 'monster-abyss' : '' }} {{ $firstAnim == 't' ? 'slide-left' : '' }} {{ $battleStatus == 'win' ? 'lose' : '' }}">
         <div class="character-hp">
             <i class="fas fa-heart heart-icon"></i>
             {{ $userHealth }}
         </div>
-        <div class="enemy-hp">
-            {{ $enemyHealth * 20 }}
-            <i class="fas fa-heart heart-icon"></i>
-        </div>
-        <img src="{{ $storyLevel->story->image }}" class="battle-background">
+        @if($mode == 'story')
+            <div class="enemy-hp">
+                {{ $enemyHealth * 20 }}
+                <i class="fas fa-heart heart-icon"></i>
+            </div>
+        @endif
+        <img src="{{ $mode == 'story' ? $storyLevel->story->image : $abyssBg }}" class="battle-background">
     </div>
 
     <div id="check-answer" class="check-answer-container justify-content-center">
@@ -223,17 +257,27 @@
                     <h4 class="reward_exp mx-2">EXP</h4>
                     <h4>x{{ $rewards[1]->reward_amount }}</h4>
                 </div>
+
+                <img src="/images/BattleCharacter.png" class="reward-character">
             @else
-                
+                <div class="d-flex justify-content-center my-3">
+                    <img src="/images/Gold.png" class="reward-gold mx-2">
+                    <h4>x{{ $mode == 'abyss' ? $rewards[0] : '0' }}</h4>
+                </div>
+
+                <div class="d-flex justify-content-center my-4">
+                    <h4 class="reward_exp mx-2">EXP</h4>
+                    <h4>x{{ $mode == 'abyss' ? $rewards[1] : '0' }}</h4>
+                </div>
+
+                <img src="/images/DownedBattleCharacter.png" class="reward-character">
             @endif
-                
-           
 
             @if ($mode == 'story')
                 <div class="d-flex justify-content-end">
                     @if($battleStatus == 'lose')
                         <span class="text-end mx-3">
-                            <a href="/battle/{{ $storyLevel->level_id }}/story/n/n/r/t" class="btn btn-danger text-center mt-1">ULANGI</a>
+                            <a href="/battle/{{ $storyLevel->level_id }}/story/n/n/r/t/n" class="btn btn-danger text-center mt-1">ULANGI</a>
                         </span>
                     @endif
 
@@ -306,4 +350,5 @@
     </div> 
 
 </body>
+
 </html>

@@ -66,15 +66,6 @@ class RegisterController extends Controller
                 'abyss_point'=>0,
                 'story_level_progress'=>11
             ]);
-
-            // Student::create([
-            //     'story_on_progress'=>1,
-            //     'exp_id'=>1,
-            //     'user_id'=>$user->id,
-            //     'golds'=>0,
-            //     'total_exp'=>0,
-            //     'abyss_point'=>0
-            // ]);
     
             return redirect('/');
         }else{

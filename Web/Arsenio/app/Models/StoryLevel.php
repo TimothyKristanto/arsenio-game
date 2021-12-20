@@ -14,7 +14,6 @@ class StoryLevel extends Model
     protected $fillable = [
         'level_id',
         'story_id',
-        'level_finished',
         'enemy_id'
     ];
 
