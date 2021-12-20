@@ -9,7 +9,7 @@ class LevelRewardRelation extends Model
 {
     use HasFactory;
 
-    protected $table = 'senrup_level_rewards';
+    protected $table = 'senrup_levels_rewards';
 
     protected $fillable = [
         'level_id',

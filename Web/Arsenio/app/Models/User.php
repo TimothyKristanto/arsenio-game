@@ -47,6 +47,6 @@ class User extends Authenticatable
     ];
 
     public function student(){
-        return $this->hasOne(Student::class, 'user_id', 'user_id');
+        return $this->hasOne(Student::class, 'user_id', 'id');
     }
 }

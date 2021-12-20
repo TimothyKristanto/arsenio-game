@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ItemStudentRelation;
 use App\Models\Story;
 use App\Models\Student;
 use App\Models\User;
@@ -58,23 +59,22 @@ class RegisterController extends Controller
                 'is_active'=>'1'
             ]);
 
-            Student::create([
-                'story_on_progress'=>1,
+            $student = Student::create([
                 'exp_id'=>1,
                 'user_id'=>$user->id,
                 'golds'=>0,
                 'total_exp'=>0,
-                'abyss_point'=>0
+                'abyss_point'=>0,
+                'story_level_progress'=>11
             ]);
 
-            // Student::create([
-            //     'story_on_progress'=>1,
-            //     'exp_id'=>1,
-            //     'user_id'=>$user->id,
-            //     'golds'=>0,
-            //     'total_exp'=>0,
-            //     'abyss_point'=>0
-            // ]);
+            for($i = 1; $i <= 3; $i++){
+                ItemStudentRelation::create([
+                    'item_id'=>$i,
+                    'student_id'=>$student->student_id,
+                    'item_owned'=>0
+                ]);
+            }
 
             return redirect('/');
         }else{
