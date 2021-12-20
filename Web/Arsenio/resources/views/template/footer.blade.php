@@ -1,6 +1,6 @@
 <div class="footer">
     <div class="float-start">
-        <a href= "/shop/0/0">
+        <a href= "/shop/0/0/f">
             <img src="/images/ShopIcon.png" class="shop">
         </a>
     </div>

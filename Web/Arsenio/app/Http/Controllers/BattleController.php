@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CharacterExp;
 use App\Models\Enemy;
+use App\Models\ItemStudentRelation;
 use App\Models\LevelRewardRelation;
 use App\Models\Question;
 use App\Models\StoryLevel;
@@ -52,10 +53,43 @@ class BattleController extends Controller
      * @param  \App\Models\StoryLevel  $storyLevel
      * @return \Illuminate\Http\Response
      */
-    public function show($id, $mode, $answerCorrect, $questionId, $userHealth, $firstAnim, $abyssScore)
+    public function show($id, $mode, $answerCorrect, $questionId, $userHealth, $firstAnim, $abyssScore, $useItem, $countdown, $lastQuestionId)
     {
         //
-        $student = Student::where('student_id', Auth::id())->first();
+        $student = Student::where('user_id', Auth::id())->first();
+
+        $studentItem = ItemStudentRelation::where('student_id', $student->student_id)->get();
+
+        if($useItem != 'n'){
+            if($studentItem[$useItem - 1]->item_owned > 0){
+                if($useItem == '1'){
+                    if($userHealth < $student->characterExp->health){
+                        $userHealth += 10;
+                    }
+        
+                    if($userHealth > $student->characterExp->health){
+                        $userHealth = $student->characterExp->health;
+                    }
+                }else if($useItem == '2'){
+                    $userHealth = $student->characterExp->health;
+                }else if($useItem == '3'){
+                    $countdown += 10;
+    
+                    if($countdown > 25){
+                        $countdown = 25;
+                    }
+                }
+    
+                $itemOwned = $studentItem[$useItem - 1]->item_owned - 1;
+    
+                ItemStudentRelation::where('student_id', $student->student_id)
+                ->where('item_id', $useItem)->update([
+                    'item_owned'=>$itemOwned
+                ]);
+    
+                $studentItem = ItemStudentRelation::where('student_id', $student->student_id)->get();
+            }
+        }
 
         if($mode == 'story'){
             $rewards = LevelRewardRelation::where('level_id', $id)->get();
@@ -66,15 +100,25 @@ class BattleController extends Controller
 
             $array = collect(explode('-', $questionId));
 
+            $randomizedQuestion = $question->random();
+
+            if($lastQuestionId != 'n'){
+                $randomizedQuestion = $question[$lastQuestionId];
+            }
+
             if($userHealth == 'r'){
                 $userHealth = Student::where('student_id', Auth::user()->id)->first()->characterExp->health;
             }
 
-            if($answerCorrect == 'f'){
-                $array->forget($array->count() - 1);
+            if($answerCorrect == 'f' || $answerCorrect == 'n'){
+                if($array->count() - 1 != 'n'){
+                    $array->forget($array->count() - 1);
+                }
                 $questionId = $array->join('-');
 
-                $userHealth -= $storyLevel->enemy->damage;
+                if($answerCorrect == 'f'){
+                    $userHealth -= $storyLevel->enemy->damage;
+                }
             }
 
             if($array->count() > 0){
@@ -104,7 +148,9 @@ class BattleController extends Controller
                     'battleQuestionId'=>'',
                     'rewards'=>$rewards,
                     'levelId'=>$id,
-                    'abyssScore'=>'n'
+                    'abyssScore'=>'n',
+                    'studentItem'=>$studentItem,
+                    'countdown'=>$countdown
                 ]);
             }else if($question->count() == 0){
                 $battleStatus = 'win';
@@ -160,12 +206,12 @@ class BattleController extends Controller
                     'battleQuestionId'=>'',
                     'rewards'=>$rewards,
                     'levelId'=>$id,
-                    'abyssScore'=>'n'
+                    'abyssScore'=>'n',
+                    'studentItem'=>$studentItem,
+                    'countdown'=>$countdown
                 ]);
             }
-
-            $randomizedQuestion = $question->random();
-
+            
             $battleQuestionId = $question->search($randomizedQuestion);
 
             $battleAnswer = collect([]);
@@ -199,7 +245,9 @@ class BattleController extends Controller
                 'battleStatus'=>$battleStatus,
                 'rewards'=>$rewards,
                 'levelId'=>$id,
-                'abyssScore'=>'n'
+                'abyssScore'=>'n',
+                'studentItem'=>$studentItem,
+                'countdown'=>$countdown
             ]);
         }else if($mode == 'abyss'){
             $enemy = Enemy::where('name', 'Iblis Kekal')->first();
@@ -265,11 +313,19 @@ class BattleController extends Controller
                     'firstAnim'=>$firstAnim,
                     'battleStatus'=>$battleStatusAbyss,
                     'rewards'=>[floor($abyssScore * 0.1), floor($abyssScore * 0.003)],
-                    'abyssScore'=>$abyssScore
+                    'abyssScore'=>$abyssScore,
+                    'studentItem'=>$studentItem,
+                    'countdown'=>$countdown
                 ]);
             }
 
             $randomizedQuestion = $questions->random();
+
+            if($lastQuestionId != 'n'){
+                $randomizedQuestion = $questions[$lastQuestionId];
+            }
+
+            $battleQuestionId = $questions->search($randomizedQuestion);
 
             $battleAnswer = collect([]);
 
@@ -298,12 +354,14 @@ class BattleController extends Controller
                 'answers'=>$randomizedAnswer,
                 'mode'=>$mode,
                 'correctAnswer'=>$randomizedQuestion->correct_answer,
-                'battleQuestionId'=>'',
+                'battleQuestionId'=>$battleQuestionId,
                 'questionId'=>$questionId,
                 'firstAnim'=>$firstAnim,
                 'battleStatus'=>$battleStatusAbyss,
                 'rewards'=>[floor($abyssScore * 0.1), floor($abyssScore * 0.003)],
-                'abyssScore'=>$abyssScore
+                'abyssScore'=>$abyssScore,
+                'studentItem'=>$studentItem,
+                'countdown'=>$countdown
             ]);
         }
         

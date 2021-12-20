@@ -22,7 +22,7 @@
             <div class="col-md-4 shop-items">
 
                 <div class="detail-item-icon">
-                    <a class="text-center icon-detail-item" href="/shop/{{$item->item_id}}/0">
+                    <a class="text-center icon-detail-item" href="/shop/{{$item->item_id}}/0/t">
                         <i class="fa fa-question" aria-hidden="true">
                         <br>
                         <p class="detail-item">Detail</p>
@@ -83,7 +83,7 @@
         <script>
             function getAmount(item_id, element_id){
                 let amount = document.getElementById(element_id).value;
-                window.location.href = "/shop/"+item_id+"/"+amount;
+                window.location.href = "/shop/"+item_id+"/"+amount+'/f';
             }
 
             // function increment(amount) {
