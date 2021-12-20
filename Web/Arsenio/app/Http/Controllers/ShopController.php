@@ -3,95 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\ItemStudentRelation;
 use App\Models\Student;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $item = Item::all();
+    public function index($item_id, $amount){
+
         $student = Student::where('user_id', Auth::id())->first();
-        $user = User::findOrFail(Auth::id())->first();
+        $itemStudent = ItemStudentRelation::where('student_id', $student->student_id)->get();
+        $items = Item::all();
+
+        if($amount > 0){
+            $ownedItem = $itemStudent[$item_id-1]->item_owned + $amount;
+
+            ItemStudentRelation::where('student_id', $student->student_id)
+            ->where('item_id', $item_id)
+            ->update([
+                'item_owned' => $ownedItem,
+            ]);
+            // $itemStudent::where('item_id', $item_id)->first()
+            // ->update([
+            //     'item_owned' => $ownedItem,
+            // ]);
+        }
 
         return view('shop', [
             'page'=>'TOKO',
-            'item'=> $item,
             'student'=>$student,
-            'user'=>$user
+            'items'=> $items,
+            'itemStudent' => $itemStudent,
         ]);
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

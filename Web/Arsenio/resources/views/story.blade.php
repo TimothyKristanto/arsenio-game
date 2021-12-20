@@ -3,7 +3,7 @@
 @section('story', 'Arsenio: Story')
 
 @section('mainContent')
-<body 
+<body
     class="
     @if ($storyLevel[0]->story_id == 1)
         story-bg1
@@ -19,16 +19,15 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
-        
     @endif
 
     <div class="story-desc text-end">
         <a href="/story/{{ $storyLevel[0]->story_id }}/t">
             <i class="fas fa-book text-center story-icon">
-                <br> <span class="story-text">Story</span> 
-            </i> 
+                <br> <span class="story-text">Story</span>
+            </i>
         </a>
-        
+
     </div>
 
     <div class="container">
@@ -52,7 +51,7 @@
     </div>
 
     @include('template.footer')
-    
+
 @include('template.footer')
 </body>
 

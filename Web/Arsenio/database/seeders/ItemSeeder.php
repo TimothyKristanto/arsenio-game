@@ -16,7 +16,7 @@ class ItemSeeder extends Seeder
     {
         DB::table('senrup_items')->insert([
             'name'=>'Perban',
-            'image'=>'/images/Perban.png',
+            'image'=>'/images/ShopItemBandages.png',
             'amount' => 1,
             'single_price' => 250,
             'description' => 'Menambah darah pemain sebanyak 10',
@@ -26,7 +26,7 @@ class ItemSeeder extends Seeder
 
         DB::table('senrup_items')->insert([
             'name'=>'Jamu',
-            'image'=>'/images/Jamu.png',
+            'image'=>'/images/ShopItemJamu.png',
             'amount' => 1,
             'single_price' => 1500,
             'description' => 'Mengisi penuh nyawa pemain',
@@ -36,7 +36,7 @@ class ItemSeeder extends Seeder
 
         DB::table('senrup_items')->insert([
             'name'=>'Jam Pasir',
-            'image'=>'/images/JamPasir.png',
+            'image'=>'/images/ShopItemHourglass.png',
             'amount' => 1,
             'single_price' => 400,
             'description' => 'Memperlama waktu menjawab sebuah soal selama 10 detik',
