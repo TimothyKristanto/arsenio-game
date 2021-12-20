@@ -8,24 +8,14 @@
         </div>
         <ul class="nav navbar-nav navbar-center">
             <li>
-                @if ($page != 'BERANDA')
-                    @if ($page == 'STORY MODE' || $page == 'ABYSS')
-                        <a href="{{ route('home.index') }}" class="back-icon">
-                            <i class="fas fa-arrow-left"></i>
-                        </a>
-                    @else
-                        <a href="#" onclick="history.back()" class="back-icon">
-                            <i class="fas fa-arrow-left"></i>
+                <div class="d-flex justify-content-center align-items-center">
+                    {{ $page }}
+                    @if ($page != 'BERANDA')
+                        <a href="{{ route('home.index') }}" class="btn btn-danger home-icon rounded-pill">
+                            <i class="fas fa-home text-center"></i>
                         </a>
                     @endif
-                @endif
-                {{ $page }}
-                @if ($page != 'BERANDA')
-                    <a href="{{ route('home.index') }}" class="home-icon">
-                        <i class="fas fa-home text-center"></i>
-                    </a>
-                @endif
-                
+                </div>
             </li>
             
         </ul>

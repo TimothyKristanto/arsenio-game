@@ -24,8 +24,190 @@
     <title>Arsenio: Battle</title>
 </head>
 
+<body>
+    <div id="black-bg" class="black-bg"></div>
+    <div class="battle-area">
+        @if ($mode == 'abyss')
+            <div class="abyss-battle-score d-flex">
+                <h1 id="abyss-score-info">Score: {{ $abyssScore }}</h1>
+                <span id="score-update" class="score-update mx-4">
+                    <p>+250</p>
+                </span>
+            </div>
+        @endif
+        
+        <button onclick="pauseGame()" class="pause-battle btn btn-danger">
+            <i class="fas fa-pause"></i>
+        </button>
+        <div class="question-countdown">
+            <h1><i class="fas fa-hourglass-half"></i></h1> &nbsp; &nbsp;
+            <h1 id="countdown">{{ $countdown < 10 ? '0' . $countdown : $countdown }}</h1>
+        </div>
+        <div id="user-health-deduct" class="user-health-deduct">
+            <span>-{{ $enemyAttack }}</span> 
+            <i class="fas fa-heart heart-icon"></i>
+        </div>
+        <img id="battle-character" src="/images/BattleCharacter.png" class="battle-character {{ $firstAnim == 't' ? 'slide-right' : '' }} {{ $battleStatus == 'lose' ? 'lose' : '' }}">
+        <div id="enemy-health-deduct" class="enemy-health-deduct">
+            <span>-20</span> 
+            <i class="fas fa-heart heart-icon"></i>
+        </div>
+        <img id="battle-enemy" src="{{ $mode == 'story' ? $storyLevel->enemy->image : $enemy->image }}" class="battle-enemy {{ $mode == 'abyss' ? 'monster-abyss' : '' }} {{ $firstAnim == 't' ? 'slide-left' : '' }} {{ $battleStatus == 'win' ? 'lose' : '' }}">
+        <div class="character-hp">
+            <i class="fas fa-heart heart-icon"></i>
+            {{ $userHealth }}
+        </div>
+        @if($mode == 'story')
+            <div class="enemy-hp">
+                {{ $enemyHealth * 20 }}
+                <i class="fas fa-heart heart-icon"></i>
+            </div>
+        @endif
+        <img src="{{ $mode == 'story' ? $storyLevel->story->image : $abyssBg }}" class="battle-background">
+    </div>
+
+    <div id="check-answer" class="check-answer-container justify-content-center">
+        <div id="correct-icon" class="correct-answer">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div id="wrong-icon" class="wrong-answer">
+            <i class="fas fa-times-circle"></i>
+        </div>
+        <div id="times-up" class="times-up-answer">
+            <span>Waktu Habis!</span>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center">
+        <div id="pause-alert" class="alert alert-warning alert-dismissible fade show story-desc-alert text-center pause-alert">
+            <h2 class="mt-5">Menyerah dari pertarungan?</h2>
+
+            @if ($mode == 'story')
+                <div class="d-flex justify-content-end">
+                    <a href="/story/{{ $storyLevel->story->story_id }}/f" class="btn btn-danger text-center mt-3">MENYERAH</a>
+                </div>
+            @else
+                <div class="d-flex justify-content-end">
+                    <a href="/abyss" class="btn btn-danger text-center mt-3">MENYERAH</a>
+                </div>
+            @endif
+            <button type="button" onclick="continueGame()" class="btn-close" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div id="battle-status" class="alert alert-warning alert-dismissible fade show story-desc-alert text-center battle-status-alert">
+            <h2 class="mt-5">Hadiah Anda!</h2>
+
+            <br>
+
+            
+            @if ($battleStatus == 'win')
+                <div class="d-flex justify-content-center my-3">
+                    <img src="/images/Gold.png" class="reward-gold mx-2">
+                    <h4>x{{ $rewards[0]->reward_amount }}</h4>
+                </div>
+
+                <div class="d-flex justify-content-center my-4">
+                    <h4 class="reward_exp mx-2">EXP</h4>
+                    <h4>x{{ $rewards[1]->reward_amount }}</h4>
+                </div>
+
+                <img src="/images/BattleCharacter.png" class="reward-character">
+            @else
+                <div class="d-flex justify-content-center my-3">
+                    <img src="/images/Gold.png" class="reward-gold mx-2">
+                    <h4>x{{ $mode == 'abyss' ? $rewards[0] : '0' }}</h4>
+                </div>
+
+                <div class="d-flex justify-content-center my-4">
+                    <h4 class="reward_exp mx-2">EXP</h4>
+                    <h4>x{{ $mode == 'abyss' ? $rewards[1] : '0' }}</h4>
+                </div>
+
+                <img src="/images/DownedBattleCharacter.png" class="reward-character">
+            @endif
+
+            @if ($mode == 'story')
+                <div class="d-flex justify-content-end">
+                    @if($battleStatus == 'lose')
+                        <span class="text-end mx-3">
+                            <a href="/battle/{{ $storyLevel->level_id }}/story/n/n/r/t/n/n/25/n" class="btn btn-danger text-center mt-1">ULANGI</a>
+                        </span>
+                    @endif
+
+                    <span class="text-end">
+                        <a href="/story/{{ $storyLevel->story->story_id }}/f" class="btn btn-danger text-center mt-1">KELUAR</a>
+                    </span>
+                </div>
+            @else
+                <span class="d-flex justify-content-end">
+                    <a href="/abyss" class="btn btn-danger text-center mt-1">KELUAR</a>
+                </span>
+            @endif
+        </div>
+    </div>
+
+    <div class="question-area">
+        @if($battleStatus == 'win')
+            <div class="pt-3 text-center text-white">
+                <h1 class="battle-status">Anda Menang!</h1>
+                <h3>Darah musuh telah habis</h3>
+            </div>
+        @elseif ($battleStatus == 'lose')
+            <div class="pt-3 text-center text-white">
+                <h1 class="battle-status">Anda Kalah!</h1>
+                <h3>Darah karakter Anda telah habis</h3>
+            </div>
+        @else
+            <div class="pt-3 text-center">
+
+                <span class="question">
+                    {{ $question }}
+                </span>
+
+                <br>
+
+                <button id="answer-a" value="{{ $answers[0] }}" onclick="checkAnswer(this.id)" class="btn btn-answer rounded-pill btn-answer-left">
+                    A. {{ $answers[0] }}
+                </button>   
+
+                <button id="answer-b" value="{{ $answers[1] }}" onclick="checkAnswer(this.id)" class="btn btn-answer rounded-pill btn-answer-right">
+                    B. {{ $answers[1] }}
+                </button>  
+                
+                <br>
+
+                <button id="answer-c" value="{{ $answers[2] }}" onclick="checkAnswer(this.id)" class="btn btn-answer rounded-pill btn-answer-left">
+                    C. {{ $answers[2] }}
+                </button>  
+
+                <button id="answer-d" value="{{ $answers[3] }}" onclick="checkAnswer(this.id)" class="btn btn-answer rounded-pill btn-answer-right">
+                    D. {{ $answers[3] }}
+                </button>  
+            </div>
+
+            <div class="battle-items">
+                <button onclick="changePageWithCountdown({{ $studentItem[0]->item_id }})" class="item btn">
+                    <img src="/images/BandageItem.png" width="80" height="80">
+                    <h4 class="text-center">{{ $studentItem[0]->item_owned }}</h4>
+                </button>
+                <button onclick="changePageWithCountdown({{ $studentItem[1]->item_id }})" class="item2 item btn">
+                    <img src="/images/JamuItem.png" width="80" height="80">
+                    <h4 class="text-center">{{ $studentItem[1]->item_owned }}</h4>
+                </button>
+                <button onclick="changePageWithCountdown({{ $studentItem[2]->item_id }})" class="item btn">
+                    <img src="/images/HourglassItem.png" width="80" height="80">
+                    <h4 class="text-center">{{ $studentItem[2]->item_owned }}</h4>  
+                </button>
+            </div>
+        @endif
+    </div> 
+
+</body>
+
 <script>
-    let second = 25;
+    let second = {{ $countdown }};
     let timer;
 
     CountDownTimer('countdown');
@@ -33,6 +215,10 @@
     if('{{ $battleStatus }}' == 'win' || '{{ $battleStatus }}' == 'lose'){
         clearInterval(timer);
         const battleStatTimeout = setTimeout(showBattleStat, 2500);  
+    }
+
+    function changePageWithCountdown(item){
+        window.location.href = "/battle/{{ $mode == 'story' ? $levelId : 'n' }}/{{ $mode }}/n/{{ $mode == 'story' ? $questionId : 'n' }}/{{ $userHealth }}/f/{{ $mode == 'abyss' ? $abyssScore : 'n' }}/" + item + "/" + second + "/{{ $battleQuestionId }}";
     }
 
     function showBattleStat(){
@@ -153,202 +339,20 @@
         @endphp
         
         if('{{ $mode }}' == 'story'){
-            window.location.href = '/battle/{{ $levelId }}/{{ $mode }}/t/{{ $questionId }}/{{ $userHealth }}/f/n'
+            window.location.href = '/battle/{{ $levelId }}/{{ $mode }}/t/{{ $questionId }}/{{ $userHealth }}/f/n/n/25/n'
         }else if('{{ $mode }}' == 'abyss'){
-            window.location.href = '/battle/n/{{ $mode }}/t/n/{{ $userHealth }}/f/{{ $abyssScore }}'
+            window.location.href = '/battle/n/{{ $mode }}/t/n/{{ $userHealth }}/f/{{ $abyssScore }}/n/25/n'
         }
         
     }
 
     function changePageWithWrongAnswer(){
         if('{{ $mode }}' == 'story'){
-            window.location.href = '/battle/{{ $levelId }}/{{ $mode }}/f/{{ $questionId }}/{{ $userHealth }}/f/n'
+            window.location.href = '/battle/{{ $levelId }}/{{ $mode }}/f/{{ $questionId }}/{{ $userHealth }}/f/n/n/25/n'
         }else if('{{ $mode }}' == 'abyss'){
-            window.location.href = '/battle/n/{{ $mode }}/f/n/{{ $userHealth }}/f/{{ $abyssScore }}'
+            window.location.href = '/battle/n/{{ $mode }}/f/n/{{ $userHealth }}/f/{{ $abyssScore }}/n/25/n'
         }
     }
 </script>
-
-<body>
-    <div id="black-bg" class="black-bg"></div>
-    <div class="battle-area">
-        @if ($mode == 'abyss')
-            <div class="abyss-battle-score d-flex">
-                <h1 id="abyss-score-info">Score: {{ $abyssScore }}</h1>
-                <span id="score-update" class="score-update mx-4">
-                    <p>+250</p>
-                </span>
-            </div>
-        @endif
-        
-        <button onclick="pauseGame()" class="pause-battle btn btn-danger">
-            <i class="fas fa-pause"></i>
-        </button>
-        <div class="question-countdown">
-            <h1><i class="fas fa-hourglass-half"></i></h1> &nbsp; &nbsp;
-            <h1 id="countdown">25</h1>
-        </div>
-        <div id="user-health-deduct" class="user-health-deduct">
-            <span>-{{ $enemyAttack }}</span> 
-            <i class="fas fa-heart heart-icon"></i>
-        </div>
-        <img id="battle-character" src="/images/BattleCharacter.png" class="battle-character {{ $firstAnim == 't' ? 'slide-right' : '' }} {{ $battleStatus == 'lose' ? 'lose' : '' }}">
-        <div id="enemy-health-deduct" class="enemy-health-deduct">
-            <span>-20</span> 
-            <i class="fas fa-heart heart-icon"></i>
-        </div>
-        <img id="battle-enemy" src="{{ $mode == 'story' ? $storyLevel->enemy->image : $enemy->image }}" class="battle-enemy {{ $mode == 'abyss' ? 'monster-abyss' : '' }} {{ $firstAnim == 't' ? 'slide-left' : '' }} {{ $battleStatus == 'win' ? 'lose' : '' }}">
-        <div class="character-hp">
-            <i class="fas fa-heart heart-icon"></i>
-            {{ $userHealth }}
-        </div>
-        @if($mode == 'story')
-            <div class="enemy-hp">
-                {{ $enemyHealth * 20 }}
-                <i class="fas fa-heart heart-icon"></i>
-            </div>
-        @endif
-        <img src="{{ $mode == 'story' ? $storyLevel->story->image : $abyssBg }}" class="battle-background">
-    </div>
-
-    <div id="check-answer" class="check-answer-container justify-content-center">
-        <div id="correct-icon" class="correct-answer">
-            <i class="fas fa-check-circle"></i>
-        </div>
-        <div id="wrong-icon" class="wrong-answer">
-            <i class="fas fa-times-circle"></i>
-        </div>
-        <div id="times-up" class="times-up-answer">
-            <span>Waktu Habis!</span>
-        </div>
-    </div>
-
-    <div class="d-flex justify-content-center align-items-center">
-        <div id="pause-alert" class="alert alert-warning alert-dismissible fade show story-desc-alert text-center pause-alert">
-            <h2 class="mt-5">Menyerah dari pertarungan?</h2>
-
-            @if ($mode == 'story')
-                <div class="d-flex justify-content-end">
-                    <a href="/story/{{ $storyLevel->story->story_id }}/f" class="btn btn-danger text-center mt-3">MENYERAH</a>
-                </div>
-            @else
-                <div class="d-flex justify-content-end">
-                    <a href="/abyss" class="btn btn-danger text-center mt-3">MENYERAH</a>
-                </div>
-            @endif
-            <button type="button" onclick="continueGame()" class="btn-close" aria-label="Close"></button>
-        </div>
-    </div>
-
-    <div class="d-flex justify-content-center">
-        <div id="battle-status" class="alert alert-warning alert-dismissible fade show story-desc-alert text-center battle-status-alert">
-            <h2 class="mt-5">Hadiah Anda!</h2>
-
-            <br>
-
-            
-            @if ($battleStatus == 'win')
-                <div class="d-flex justify-content-center my-3">
-                    <img src="/images/Gold.png" class="reward-gold mx-2">
-                    <h4>x{{ $rewards[0]->reward_amount }}</h4>
-                </div>
-
-                <div class="d-flex justify-content-center my-4">
-                    <h4 class="reward_exp mx-2">EXP</h4>
-                    <h4>x{{ $rewards[1]->reward_amount }}</h4>
-                </div>
-
-                <img src="/images/BattleCharacter.png" class="reward-character">
-            @else
-                <div class="d-flex justify-content-center my-3">
-                    <img src="/images/Gold.png" class="reward-gold mx-2">
-                    <h4>x{{ $mode == 'abyss' ? $rewards[0] : '0' }}</h4>
-                </div>
-
-                <div class="d-flex justify-content-center my-4">
-                    <h4 class="reward_exp mx-2">EXP</h4>
-                    <h4>x{{ $mode == 'abyss' ? $rewards[1] : '0' }}</h4>
-                </div>
-
-                <img src="/images/DownedBattleCharacter.png" class="reward-character">
-            @endif
-
-            @if ($mode == 'story')
-                <div class="d-flex justify-content-end">
-                    @if($battleStatus == 'lose')
-                        <span class="text-end mx-3">
-                            <a href="/battle/{{ $storyLevel->level_id }}/story/n/n/r/t/n" class="btn btn-danger text-center mt-1">ULANGI</a>
-                        </span>
-                    @endif
-
-                    <span class="text-end">
-                        <a href="/story/{{ $storyLevel->story->story_id }}/f" class="btn btn-danger text-center mt-1">KELUAR</a>
-                    </span>
-                </div>
-            @else
-                <span class="d-flex justify-content-end">
-                    <a href="/abyss" class="btn btn-danger text-center mt-1">KELUAR</a>
-                </span>
-            @endif
-        </div>
-    </div>
-
-    <div class="question-area">
-        @if($battleStatus == 'win')
-            <div class="pt-3 text-center text-white">
-                <h1 class="battle-status">Anda Menang!</h1>
-                <h3>Darah musuh telah habis</h3>
-            </div>
-        @elseif ($battleStatus == 'lose')
-            <div class="pt-3 text-center text-white">
-                <h1 class="battle-status">Anda Kalah!</h1>
-                <h3>Darah karakter Anda telah habis</h3>
-            </div>
-        @else
-            <div class="pt-3 text-center">
-
-                <span class="question">
-                    {{ $question }}
-                </span>
-
-                <br>
-
-                <button id="answer-a" value="{{ $answers[0] }}" onclick="checkAnswer(this.id)" class="btn btn-answer rounded-pill btn-answer-left">
-                    A. {{ $answers[0] }}
-                </button>   
-
-                <button id="answer-b" value="{{ $answers[1] }}" onclick="checkAnswer(this.id)" class="btn btn-answer rounded-pill btn-answer-right">
-                    B. {{ $answers[1] }}
-                </button>  
-                
-                <br>
-
-                <button id="answer-c" value="{{ $answers[2] }}" onclick="checkAnswer(this.id)" class="btn btn-answer rounded-pill btn-answer-left">
-                    C. {{ $answers[2] }}
-                </button>  
-
-                <button id="answer-d" value="{{ $answers[3] }}" onclick="checkAnswer(this.id)" class="btn btn-answer rounded-pill btn-answer-right">
-                    D. {{ $answers[3] }}
-                </button>  
-            </div>
-
-            <div class="battle-items">
-                <div class="item">
-                    <img src="/images/BandageItem.png" width="80" height="80">
-                    <h4 class="text-center">0</h4>
-                </div>
-                <div class="item2 item">
-                    <img src="/images/HourglassItem.png" width="80" height="80">
-                    <h4 class="text-center">0</h4>
-                </div>
-                <div class="item">
-                    <img src="/images/JamuItem.png" width="80" height="80">
-                    <h4 class="text-center">0</h4>  
-                </div>
-            </div>
-        @endif
-    </div> 
-
-</body>
 
 </html>

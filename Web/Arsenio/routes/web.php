@@ -33,6 +33,6 @@ Route::get('/story/{id}/{storyDesc}', [StoryController::class, 'index'])->middle
 
 Route::get('/abyss', [AbyssController::class, 'index'])->middleware('auth');
 
-Route::get('/battle/{id}/{mode}/{answerCorrect}/{questionId}/{userHealth}/{firstAnim}/{abyssScore}', [BattleController::class, 'show'])->middleware('auth');
+Route::get('/battle/{id}/{mode}/{answerCorrect}/{questionId}/{userHealth}/{firstAnim}/{abyssScore}/{useItem}/{countdown}/{lastQuestionId}', [BattleController::class, 'show'])->middleware('auth');
 
-Route::get('/shop/{item_id}/{amount}', [ShopController::class, 'index']);
+Route::get('/shop/{item_id}/{amount}/{showItemDetail}', [ShopController::class, 'index']);

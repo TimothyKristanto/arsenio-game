@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <a href="/battle/n/abyss/n/n/{{ $student->characterExp->health }}/t/0"><img class="m-4 img-fluid abyss-btn" src="/images/buttonAbyss.png" alt="button" width="160"/></a>
+        <a href="/battle/n/abyss/n/n/{{ $student->characterExp->health }}/t/0/n/25/n"><img class="m-4 img-fluid abyss-btn" src="/images/buttonAbyss.png" alt="button" width="160"/></a>
     
     </div>
     <div>

@@ -251,6 +251,12 @@ nav {
     border-radius: 20px;
     padding: 5px 5px 0px 5px;
     color: black;
+    transition: 0.3s;
+}
+
+.item:hover {
+    transition: 0.3s;
+    transform: scale(1.1);
 }
 
 .monster-abyss {
@@ -639,11 +645,12 @@ nav {
 }
 
 .home-icon {
-    font-size: 20px;
+    font-size: 18px;
     margin-left: 5px;
     text-decoration: none;
     color: black;
     transition: 0.3s;
+    padding: 2px 5px 2px 5px;
 }
 
 .back-icon {
@@ -659,11 +666,6 @@ nav {
     transition: 0.3s;
 }
 
-.home-icon:hover {
-    color: #7f4f24;
-    transition: 0.3s;
-}
-
 .battle-items {
     clear: both;
     color: white;
@@ -673,24 +675,23 @@ nav {
     padding-top: 30px;
 }
 
-
 /*
     SHOP
  */
 
-.shop-bg{
+.shop-bg {
     background: url("/images/ShopBG.png") no-repeat center center fixed;
     background-size: cover;
     overflow: hidden;
 }
 
-.shop-area{
+.shop-area {
     height: 80%;
     margin: auto;
     padding: 200px 100px 0px 100px;
 }
 
-.shop-items{
+.shop-items {
     float: left;
     width: 30%;
     margin-left: 2%;
@@ -698,13 +699,13 @@ nav {
     align-items: center;
 }
 
-.shop-items img{
+.shop-items img {
     position: absolute;
     height: 300px;
     z-index: 0;
 }
 
-.detail-item-icon{
+.detail-item-icon {
     position: absolute;
     color: #7f4f24;
     background-color: #f4bc73;
@@ -714,35 +715,35 @@ nav {
     z-index: 5;
 }
 
-.icon-detail-item{
+.icon-detail-item {
     font-size: large;
     vertical-align: middle;
     margin-top: 10px;
     color: #7f4f24;
 }
 
-.icon-detail-item:hover{
+.icon-detail-item:hover {
     color: #7f4f24;
 }
 
-.detail-item-icon:hover{
+.detail-item-icon:hover {
     transform: scale(1.1);
     transition: ease-in-out;
 }
 
-.detail-item{
+.detail-item {
     padding-top: 5px;
     font-size: small;
     padding-bottom: 0px;
 }
 
-.item-desc-alert{
+.item-desc-alert {
     position: absolute;
     width: fit-content;
     margin-top: 50px;
 }
 
-.info-item{
+.info-item {
     position: relative;
     width: fit-content;
     margin-top: 220px;
@@ -757,7 +758,7 @@ nav {
     font-size: medium;
 }
 
-.shop-action{
+.shop-action {
     position: relative;
     margin-top: 10px;
     margin-left: 50px;
@@ -778,4 +779,3 @@ nav {
     padding-left: 5px;
     padding-right: 5px;
 } */
-
