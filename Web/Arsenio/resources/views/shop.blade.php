@@ -17,12 +17,11 @@
         <div class="shop-area row mt-3 mb-3">
             @php
                 $index = 1;
-                $itemOwned = $amount;
             @endphp
             @foreach ($items as $item)
             <div class="col-md-4 shop-items">
 
-                <div class="info-item-icon">
+                <div class="detail-item-icon">
                     <a class="text-center icon-detail-item" href="/shop/{{$item->item_id}}/0">
                         <i class="fa fa-question" aria-hidden="true">
                         <br>
@@ -34,14 +33,17 @@
                 <img src="{{$item->image}}">
 
                 {{-- <a type="button" class="tombol-beli btn btn-success" data-toggle="modal" data-target="#buyModal" > Beli </a> --}}
-                <h5 class="item-owned">Dimiliki: {{$itemOwned}}</h5>
-
-                <div class="shop-action">
-                        {{-- <button onclick="decrement(amountOfItem{{$index}})" class="action-item"> - </button> --}}
-                        <input id="amountOfItem{{$index}}" type="number" min="0" max="999">
-                        {{-- <button onclick="increment(amountOfItem{{$index}})" class="action-item"> + </button> --}}
-                        <button onclick="getAmount(amountOfItem{{$index}})" class="btn btn-success">Beli</button>
+                <div class="info-item">
+                    <h5 class="item-price">Harga: {{$item->single_price}}</h5>
+                    <h5 class="item-owned">Dimiliki: {{$itemStudent[$index-1]->item_owned}}</h5>
                 </div>
+                <div class="shop-action">
+                    <input id="amountOfItem{{$index}}" class="inputAmount" type="number" min="0" max="999">
+                    {{-- <button onclick="decrement(amountOfItem{{$index}})" class="action-item"> - </button> --}}
+                    {{-- <button onclick="increment(amountOfItem{{$index}})" class="action-item"> + </button> --}}
+                    <button onclick="getAmount('{{$item->item_id}}', 'amountOfItem{{$index}}')" class="btn btn-success">Beli</button>
+                </div>
+
                 @php
                     $index++;
                 @endphp
@@ -79,9 +81,9 @@
 
         {{-- JavaScript --}}
         <script>
-            function getAmount(id){
-                let amount = document.getElementById(id).value;
-                window.location.href = "/shop/"
+            function getAmount(item_id, element_id){
+                let amount = document.getElementById(element_id).value;
+                window.location.href = "/shop/"+item_id+"/"+amount;
             }
 
             // function increment(amount) {

@@ -16,11 +16,27 @@ class ShopController extends Controller
         $itemStudent = ItemStudentRelation::where('student_id', $student->student_id)->get();
         $items = Item::all();
 
+        if($amount > 0){
+            $ownedItem = $itemStudent[$item_id-1]->item_owned + $amount;
+
+            ItemStudentRelation::where('student_id', $student->student_id)
+            ->where('item_id', $item_id)
+            ->update([
+                'item_owned' => $ownedItem,
+            ]);
+            // $itemStudent::where('item_id', $item_id)->first()
+            // ->update([
+            //     'item_owned' => $ownedItem,
+            // ]);
+        }
+
         return view('shop', [
             'page'=>'TOKO',
             'student'=>$student,
             'items'=> $items,
-            'amount' => $itemStudent,
+            'itemStudent' => $itemStudent,
         ]);
+
+
     }
 }
