@@ -1,0 +1,34 @@
+.admin-controller-bg {
+    width: 1000px;
+    height: 500px;
+    margin-top: 70px;
+}
+
+.admin-controller {
+    color: black;
+    position: absolute;
+    top: 100px;
+    left: 200px;
+}
+
+.admin-controller-text {
+    position: relative;
+    color: #7f4f24;
+    text-decoration: none;
+}
+
+.admin-controller-text:hover {
+    color: #7f4f24;
+    text-decoration: underline !important;
+}
+
+.question-form {
+    background-color: #f4bc73;
+    border-radius: 30px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.bg-brown {
+    background-color: #f4bc73;
+}

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnSenrupStoriesTable extends Migration
+class AddColumnToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddColumnSenrupStoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('senrup_stories', function (Blueprint $table) {
-            $table->text('story_desc');
-            $table->string('image');
+        Schema::table('users', function (Blueprint $table) {
+            //
+            $table->boolean('is_admin')->default(0);
         });
     }
 
@@ -26,10 +26,9 @@ class AddColumnSenrupStoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('senrup_stories', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('story_desc');
-            $table->dropColumn('image');
+            $table->dropColumn('is_admin');
         });
     }
 }

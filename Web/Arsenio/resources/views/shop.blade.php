@@ -38,7 +38,7 @@
                     <h5 class="item-owned">Dimiliki: {{$itemStudent[$index-1]->item_owned}}</h5>
                 </div>
                 <div class="shop-action">
-                    <input id="amountOfItem{{$index}}" class="inputAmount" type="number" min="0" max="999">
+                    <input id="amountOfItem{{$index}}" class="inputAmount" type="number" min="0" max="999" value="0">
                     {{-- <button onclick="decrement(amountOfItem{{$index}})" class="action-item"> - </button> --}}
                     {{-- <button onclick="increment(amountOfItem{{$index}})" class="action-item"> + </button> --}}
                     <button onclick="getAmount('{{$item->item_id}}', 'amountOfItem{{$index}}')" class="btn btn-success">Beli</button>

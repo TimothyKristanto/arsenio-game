@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\UserSystemInfoHelper;
+use App\Models\GameLog;
 use App\Models\Item;
 use App\Models\ItemStudentRelation;
 use App\Models\Student;
@@ -19,6 +21,14 @@ class ShopController extends Controller
             return back()->with('itemDesc', 'Item ' . $items[$item_id - 1]->name . ': ' . $items[$item_id - 1]->description);
         }
 
+        GameLog::create([
+            'table'=>'senrup_students',
+            'student_id'=>$student->student_id,
+            'log_desc'=>'Uang student ' . $student->user->name . ': ' . $student->golds,
+            'log_path'=>'/shop/' . $item_id . '/' . $amount . '/' . $showItemDetail,
+            'log_ip'=>UserSystemInfoHelper::get_ip(),
+        ]);
+
         if($amount > 0){
             $studentGold = $student->golds;
             $itemPrice = $items[$item_id - 1]->single_price * $amount;
@@ -34,16 +44,41 @@ class ShopController extends Controller
                     'item_owned' => $ownedItem,
                 ]);
 
+                GameLog::create([
+                    'table'=>'senrup_items_students',
+                    'student_id'=>$student->student_id,
+                    'log_desc'=>'Student ' . $student->user->name . ' beli item ' . $items[$item_id - 1]->name . '. Total item ' . $items[$item_id - 1]->name . ': ' . $ownedItem,
+                    'log_path'=>'/shop/' . $item_id . '/' . $amount . '/' . $showItemDetail,
+                    'log_ip'=>UserSystemInfoHelper::get_ip(),
+                ]);
+
                 $student->update([
                     'golds'=>$studentGold,
                 ]);
+
+                GameLog::create([
+                    'table'=>'senrup_students',
+                    'student_id'=>$student->student_id,
+                    'log_desc'=>'Uang student ' . $student->user->name . ': ' . $student->golds,
+                    'log_path'=>'/shop/' . $item_id . '/' . $amount . '/' . $showItemDetail,
+                    'log_ip'=>UserSystemInfoHelper::get_ip(),
+                ]);
             }else{
+                GameLog::create([
+                    'table'=>'senrup_students',
+                    'student_id'=>$student->student_id,
+                    'log_desc'=>'Uang student ' . $student->user->name . ': ' . $student->golds . '. Tidak cukup untuk beli item ' . $items[$item_id - 1]->name . ' seharga ' . ($items[$item_id - 1]->single_price * $amount),
+                    'log_path'=>'/shop/' . $item_id . '/' . $amount . '/' . $showItemDetail,
+                    'log_ip'=>UserSystemInfoHelper::get_ip(),
+                ]);
+                
                 return back()->with('itemDesc', 'Emas Anda tidak mencukupi');
             }
 
             return view('shop', [
                 'page'=>'TOKO',
                 'student'=>$student,
+                'user'=>$student->user,
                 'items'=> $items,
                 'itemStudent' => ItemStudentRelation::where('student_id', $student->student_id)->get(),
             ]);
@@ -53,6 +88,7 @@ class ShopController extends Controller
         return view('shop', [
             'page'=>'TOKO',
             'student'=>$student,
+            'user'=>$student->user,
             'items'=> $items,
             'itemStudent' => $itemStudent,
         ]);

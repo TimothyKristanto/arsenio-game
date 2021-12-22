@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\UserSystemInfoHelper;
 use App\Models\CharacterExp;
 use App\Models\Enemy;
+use App\Models\GameLog;
 use App\Models\ItemStudentRelation;
 use App\Models\LevelRewardRelation;
 use App\Models\Question;
@@ -60,6 +62,14 @@ class BattleController extends Controller
 
         $studentItem = ItemStudentRelation::where('student_id', $student->student_id)->get();
 
+        GameLog::create([
+            'table'=>'senrup_story_level',
+            'student_id'=>$student->student_id,
+            'log_desc'=>'Student ' . $student->user->name . ' memasuki battle ' . $mode,
+            'log_path'=>'/battle/' . $id . '/' . $mode . '/' . $answerCorrect . '/' . $questionId . '/' . $userHealth . '/' . $firstAnim . '/' . $abyssScore . '/' . $useItem . '/' . $countdown . '/' . $lastQuestionId,
+            'log_ip'=>UserSystemInfoHelper::get_ip(),
+        ]);
+
         if($useItem != 'n'){
             if($studentItem[$useItem - 1]->item_owned > 0){
                 if($useItem == '1'){
@@ -79,6 +89,14 @@ class BattleController extends Controller
                         $countdown = 25;
                     }
                 }
+
+                GameLog::create([
+                    'table'=>'senrup_items_students',
+                    'student_id'=>$student->student_id,
+                    'log_desc'=>'Jumlah item' . $studentItem[$useItem - 1]->name . ' student ' . $student->user->name . ': ' . $studentItem[$useItem - 1]->item_owned,
+                    'log_path'=>'/battle/' . $id . '/' . $mode . '/' . $answerCorrect . '/' . $questionId . '/' . $userHealth . '/' . $firstAnim . '/' . $abyssScore . '/' . $useItem . '/' . $countdown . '/' . $lastQuestionId,
+                    'log_ip'=>UserSystemInfoHelper::get_ip(),
+                ]);
     
                 $itemOwned = $studentItem[$useItem - 1]->item_owned - 1;
     
@@ -88,6 +106,14 @@ class BattleController extends Controller
                 ]);
     
                 $studentItem = ItemStudentRelation::where('student_id', $student->student_id)->get();
+
+                GameLog::create([
+                    'table'=>'senrup_items_students',
+                    'student_id'=>$student->student_id,
+                    'log_desc'=>'Jumlah item' . $studentItem[$useItem - 1]->name . ' student ' . $student->user->name . ': ' . $studentItem[$useItem - 1]->item_owned,
+                    'log_path'=>'/battle/' . $id . '/' . $mode . '/' . $answerCorrect . '/' . $questionId . '/' . $userHealth . '/' . $firstAnim . '/' . $abyssScore . '/' . $useItem . '/' . $countdown . '/' . $lastQuestionId,
+                    'log_ip'=>UserSystemInfoHelper::get_ip(),
+                ]);
             }
         }
 
@@ -186,11 +212,27 @@ class BattleController extends Controller
                     $expId = $exp->exp_id + 1;
                 }
 
+                GameLog::create([
+                    'table'=>'senrup_students',
+                    'student_id'=>$student->student_id,
+                    'log_desc'=>'Status student ' . $student->user->name . '. Jumlah uang: ' . $student->golds . '. Jumlah Exp: ' . $student->total_exp . '. Progress story: ' . $student->story_level_progress . '. Level: ' . $student->exp_id,
+                    'log_path'=>'/battle/' . $id . '/' . $mode . '/' . $answerCorrect . '/' . $questionId . '/' . $userHealth . '/' . $firstAnim . '/' . $abyssScore . '/' . $useItem . '/' . $countdown . '/' . $lastQuestionId,
+                    'log_ip'=>UserSystemInfoHelper::get_ip(),
+                ]);
+
                 $student->update([
                     'golds'=>$golds,
                     'total_exp'=>$totalExp,
                     'story_level_progress'=>$storyLevelProgress,
                     'exp_id'=>$expId
+                ]);
+
+                GameLog::create([
+                    'table'=>'senrup_students',
+                    'student_id'=>$student->student_id,
+                    'log_desc'=>'Status student ' . $student->user->name . '. Jumlah uang: ' . $student->golds . '. Jumlah Exp: ' . $student->total_exp . '. Progress story: ' . $student->story_level_progress . '. Level: ' . $student->exp_id,
+                    'log_path'=>'/battle/' . $id . '/' . $mode . '/' . $answerCorrect . '/' . $questionId . '/' . $userHealth . '/' . $firstAnim . '/' . $abyssScore . '/' . $useItem . '/' . $countdown . '/' . $lastQuestionId,
+                    'log_ip'=>UserSystemInfoHelper::get_ip(),
                 ]);
 
                 return view('battle', [
@@ -290,11 +332,27 @@ class BattleController extends Controller
                     $studentAbyssScore = $abyssScore;
                 }
 
+                GameLog::create([
+                    'table'=>'senrup_students',
+                    'student_id'=>$student->student_id,
+                    'log_desc'=>'Status student ' . $student->user->name . '. Jumlah uang: ' . $student->golds . '. Jumlah Exp: ' . $student->total_exp . '. Point abyss: ' . $student->abyss_point . '. Level: ' . $student->exp_id,
+                    'log_path'=>'/battle/' . $id . '/' . $mode . '/' . $answerCorrect . '/' . $questionId . '/' . $userHealth . '/' . $firstAnim . '/' . $abyssScore . '/' . $useItem . '/' . $countdown . '/' . $lastQuestionId,
+                    'log_ip'=>UserSystemInfoHelper::get_ip(),
+                ]);
+
                 $student->update([
                     'golds'=>$golds,
                     'total_exp'=>$totalExp,
                     'exp_id'=>$expId,
                     'abyss_point'=>$studentAbyssScore
+                ]);
+
+                GameLog::create([
+                    'table'=>'senrup_students',
+                    'student_id'=>$student->student_id,
+                    'log_desc'=>'Status student ' . $student->user->name . '. Jumlah uang: ' . $student->golds . '. Jumlah Exp: ' . $student->total_exp . '. Point abyss: ' . $student->abyss_point . '. Level: ' . $student->exp_id,
+                    'log_path'=>'/battle/' . $id . '/' . $mode . '/' . $answerCorrect . '/' . $questionId . '/' . $userHealth . '/' . $firstAnim . '/' . $abyssScore . '/' . $useItem . '/' . $countdown . '/' . $lastQuestionId,
+                    'log_ip'=>UserSystemInfoHelper::get_ip(),
                 ]);
 
                 return view('battle', [
