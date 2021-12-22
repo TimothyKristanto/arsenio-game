@@ -23,6 +23,7 @@ class HomeController extends Controller
 
         return view('home', [
             'page'=>'BERANDA',
+            'user'=>$student->user,
             'student'=>$student,
             'user'=>$user
         ]);

@@ -27,6 +27,7 @@ class AddColumnSenrupRewardsTable extends Migration
     {
         Schema::table('senrup_rewards', function (Blueprint $table) {
             //
+            $table->dropColumn('image');
         });
     }
 }

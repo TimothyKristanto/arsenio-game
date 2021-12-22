@@ -30,7 +30,11 @@ class LoginController extends Controller
             if($check->is_active == '1'){
                 if(Auth::attempt($dataValidation)){
                     $request->session()->regenerate();
-                    return redirect()->intended('/home');
+                    if($check->role == 'admin'){
+                        return redirect()->intended('/admin');
+                    }else{
+                        return redirect()->intended('/home');
+                    }
                 }
             }else{
                 return back()->with('loginError', 'Akun anda telah di non-aktifkan');

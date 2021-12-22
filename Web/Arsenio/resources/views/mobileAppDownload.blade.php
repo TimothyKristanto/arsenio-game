@@ -30,21 +30,20 @@
     <script src="https://kit.fontawesome.com/ff5a4ae61c.js" crossorigin="anonymous"></script>
     <script>
         let width = window.innerWidth
-        let height = window.innerHeight
         
-        if(width < 1200){
-            window.location.href = "/mobileAppsDownload"
+        if(width >= 1200){
+            window.location.href = "/"
         }
         
     </script>
-    <title>@yield('webTitle')</title>
+    <title>Arsenio: Download aplikasi mobile</title>
 </head>
-<body>
-    @include('template.navbar')
-
-    <div class="container-fluid">
-        @yield('mainContent')
+<body class="home-bg"> 
+    <div class="text-center mobile-apps-download-alert">
+        <h1>Kami mendeteksi ukuran layar web Anda tidak memenuhi syarat</h1>
+        <br>
+        <br>
+        <h3>Silahkan mengunduh permainan kami melalui link ini untuk melanjutkan permainan</h3>
     </div>
-
 </body>
 </html>

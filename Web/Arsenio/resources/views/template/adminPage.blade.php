@@ -26,25 +26,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin.css">
     <link rel="stylesheet" href="/css/app.css">
     <script src="https://kit.fontawesome.com/ff5a4ae61c.js" crossorigin="anonymous"></script>
-    <script>
-        let width = window.innerWidth
-        let height = window.innerHeight
-        
-        if(width < 1200){
-            window.location.href = "/mobileAppsDownload"
-        }
-        
-    </script>
+    <link type="text/css" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <title>@yield('webTitle')</title>
 </head>
-<body>
+<body class="home-bg">
     @include('template.navbar')
-
-    <div class="container-fluid">
+    
+    <div>
         @yield('mainContent')
     </div>
-
 </body>
 </html>

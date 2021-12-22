@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AbyssController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BattleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MobileAppDownloadController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StoryController;
@@ -35,4 +38,14 @@ Route::get('/abyss', [AbyssController::class, 'index'])->middleware('auth');
 
 Route::get('/battle/{id}/{mode}/{answerCorrect}/{questionId}/{userHealth}/{firstAnim}/{abyssScore}/{useItem}/{countdown}/{lastQuestionId}', [BattleController::class, 'show'])->middleware('auth');
 
-Route::get('/shop/{item_id}/{amount}/{showItemDetail}', [ShopController::class, 'index']);
+Route::get('/shop/{item_id}/{amount}/{showItemDetail}', [ShopController::class, 'index'])->middleware('auth');
+
+Route::get('/admin', [AdminController::class, 'index'])->middleware('admin');
+
+Route::get('/gameLogs', [AdminController::class, 'showGameLogs'])->middleware('admin');
+
+Route::post('/admin/{userId}', [AdminController::class, 'banUser'])->middleware('admin');
+
+Route::resource('question', QuestionController::class)->middleware('admin');
+
+Route::get('/mobileAppsDownload', [MobileAppDownloadController::class, 'index']);

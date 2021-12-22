@@ -16,6 +16,7 @@ class AbyssController extends Controller
         return view('abyss', [
             'page'=>'ABYSS',
             'student'=>$student,
+            'user'=>$student->user,
             'studentPoint'=>Student::all()->sortByDesc('abyss_point')
         ]);
     }

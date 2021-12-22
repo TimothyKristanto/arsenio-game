@@ -1,7 +1,7 @@
 body {
     font-family: "MedievalSharp", cursive;
     font-weight: bolder;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 img {
@@ -300,7 +300,6 @@ nav {
 .home-bg {
     background: url("/images/TavernBG.png") no-repeat center center fixed;
     background-size: cover;
-    overflow: hidden;
 }
 
 .shop {
@@ -381,7 +380,6 @@ nav {
     background: url("/images/backgroundAbyss.png") no-repeat center center fixed;
     background-repeat: no-repeat;
     background-size: cover;
-    overflow: hidden;
 }
 
 .abyss-btn {
@@ -431,13 +429,11 @@ nav {
 .story-bg1 {
     background: url("/images/StoryHutan.png") no-repeat center center fixed;
     background-size: cover;
-    overflow: hidden;
 }
 
 .story-bg2 {
     background: url("/images/StoryGua.png") no-repeat center center fixed;
     background-size: cover;
-    overflow: hidden;
 }
 
 .btn-primary {
@@ -683,7 +679,6 @@ nav {
 .shop-bg {
     background: url("/images/ShopBG.png") no-repeat center center fixed;
     background-size: cover;
-    overflow: hidden;
 }
 
 .shop-area {
@@ -769,6 +764,13 @@ nav {
     border-radius: 10px;
     font-size: large;
     vertical-align: middle;
+}
+
+.mobile-apps-download-alert {
+    color: white;
+    margin-top: 200px;
+    background-color: #7f4f24;
+    padding: 10px;
 }
 
 /* .action-item {
