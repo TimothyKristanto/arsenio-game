@@ -684,7 +684,7 @@ nav {
 .shop-area {
     height: 80%;
     margin: auto;
-    padding: 200px 100px 0px 100px;
+    padding: 150px 100px 0px 50px;
 }
 
 .shop-items {
@@ -709,6 +709,8 @@ nav {
     border-radius: 5px;
     text-align: center;
     z-index: 5;
+    margin-left: 5px;
+    margin-top: 5px;
 }
 
 .icon-detail-item {
@@ -739,16 +741,46 @@ nav {
     margin-top: 50px;
 }
 
+.item-price{
+    position: absolute;
+    color: #7f4f24;
+    background-color: #f4bc73;
+    margin-top: 5px;
+    margin-left: 195px;
+    padding: 5px 5px 0px 0px;
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+    z-index: 6;
+}
+
+.item-price-text{
+    vertical-align: middle;
+    margin-left: 50px;
+    margin-right: 10px;
+    font-weight: bolder;
+}
+
+.item-price img{
+    position: absolute;
+    vertical-align: middle;
+    width: 30px;
+    height: 25px;
+    margin-left: 10px;
+}
+
 .info-item {
     position: relative;
     width: fit-content;
     margin-top: 220px;
-    margin-left: 90px;
-    padding: 2px;
+    margin-left: 100px;
+    padding: 7px 5px 1px 5px;
+    vertical-align: middle;
     border-radius: 5px;
     z-index: 10;
-    color: #f4bc73;
-    background-color: #7f4f24;
+    color: #fff;
+    background-color: #71411d;
+    border: rgba(255, 255, 255, 0.5) 2px solid ;
     text-align: center;
     font-weight: bold;
     font-size: medium;
@@ -756,14 +788,16 @@ nav {
 
 .shop-action {
     position: relative;
-    margin-top: 10px;
-    margin-left: 50px;
+    margin-top: 50px;
+    margin-left: 75px;
 }
-
 .inputAmount {
     border-radius: 10px;
     font-size: large;
     vertical-align: middle;
+    width: 120px;
+    text-align: center;
+    padding-left: 15px;
 }
 
 .mobile-apps-download-alert {

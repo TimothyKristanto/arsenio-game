@@ -22,7 +22,7 @@
             <div class="col-md-4 shop-items">
 
                 <div class="detail-item-icon">
-                    <a class="text-center icon-detail-item" href="/shop/{{$item->item_id}}/0/t">
+                    <a class="text-center icon-detail-item" href="/shop/{{$item->item_id}}/0/show">
                         <i class="fa fa-question" aria-hidden="true">
                         <br>
                         <p class="detail-item">Detail</p>
@@ -30,11 +30,17 @@
                     </a>
                 </div>
 
+                <div class="item-price">
+                    <img src="/images/Gold.png">
+                    <p class="item-price-text">
+                        {{$item->single_price}}
+                    </p>
+                </div>
+
                 <img src="{{$item->image}}">
 
                 {{-- <a type="button" class="tombol-beli btn btn-success" data-toggle="modal" data-target="#buyModal" > Beli </a> --}}
                 <div class="info-item">
-                    <h5 class="item-price">Harga: {{$item->single_price}}</h5>
                     <h5 class="item-owned">Dimiliki: {{$itemStudent[$index-1]->item_owned}}</h5>
                 </div>
                 <div class="shop-action">
