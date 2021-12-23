@@ -5,9 +5,9 @@
 @section('mainContent')
 
 <div class="align-items-center justify-content-center">
-        
+
     <h2 class="text-center auth-title">Lanjutkan Petualanganmu sebagai Pahlawan!</h2>
-    
+
     <form action="/" method="POST" class="auth-login align-items-center">
         @csrf
         <div class="form-group mt-3">
@@ -27,11 +27,12 @@
         </div>
 
     </form>
-    
-    
+
+
 </div>
 
-<div class="d-flex justify-content-end">
+<div class="d-flex justify-content-end change-auth-login-area">
+    <img src="/images/FeatherOnly.png">
     <a href="{{ route('register.index') }}" class="change-auth-login">
         Daftar
     </a>

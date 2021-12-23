@@ -4,9 +4,9 @@
 
 @section('mainContent')
     <div class="align-items-center justify-content-center">
-        
+
         <h2 class="text-center auth-title">Daftarkan dirimu sebagai pahlawan sekarang juga!</h2>
-        
+
         <form action="{{ route('register.store') }}" method="POST" class="auth-register align-items-center">
             @csrf
             <div class="form-group">
@@ -18,7 +18,7 @@
                 </label>
                 <input type="text" class="form-control @error("name") is-invalid @enderror" name="name" id="name" value="{{ old('name') }}" required>
             </div>
-            
+
             <div class="form-group mt-3">
                 <label for="email">
                     Email
@@ -48,16 +48,17 @@
                 </label>
                 <input type="password" id="passwordConfirmation" name="passwordConfirmation" class="form-control @error("passwordConfirmation") is-invalid @enderror" required>
             </div>
-            
+
             <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-dark mt-5 text-center brown">
+                <button type="submit" class="btn btn-dark mt-3 text-center brown">
                     Daftar
                 </button>
             </div>
 
         </form>
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end change-auth-register-area">
+            <img src="/images/FeatherOnly.png">
             <a href="/" class="change-auth-register">
                 Masuk
             </a>

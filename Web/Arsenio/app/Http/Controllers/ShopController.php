@@ -17,7 +17,7 @@ class ShopController extends Controller
         $items = Item::all();
         $itemStudent = ItemStudentRelation::where('student_id', $student->student_id)->get();
 
-        if($showItemDetail == 't'){
+        if($showItemDetail == 'show'){
             return back()->with('itemDesc', 'Item ' . $items[$item_id - 1]->name . ': ' . $items[$item_id - 1]->description);
         }
 
@@ -71,7 +71,7 @@ class ShopController extends Controller
                     'log_path'=>'/shop/' . $item_id . '/' . $amount . '/' . $showItemDetail,
                     'log_ip'=>UserSystemInfoHelper::get_ip(),
                 ]);
-                
+
                 return back()->with('itemDesc', 'Emas Anda tidak mencukupi');
             }
 
@@ -82,7 +82,7 @@ class ShopController extends Controller
                 'items'=> $items,
                 'itemStudent' => ItemStudentRelation::where('student_id', $student->student_id)->get(),
             ]);
-            
+
         }
 
         return view('shop', [
