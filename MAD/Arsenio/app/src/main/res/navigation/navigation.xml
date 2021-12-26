@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeActivity">
+
+    <fragment
+        android:id="@+id/homeActivity"
+        android:name="com.example.arsenio.views.HomeFragment"
+        android:label="fragment_home_activity"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeActivity_to_shopActivity"
+            app:destination="@id/shopActivity" />
+        <action
+            android:id="@+id/action_homeActivity_to_storyActivity"
+            app:destination="@id/storyActivity" />
+        <action
+            android:id="@+id/action_homeActivity_to_abyssActivity"
+            app:destination="@id/abyssActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/shopActivity"
+        android:name="com.example.arsenio.views.ShopFragment"
+        android:label="fragment_shop_activity"
+        tools:layout="@layout/fragment_shop" >
+        <action
+            android:id="@+id/action_shopActivity_to_homeActivity"
+            app:destination="@id/homeActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/storyActivity"
+        android:name="com.example.arsenio.views.StoryFragment"
+        android:label="fragment_story_activity"
+        tools:layout="@layout/fragment_story" >
+        <action
+            android:id="@+id/action_storyActivity_to_homeActivity"
+            app:destination="@id/homeActivity" />
+        <action
+            android:id="@+id/action_storyActivity_to_shopActivity"
+            app:destination="@id/shopActivity" />
+        <action
+            android:id="@+id/action_storyActivity_to_abyssActivity"
+            app:destination="@id/abyssActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/abyssActivity"
+        android:name="com.example.arsenio.views.AbyssFragment"
+        android:label="fragment_abyss_activity"
+        tools:layout="@layout/fragment_abyss" >
+        <action
+            android:id="@+id/action_abyssActivity_to_homeActivity"
+            app:destination="@id/homeActivity" />
+    </fragment>
+</navigation>

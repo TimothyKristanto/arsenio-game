@@ -63,7 +63,7 @@
                 <i class="fas fa-heart heart-icon"></i>
             </div>
         @endif
-        <img src="{{ $mode == 'story' ? $storyLevel->story->image : $abyssBg }}" class="battle-background">
+        <img src="{{ $mode == 'story' ? '/images/' . $storyLevel->story->image : $abyssBg }}" class="battle-background">
     </div>
 
     <div id="check-answer" class="check-answer-container justify-content-center">

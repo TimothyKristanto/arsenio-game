@@ -108,6 +108,14 @@ public class LoginActivity extends AppCompatActivity {
         txtDaftarLogin = findViewById(R.id.txtDaftarLogin);
 
         sharedPreferenceHelper = SharedPreferenceHelper.getInstance(LoginActivity.this);
+
+        if(!sharedPreferenceHelper.getAccessToken().isEmpty()){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
+
         authViewModel = new ViewModelProvider(LoginActivity.this).get(AuthViewModel.class);
     }
 }

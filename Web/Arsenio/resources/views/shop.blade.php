@@ -89,7 +89,7 @@
         <script>
             function getAmount(item_id, element_id){
                 let amount = document.getElementById(element_id).value;
-                window.location.href = "/shop/"+item_id+"/"+amount+'/f';
+                window.location.href = "/shop/"+item_id+"/"+amount+"/f";
             }
 
             // function increment(amount) {
