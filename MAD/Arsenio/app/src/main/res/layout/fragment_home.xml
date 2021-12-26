@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/tavernbg"
-    tools:context=".views.HomeActivity" >
+    tools:context=".views.HomeFragment" >
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/navbar"
-        android:layout_width="728dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
-        android:background="@color/navbar"
+        android:background="@drawable/rounded_bottom_corners"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,13 +21,15 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/navbar_home"
-        android:layout_width="555dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="20dp"
-        android:background="@color/navbar"
+        android:layout_marginEnd="140dp"
+        android:background="@drawable/rounded_corners"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="@+id/jumlah_gold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="@+id/navbar"
         app:layout_constraintTop_toBottomOf="@+id/navbar" />
@@ -37,40 +39,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="Arsenio"
         android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/arsenio_logo"
         app:layout_constraintStart_toEndOf="@+id/arsenio_logo"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/arsenio_logo" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="261dp"
+        android:layout_height="390dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/warrior"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navbar_home" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="31dp"
         android:layout_height="30dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:src="@drawable/gold"
-        app:layout_constraintEnd_toStartOf="@+id/jumlah_gold"
+        app:layout_constraintBottom_toBottomOf="@+id/navbar"
+        app:layout_constraintEnd_toStartOf="@+id/txtGoldHomeFragment"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/jumlah_gold"
-        android:layout_width="37dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
+        android:id="@+id/txtGoldHomeFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:text="0"
         android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
     <ImageView
         android:id="@+id/arsenio_logo"
         android:layout_width="30dp"
         android:layout_height="29dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
         android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="@+id/navbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,106 +91,119 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="232dp"
-        android:layout_marginTop="12dp"
         android:text="BERANDA"
         android:textColor="#000000"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.008"
-        app:layout_constraintStart_toEndOf="@+id/arsenio_title"
+        app:layout_constraintBottom_toBottomOf="@+id/navbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/shop_button_home"
+        android:id="@+id/imgShopHomeFragment"
         android:layout_width="78dp"
         android:layout_height="70dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="30dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/shop"
+        android:src="@drawable/shop_icon"
         android:translationZ="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/abyss_button_home"
+        android:id="@+id/imgAbyssHomeFragment"
         android:layout_width="78dp"
         android:layout_height="70dp"
-        android:layout_marginEnd="44dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/abyss"
+        android:src="@drawable/abyss_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imgLogoutHomeFragment"
         android:layout_width="27dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="32dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/logout"
         app:layout_constraintBottom_toBottomOf="@+id/navbar_home"
         app:layout_constraintStart_toStartOf="@+id/navbar_home"
         app:layout_constraintTop_toTopOf="@+id/navbar_home" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/txtUsernameHomeFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="TextView"
+        android:layout_marginStart="16dp"
+        android:text="username"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        app:layout_constraintBottom_toBottomOf="@+id/imgLogoutHomeFragment"
+        app:layout_constraintStart_toEndOf="@+id/imgLogoutHomeFragment"
+        app:layout_constraintTop_toTopOf="@+id/imgLogoutHomeFragment" />
 
     <TextView
-        android:id="@+id/story_progress"
+        android:id="@+id/txtStoryProgressHomeFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:text="TextView"
+        android:text="story progress"
         android:textColor="#000000"
-        app:layout_constraintStart_toEndOf="@+id/username"
-        app:layout_constraintTop_toTopOf="@+id/username" />
+        app:layout_constraintBottom_toBottomOf="@+id/txtUsernameHomeFragment"
+        app:layout_constraintEnd_toStartOf="@+id/txtAbyssScoreHomeFragment"
+        app:layout_constraintStart_toEndOf="@+id/txtUsernameHomeFragment"
+        app:layout_constraintTop_toTopOf="@+id/txtUsernameHomeFragment" />
 
     <TextView
-        android:id="@+id/abyss_score"
+        android:id="@+id/txtAbyssScoreHomeFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:text="TextView"
+        android:layout_marginEnd="16dp"
+        android:text="abyss score"
         android:textColor="#000000"
-        app:layout_constraintStart_toEndOf="@+id/story_progress"
-        app:layout_constraintTop_toTopOf="@+id/story_progress" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="261dp"
-        android:layout_height="390dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="120dp"
-        android:src="@drawable/warrior"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/navbar" />
+        app:layout_constraintBottom_toBottomOf="@+id/txtStoryProgressHomeFragment"
+        app:layout_constraintEnd_toEndOf="@+id/navbar_home"
+        app:layout_constraintTop_toTopOf="@+id/txtStoryProgressHomeFragment" />
 
     <TextView
-        android:id="@+id/warrior_level"
+        android:id="@+id/txtLevelHomeFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="TextView"
+        android:text="Level"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
         app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/left_arrow"
+        android:textColor="#D0FFFFFF"
+        android:textSize="65dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rvHomeFragment"
+        app:layout_constraintEnd_toStartOf="@+id/rvHomeFragment"
+        app:layout_constraintTop_toTopOf="@+id/rvHomeFragment" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/right_arrow"
+        android:textColor="#D0FFFFFF"
+        android:textSize="65dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rvHomeFragment"
+        app:layout_constraintStart_toEndOf="@+id/rvHomeFragment"
+        app:layout_constraintTop_toTopOf="@+id/rvHomeFragment" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rc_chapter"
-        android:layout_width="294dp"
-        android:layout_height="309dp"
+        android:id="@+id/rvHomeFragment"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/navbar_home" />
 

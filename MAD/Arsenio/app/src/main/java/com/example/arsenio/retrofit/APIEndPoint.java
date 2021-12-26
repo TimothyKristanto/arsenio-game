@@ -1,5 +1,6 @@
 package com.example.arsenio.retrofit;
 
+import com.example.arsenio.models.Home;
 import com.example.arsenio.models.RegisterResponse;
 import com.example.arsenio.models.TokenResponse;
 import com.google.gson.JsonObject;
@@ -7,6 +8,7 @@ import com.google.gson.JsonObject;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface APIEndPoint {
@@ -24,4 +26,7 @@ public interface APIEndPoint {
 
     @POST("logout")
     Call<JsonObject> logout();
+
+    @GET("home")
+    Call<Home> getHome();
 }

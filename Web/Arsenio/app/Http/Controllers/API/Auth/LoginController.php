@@ -33,32 +33,22 @@ class LoginController extends Controller
 
         if(!empty($check)){
             if ($check->is_active == '1') {
-                if ($check->is_login == '0') {
-                    if (Auth::attempt($user)) {
-                        $user = User::findOrFail(Auth::id());
+                if (Auth::attempt($user)) {
+                    $user = User::findOrFail(Auth::id());
 
-                        $user->update([
-                            'is_login'=>'1',
-                        ]);
-    
-                        $response = Http::asForm()->post('http://arsenio.test/oauth/token', [
-                            'grant_type' => 'password',
-                            'client_id' => $this->client->id,
-                            'client_secret' => $this->client->secret,
-                            'username' => $request->email,
-                            'password' => $request->password,
-                            'scope' => '*',
-                        ]);
-    
-                        return $response->json();
-                    } else {
-                        return response([
-                            'message' => 'Login gagal' 
-                        ]);
-                    }
+                    $response = Http::asForm()->post('http://arsenio.test/oauth/token', [
+                        'grant_type' => 'password',
+                        'client_id' => $this->client->id,
+                        'client_secret' => $this->client->secret,
+                        'username' => $request->email,
+                        'password' => $request->password,
+                        'scope' => '*',
+                    ]);
+
+                    return $response->json();
                 } else {
                     return response([
-                        'message' => 'Akun telah digunakan' 
+                        'message' => 'Login gagal' 
                     ]);
                 }
             } else {
@@ -72,13 +62,6 @@ class LoginController extends Controller
             ]);
         }
         
-    }
-
-    public function isLogin(int $id){
-        $user = User::findOrFail($id);
-        return $user->update([
-            'is_login' => '1',
-        ]);
     }
 
     public function refresh(Request $request){

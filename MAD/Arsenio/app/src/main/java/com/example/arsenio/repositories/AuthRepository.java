@@ -53,7 +53,7 @@ public class AuthRepository {
 
             @Override
             public void onFailure(Call<RegisterResponse> call, Throwable t) {
-
+                Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });
 
@@ -80,7 +80,7 @@ public class AuthRepository {
 
             @Override
             public void onFailure(Call<TokenResponse> call, Throwable t) {
-
+                Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });
 

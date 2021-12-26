@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.arsenio.models.Home;
 import com.example.arsenio.retrofit.APIService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -62,10 +63,32 @@ public class HomeRepository {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-
+                Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });
 
         return logoutResult;
+    }
+
+    public MutableLiveData<Home> getHome(){
+        MutableLiveData<Home> getHomeResult = new MutableLiveData<>();
+
+        apiService.getHome().enqueue(new Callback<Home>() {
+            @Override
+            public void onResponse(Call<Home> call, Response<Home> response) {
+                if(response.isSuccessful()){
+                    if(response.body() != null){
+                        getHomeResult.postValue(response.body());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Home> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
+        return getHomeResult;
     }
 }
