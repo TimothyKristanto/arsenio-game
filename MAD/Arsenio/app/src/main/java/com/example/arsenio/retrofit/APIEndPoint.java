@@ -2,6 +2,7 @@ package com.example.arsenio.retrofit;
 
 import com.example.arsenio.models.Home;
 import com.example.arsenio.models.RegisterResponse;
+import com.example.arsenio.models.Story;
 import com.example.arsenio.models.TokenResponse;
 import com.google.gson.JsonObject;
 
@@ -10,6 +11,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface APIEndPoint {
     @POST("login")
@@ -29,4 +31,7 @@ public interface APIEndPoint {
 
     @GET("home")
     Call<Home> getHome();
+
+    @GET("/story/{id}")
+    Call<Story> getStory(@Path("id") String id);
 }
