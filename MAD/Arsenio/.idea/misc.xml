@@ -16,7 +16,13 @@
         <entry key="..\:/xampp/htdocs/uas-mad-webdev-db-project/MAD/Arsenio/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/xampp/htdocs/uas-mad-webdev-db-project/MAD/Arsenio/app/src/main/res/layout/activity_register.xml" value="0.33" />
         <entry key="..\:/xampp/htdocs/uas-mad-webdev-db-project/MAD/Arsenio/app/src/main/res/layout/activity_story.xml" value="0.2359375" />
+<<<<<<< HEAD
         <entry key="..\:/xampp/htdocs/uas-mad-webdev-db-project/MAD/Arsenio/app/src/main/res/layout/fragment_abyss.xml" value="0.264" />
+||||||| b4e8f8e
+        <entry key="..\:/xampp/htdocs/uas-mad-webdev-db-project/MAD/Arsenio/app/src/main/res/layout/fragment_abyss.xml" value="0.4" />
+=======
+        <entry key="..\:/xampp/htdocs/uas-mad-webdev-db-project/MAD/Arsenio/app/src/main/res/layout/fragment_abyss.xml" value="0.3333333333333333" />
+>>>>>>> main
         <entry key="..\:/xampp/htdocs/uas-mad-webdev-db-project/MAD/Arsenio/app/src/main/res/layout/fragment_abyss_activity.xml" value="0.4" />
         <entry key="..\:/xampp/htdocs/uas-mad-webdev-db-project/MAD/Arsenio/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/xampp/htdocs/uas-mad-webdev-db-project/MAD/Arsenio/app/src/main/res/layout/fragment_home_activity.xml" value="0.536" />
