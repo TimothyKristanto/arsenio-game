@@ -1,5 +1,6 @@
 package com.example.arsenio.retrofit;
 
+import com.example.arsenio.models.Abyss;
 import com.example.arsenio.models.Home;
 import com.example.arsenio.models.RegisterResponse;
 import com.example.arsenio.models.Story;
@@ -34,4 +35,7 @@ public interface APIEndPoint {
 
     @GET("/story/{id}")
     Call<Story> getStory(@Path("id") String id);
+    
+    @GET("abyss")
+    Call<Abyss> getAbyss();
 }

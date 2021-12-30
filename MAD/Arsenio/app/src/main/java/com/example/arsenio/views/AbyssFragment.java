@@ -5,14 +5,23 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.arsenio.R;
+import com.example.arsenio.adapters.HomeFragmentRVAdapter;
+import com.example.arsenio.helper.SharedPreferenceHelper;
+import com.example.arsenio.models.Abyss;
+import com.example.arsenio.models.Home;
+import com.example.arsenio.viewmodels.AbyssViewModel;
+import com.example.arsenio.viewmodels.HomeViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,7 +29,11 @@ import com.example.arsenio.R;
  * create an instance of this fragment.
  */
 public class AbyssFragment extends Fragment {
-    private ImageView btnHomeAbyssFragment;
+    private ImageView btnHomeAbyssFragment,abyss_button;
+    private TextView abyss_lb1,abyss_lb2,abyss_lb3,abyss_lb4,abyss_lb5;
+
+    private SharedPreferenceHelper sharedPreferenceHelper;
+    private AbyssViewModel abyssViewModel;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,10 +88,50 @@ public class AbyssFragment extends Fragment {
 
         initView(view);
         setListener();
+        setData();
+    }
+
+    private void setData(){
+        abyssViewModel.getAbyss();
+        abyssViewModel.getAbyssResult().observe(requireActivity(), abyss -> {
+            if(abyss != null){
+                int jumlah = abyss.getStudent_leaderboard().size();
+                if(jumlah>=1){
+                    Abyss.StudentLeaderboard student1 = abyss.getStudent_leaderboard().get(0);
+                    abyss_lb1.setText("1. " + student1.getUsername() + " (" + student1.getAbyss_point() + "pt)");
+                }
+                if(jumlah>=2){
+                    Abyss.StudentLeaderboard student2 = abyss.getStudent_leaderboard().get(1);
+                    abyss_lb2.setText("2. " + student2.getUsername() + " (" + student2.getAbyss_point() + "pt)");
+                }
+                if(jumlah>=3){
+                    Abyss.StudentLeaderboard student3 = abyss.getStudent_leaderboard().get(2);
+                    abyss_lb3.setText("3. " + student3.getUsername() + " (" + student3.getAbyss_point() + "pt)");
+                }
+                if(jumlah>=4){
+                    Abyss.StudentLeaderboard student4 = abyss.getStudent_leaderboard().get(3);
+                    abyss_lb4.setText("4. " + student4.getUsername() + " (" + student4.getAbyss_point() + "pt)");
+                }
+                if(jumlah>=5){
+                    Abyss.StudentLeaderboard student5 = abyss.getStudent_leaderboard().get(4);
+                    abyss_lb5.setText("5. " + student5.getUsername() + " (" + student5.getAbyss_point() + "pt)");
+                }
+            }
+        });
     }
 
     private void initView(View view){
+        sharedPreferenceHelper = SharedPreferenceHelper.getInstance(requireActivity());
+        abyssViewModel = new ViewModelProvider(requireActivity()).get(AbyssViewModel.class);
+        abyssViewModel.init(sharedPreferenceHelper.getAccessToken());
+
         btnHomeAbyssFragment = view.findViewById(R.id.btnHomeAbyssFragment);
+        abyss_button = view.findViewById(R.id.abyss_button);
+        abyss_lb1 = view.findViewById(R.id.abyss_lb1);
+        abyss_lb2 = view.findViewById(R.id.abyss_lb2);
+        abyss_lb3 = view.findViewById(R.id.abyss_lb3);
+        abyss_lb4 = view.findViewById(R.id.abyss_lb4);
+        abyss_lb5 = view.findViewById(R.id.abyss_lb5);
     }
 
     private void setListener(){
@@ -86,6 +139,13 @@ public class AbyssFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_abyssActivity_to_homeActivity);
+            }
+        });
+
+        abyss_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Navigation.findNavController(view).navigate(R.id.);
             }
         });
     }
