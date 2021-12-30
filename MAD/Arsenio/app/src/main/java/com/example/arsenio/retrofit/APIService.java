@@ -5,6 +5,7 @@ import android.media.session.MediaSession;
 import com.example.arsenio.helper.Const;
 import com.example.arsenio.models.Home;
 import com.example.arsenio.models.RegisterResponse;
+import com.example.arsenio.models.Story;
 import com.example.arsenio.models.TokenResponse;
 import com.google.gson.JsonObject;
 
@@ -72,4 +73,6 @@ public class APIService {
     public Call<Home> getHome(){
         return apiEndPoint.getHome();
     }
+
+    public Call<Story> getStory(String id){return apiEndPoint.getStory(id);}
 }

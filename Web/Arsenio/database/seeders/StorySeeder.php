@@ -25,7 +25,7 @@ class StorySeeder extends Seeder
                             mereka menghalangi jalan Anda untuk 
                             mendapatkan benda kuno untuk kerajaan Anda. 
                             Sepertinya Anda akan berjuang untuk melewatinya.',
-            'image'=>'/images/StoryHutan.png',
+            'image'=>'story_hutan.png',
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);
@@ -33,7 +33,7 @@ class StorySeeder extends Seeder
         DB::table('senrup_stories')->insert([
             'title'=>'Gua Kebohongan',
             'story_desc'=>'Setelah mengalahkan monster sebelumnya, kamu lanjutkan perjalananmu untuk mendapatkan Nawasena. Anda mulai mendaki gunung dan melihat lebih banyak monster menjaga gua. Anda berasumsi bahwa Nawasena akan berada di gua itu. Tanpa ragu-ragu Anda pergi untuk melawan mereka untuk mendapatkan Nawasena itu untuk kerajaan Anda.',
-            'image'=>'/images/StoryGua.png',
+            'image'=>'story_gua.png',
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()
         ]);

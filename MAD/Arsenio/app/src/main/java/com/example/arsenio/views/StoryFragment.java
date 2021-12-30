@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -12,7 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.arsenio.R;
+import com.example.arsenio.adapters.HomeFragmentRVAdapter;
+import com.example.arsenio.helper.SharedPreferenceHelper;
+import com.example.arsenio.viewmodels.HomeViewModel;
+import com.example.arsenio.viewmodels.StoryViewModel;
+
+import java.io.File;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +29,11 @@ import com.example.arsenio.R;
  */
 public class StoryFragment extends Fragment {
     private ImageView btnHomeStoryFragment;
+    private ImageView imgBackgroundStoryFragment;
+
+    private SharedPreferenceHelper sharedPreferenceHelper;
+    private StoryViewModel storyViewModel;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -79,6 +92,20 @@ public class StoryFragment extends Fragment {
 
     private void initView(View view){
         btnHomeStoryFragment = view.findViewById(R.id.btnHomeStoryFragment);
+        imgBackgroundStoryFragment = view.findViewById(R.id.imgBackgroundStoryFragment);
+
+        sharedPreferenceHelper = SharedPreferenceHelper.getInstance(requireActivity());
+        storyViewModel = new ViewModelProvider(requireActivity()).get(StoryViewModel.class);
+        storyViewModel.init(sharedPreferenceHelper.getAccessToken());
+        int id = getArguments().getInt("level_id", -1);
+        storyViewModel.getStory(String.valueOf(id));
+        storyViewModel.getStoryResult().observe(requireActivity(), story -> {
+            if (story != null ){
+                Glide.with(requireContext())
+                        .load(new File("/drawable/story_hutan.png"))
+                        .into(imgBackgroundStoryFragment);
+            }
+        });
     }
 
     private void setListener(){
@@ -89,4 +116,6 @@ public class StoryFragment extends Fragment {
             }
         });
     }
+
+
 }
