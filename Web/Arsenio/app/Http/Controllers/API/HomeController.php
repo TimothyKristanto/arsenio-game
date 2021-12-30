@@ -4,10 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\HomeResource;
-use App\Http\Resources\StoryLevelResource;
-use App\Http\Resources\StoryResource;
-use App\Models\Story;
-use App\Models\StoryLevel;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
