@@ -21,7 +21,7 @@ class StoryController extends Controller
         }
 
         return view('story', [
-            'page' => 'STORY MODE',
+            'page' => 'CERITA',
             'student'=>$student,
             'user'=>$student->user,
             'storyLevel'=>$storyLevel,

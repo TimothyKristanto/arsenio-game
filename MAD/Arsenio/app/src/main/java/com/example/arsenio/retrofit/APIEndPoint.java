@@ -32,6 +32,6 @@ public interface APIEndPoint {
     @GET("home")
     Call<Home> getHome();
 
-    @GET("/story/{id}")
-    Call<Story> getStory(@Path("id") String id);
+    @GET("story/{id}")
+    Call<Story> getStory(@Path("id") int id);
 }

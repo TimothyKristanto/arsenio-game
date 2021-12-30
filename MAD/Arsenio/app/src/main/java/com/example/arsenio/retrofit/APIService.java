@@ -74,5 +74,5 @@ public class APIService {
         return apiEndPoint.getHome();
     }
 
-    public Call<Story> getStory(String id){return apiEndPoint.getStory(id);}
+    public Call<Story> getStory(int id){return apiEndPoint.getStory(id);}
 }

@@ -43,7 +43,8 @@ public class HomeFragmentRVAdapter extends RecyclerView.Adapter<HomeFragmentRVAd
                 @Override
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
-                    bundle.putInt("level_id", storyLevelProgress);
+                    bundle.putInt("story_id", 1);
+                    bundle.putInt("storyLevelProgress", storyLevelProgress);
                     Navigation.findNavController(view).navigate(R.id.action_homeActivity_to_storyActivity, bundle);
                 }
             });
@@ -55,7 +56,10 @@ public class HomeFragmentRVAdapter extends RecyclerView.Adapter<HomeFragmentRVAd
             holder.imgBgHomeFragmentViewholder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context, "Chapter 2 clicked", Toast.LENGTH_SHORT).show();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("story_id", 2);
+                    bundle.putInt("storyLevelProgress", storyLevelProgress);
+                    Navigation.findNavController(view).navigate(R.id.action_homeActivity_to_storyActivity, bundle);
                 }
             });
         }else if(position == 1 && position > (storyLevelProgress / 10) - 1){

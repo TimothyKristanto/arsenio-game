@@ -26,7 +26,7 @@ public class StoryViewModel extends AndroidViewModel {
 
     private MutableLiveData<Story> resultStory = new MutableLiveData<>();
 
-    public void getStory(String id){
+    public void getStory(int id){
         resultStory = storyRepository.getStory(id);
     }
 
