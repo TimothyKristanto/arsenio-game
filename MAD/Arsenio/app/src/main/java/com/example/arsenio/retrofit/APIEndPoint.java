@@ -1,5 +1,6 @@
 package com.example.arsenio.retrofit;
 
+import com.example.arsenio.models.Abyss;
 import com.example.arsenio.models.Home;
 import com.example.arsenio.models.RegisterResponse;
 import com.example.arsenio.models.TokenResponse;
@@ -29,4 +30,7 @@ public interface APIEndPoint {
 
     @GET("home")
     Call<Home> getHome();
+
+    @GET("abyss")
+    Call<Abyss> getAbyss();
 }

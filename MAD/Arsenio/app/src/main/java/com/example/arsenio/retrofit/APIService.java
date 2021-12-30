@@ -3,6 +3,7 @@ package com.example.arsenio.retrofit;
 import android.media.session.MediaSession;
 
 import com.example.arsenio.helper.Const;
+import com.example.arsenio.models.Abyss;
 import com.example.arsenio.models.Home;
 import com.example.arsenio.models.RegisterResponse;
 import com.example.arsenio.models.TokenResponse;
@@ -71,5 +72,9 @@ public class APIService {
 
     public Call<Home> getHome(){
         return apiEndPoint.getHome();
+    }
+
+    public Call<Abyss> getAbyss(){
+        return apiEndPoint.getAbyss();
     }
 }
