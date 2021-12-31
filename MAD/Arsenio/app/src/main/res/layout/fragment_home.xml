@@ -101,7 +101,7 @@
     <ImageView
         android:id="@+id/imgShopHomeFragment"
         android:layout_width="78dp"
-        android:layout_height="70dp"
+        android:layout_height="78dp"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/shop_icon"
@@ -112,7 +112,7 @@
     <ImageView
         android:id="@+id/imgAbyssHomeFragment"
         android:layout_width="78dp"
-        android:layout_height="70dp"
+        android:layout_height="78dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/abyss_icon"

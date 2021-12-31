@@ -6,19 +6,27 @@ import java.util.List;
 
 public class Story {
 
-    private List<Story> story;
+    private List<StoryData> storyData;
+    private List<Navbar> navbar;
 
     public static Story objectFromData(String str) {
-
         return new Gson().fromJson(str, Story.class);
     }
 
-    public List<Story> getStory() {
-        return story;
+    public List<StoryData> getStoryData() {
+        return storyData;
     }
 
-    public void setStory(List<Story> story) {
-        this.story = story;
+    public void setStoryData(List<StoryData> storyData) {
+        this.storyData = storyData;
+    }
+
+    public List<Navbar> getNavbar() {
+        return navbar;
+    }
+
+    public void setNavbar(List<Navbar> navbar) {
+        this.navbar = navbar;
     }
 
     public static class StoryData {
@@ -26,9 +34,9 @@ public class Story {
         private String story_desc;
         private String image;
 
-        public static Story objectFromData(String str) {
+        public static StoryData objectFromData(String str) {
 
-            return new Gson().fromJson(str, Story.class);
+            return new Gson().fromJson(str, StoryData.class);
         }
 
         public String getTitle() {
@@ -53,6 +61,23 @@ public class Story {
 
         public void setImage(String image) {
             this.image = image;
+        }
+    }
+
+    public static class Navbar {
+        private int golds;
+
+        public static Navbar objectFromData(String str) {
+
+            return new Gson().fromJson(str, Navbar.class);
+        }
+
+        public int getGolds() {
+            return golds;
+        }
+
+        public void setGolds(int golds) {
+            this.golds = golds;
         }
     }
 }

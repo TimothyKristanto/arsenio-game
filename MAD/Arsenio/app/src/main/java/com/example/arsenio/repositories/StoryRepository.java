@@ -34,13 +34,14 @@ public class StoryRepository {
         }
     }
 
-    public MutableLiveData<Story> getStory(String id){
+    public MutableLiveData<Story> getStory(int id){
         MutableLiveData<Story> result = new MutableLiveData<>();
 
         apiService.getStory(id).enqueue(new Callback<Story>() {
             @Override
             public void onResponse(Call<Story> call, Response<Story> response) {
                 if (response.isSuccessful()){
+                    Log.d(TAG, "onResponse: " + response.code());
                    if (response.body() != null){
                        result.postValue(response.body());
                    }

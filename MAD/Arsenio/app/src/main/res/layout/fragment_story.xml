@@ -2,23 +2,22 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".views.StoryFragment" >
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/imgBackgroundStoryFragment"
-        android:layout_width="900dp"
-        android:layout_height="900dp"
-        android:src="@drawable/forest"
+        android:layout_width="1000dp"
+        android:layout_height="510dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/story_hutan" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/navbar"
+        android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:background="@drawable/rounded_bottom_corners"
@@ -28,158 +27,156 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
     <TextView
-        android:id="@+id/arsenio_title"
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Arsenio"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/arsenio_logo"
-        app:layout_constraintStart_toEndOf="@+id/arsenio_logo"
-        app:layout_constraintTop_toTopOf="@+id/arsenio_logo" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="31dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
-        android:src="@drawable/gold"
-        app:layout_constraintBottom_toBottomOf="@+id/navbar"
-        app:layout_constraintEnd_toStartOf="@+id/txtGoldHomeFragment"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toEndOf="@+id/imageView9"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtGoldHomeFragment"
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="0"
+        android:text="CERITA"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/arsenio_logo"
+        android:id="@+id/imageView10"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/logo"
-        app:layout_constraintBottom_toBottomOf="@+id/navbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toStartOf="@+id/txtGoldStoryFragment"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/gold" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txtGoldStoryFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="STORY MODE"
+        android:layout_marginEnd="16dp"
+        android:text="0"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/navbar"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/imageView10" />
+
+    <ImageView
+        android:id="@+id/imgShopStoryFragment"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/shop_icon" />
+
+    <ImageView
+        android:id="@+id/imgAbyssStoryFragment"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/abyss_icon" />
+
+    <Button
+        android:id="@+id/btnLevel1StoryFragment"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/rounded_button"
+        android:text="1-1"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/btnLevel2StoryFragment"
+        app:layout_constraintEnd_toStartOf="@+id/btnLevel2StoryFragment"
+        app:layout_constraintTop_toTopOf="@+id/btnLevel2StoryFragment" />
+
+    <Button
+        android:id="@+id/btnLevel2StoryFragment"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:layout_marginEnd="60dp"
+        android:alpha="0.7"
+        android:background="@drawable/rounded_button"
+        android:enabled="false"
+        android:text="1-2"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/btnLevel3StoryFragment"
+        app:layout_constraintEnd_toStartOf="@+id/btnLevel3StoryFragment"
+        app:layout_constraintTop_toTopOf="@+id/btnLevel3StoryFragment" />
+
+    <Button
+        android:id="@+id/btnLevel3StoryFragment"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:alpha="0.7"
+        android:background="@drawable/rounded_button"
+        android:enabled="false"
+        android:text="1-3"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_level_1"
-        android:layout_width="72dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginEnd="44dp"
-        android:backgroundTint="#7F4F24"
-        android:fontFamily="@font/medievalsharp"
-        android:text="1-1"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/button_level_2"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_level_2"
-        android:layout_width="72dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginEnd="44dp"
-        android:backgroundTint="#7F4F24"
-        android:fontFamily="@font/medievalsharp"
-        android:text="1-2"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/button_level_3"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_level_3"
-        android:layout_width="72dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="172dp"
-        android:backgroundTint="#7F4F24"
-        android:fontFamily="@font/medievalsharp"
-        android:text="1-3"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imgBackgroundStoryFragment"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_level_4"
-        android:layout_width="72dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="172dp"
-        android:backgroundTint="#7F4F24"
-        android:fontFamily="@font/medievalsharp"
-        android:text="1-4"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="50dp"
-        app:layout_constraintStart_toEndOf="@+id/button_level_3"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_level_5"
-        android:layout_width="72dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="172dp"
-        android:backgroundTint="#7F4F24"
-        android:fontFamily="@font/medievalsharp"
+        android:id="@+id/btnLevel5StoryFragment"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="60dp"
+        android:alpha="0.7"
+        android:background="@drawable/rounded_button"
+        android:enabled="false"
         android:text="1-5"
         android:textColor="#FFFFFF"
-        app:cornerRadius="50dp"
-        app:layout_constraintStart_toEndOf="@+id/button_level_4"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnLevel4StoryFragment"
+        app:layout_constraintStart_toEndOf="@+id/btnLevel4StoryFragment"
+        app:layout_constraintTop_toTopOf="@+id/btnLevel4StoryFragment" />
 
-    <ImageView
-        android:id="@+id/imgShopHomeFragment"
+    <Button
+        android:id="@+id/btnLevel4StoryFragment"
         android:layout_width="78dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/shop_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/imgAbyssHomeFragment"
-        android:layout_width="78dp"
-        android:layout_height="70dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/abyss_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_height="78dp"
+        android:layout_marginStart="60dp"
+        android:alpha="0.7"
+        android:background="@drawable/rounded_button"
+        android:enabled="false"
+        android:text="1-4"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/btnLevel3StoryFragment"
+        app:layout_constraintStart_toEndOf="@+id/btnLevel3StoryFragment"
+        app:layout_constraintTop_toTopOf="@+id/btnLevel3StoryFragment" />
 
     <ImageView
         android:id="@+id/btnHomeStoryFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:src="@drawable/home"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/textView5"
+        app:srcCompat="@drawable/home" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
