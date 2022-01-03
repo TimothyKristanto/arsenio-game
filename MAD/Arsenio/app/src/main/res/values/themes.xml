@@ -15,6 +15,9 @@
 <!--        <item name="android:windowTranslucentStatus">true</item>-->
 <!--        <item name="android:windowTranslucentNavigation">true</item>-->
     </style>
+    <style name="editText" parent="AppTheme">
+        <item name="colorAccent">@color/black</item>
+    </style>
     <style name="AppTheme" parent="Theme.Arsenio">
         <item name="android:textViewStyle">@style/MedievalSharpTextViewStyle</item>
         <item name="android:buttonStyle">@style/MedievalSharpButtonStyle</item>

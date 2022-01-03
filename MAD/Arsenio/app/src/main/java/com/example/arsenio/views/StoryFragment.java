@@ -1,5 +1,8 @@
 package com.example.arsenio.views;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +25,7 @@ import com.example.arsenio.R;
 import com.example.arsenio.adapters.HomeFragmentRVAdapter;
 import com.example.arsenio.helper.SharedPreferenceHelper;
 import com.example.arsenio.models.Story;
+import com.example.arsenio.viewmodels.BattleViewModel;
 import com.example.arsenio.viewmodels.HomeViewModel;
 import com.example.arsenio.viewmodels.StoryViewModel;
 
@@ -38,9 +42,14 @@ public class StoryFragment extends Fragment {
     private ImageView btnHomeStoryFragment, imgBackgroundStoryFragment, imgAbyssStoryFragment, imgShopStoryFragment;
     private TextView txtGoldStoryFragment;
     private Button btnLevel1StoryFragment, btnLevel2StoryFragment, btnLevel3StoryFragment, btnLevel4StoryFragment, btnLevel5StoryFragment;
+    private View viewStoryDescStoryFragment;
 
     private SharedPreferenceHelper sharedPreferenceHelper;
     private StoryViewModel storyViewModel;
+    private Dialog storyDescDialog;
+    private BattleViewModel battleViewModel;
+
+    private int storyLevelProgress, storyId;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -94,8 +103,8 @@ public class StoryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
-        setListener();
         setUI();
+        setListener();
     }
 
     private void initView(View view){
@@ -109,39 +118,41 @@ public class StoryFragment extends Fragment {
         btnLevel5StoryFragment = view.findViewById(R.id.btnLevel5StoryFragment);
         imgAbyssStoryFragment = view.findViewById(R.id.imgAbyssStoryFragment);
         imgShopStoryFragment = view.findViewById(R.id.imgShopStoryFragment);
+        viewStoryDescStoryFragment = view.findViewById(R.id.viewStoryDescStoryFragment);
 
         sharedPreferenceHelper = SharedPreferenceHelper.getInstance(requireActivity());
         storyViewModel = new ViewModelProvider(requireActivity()).get(StoryViewModel.class);
         storyViewModel.init(sharedPreferenceHelper.getAccessToken());
+        battleViewModel = new ViewModelProvider(requireActivity()).get(BattleViewModel.class);
+        battleViewModel.init(sharedPreferenceHelper.getAccessToken());
+        storyDescDialog = new Dialog(requireActivity());
     }
 
     private void setUI(){
-        int storyId = getArguments().getInt("story_id", -1);
+        storyId = getArguments().getInt("storyId", -1);
 
         storyViewModel.getStory(storyId);
         storyViewModel.getStoryResult().observe(requireActivity(), story -> {
-            Story.Navbar navbar = story.getNavbar().get(0);
-            Story.StoryData storyData = story.getStoryData().get(0);
+            Story.StoryStudentData storyStudentData = story.getStoryStudentData().get(0);
 
-            txtGoldStoryFragment.setText("" + navbar.getGolds());
+            txtGoldStoryFragment.setText("" + storyStudentData.getGolds());
+            storyLevelProgress = storyStudentData.getStory_level_progress();
+
+            if(storyLevelProgress > 20){
+                if(storyId == 2){
+                    showEnabledLevels(storyLevelProgress);
+                }else{
+                    enable5Level();
+                }
+            }else if(storyLevelProgress > 10){
+                showEnabledLevels(storyLevelProgress);
+            }
         });
-
-        int storyLevelProgress = getArguments().getInt("storyLevelProgress", -1);
 
         if(storyId == 1){
             imgBackgroundStoryFragment.setImageResource(R.drawable.story_hutan);
         }else{
             imgBackgroundStoryFragment.setImageResource(R.drawable.story_gua);
-        }
-
-        if(storyLevelProgress > 20){
-            if(storyId == 2){
-                showEnabledLevels(storyLevelProgress);
-            }else{
-                enable5Level();
-            }
-        }else if(storyLevelProgress > 10){
-            showEnabledLevels(storyLevelProgress);
         }
     }
 
@@ -208,7 +219,95 @@ public class StoryFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_storyActivity_to_abyssActivity);
             }
         });
+
+        viewStoryDescStoryFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showStoryDesc();
+            }
+        });
+
+        btnLevel1StoryFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int levelId = (storyId == 1 ? 11 : 21);
+                navigateToBattle(view, levelId);
+            }
+        });
+
+        btnLevel2StoryFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int levelId = (storyId == 1 ? 12 : 22);
+                navigateToBattle(view, levelId);
+            }
+        });
+
+        btnLevel3StoryFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int levelId = (storyId == 1 ? 13 : 23);
+                navigateToBattle(view, levelId);
+            }
+        });
+
+        btnLevel4StoryFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int levelId = (storyId == 1 ? 14 : 24);
+                navigateToBattle(view, levelId);
+            }
+        });
+
+        btnLevel5StoryFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int levelId = (storyId == 1 ? 15 : 25);
+                navigateToBattle(view, levelId);
+            }
+        });
     }
 
+    private void showStoryDesc(){
+        storyDescDialog.setContentView(R.layout.story_desc_dialog);
+        storyDescDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        TextView txtStoryTitleStoryDialog, txtCloseStoryDialog, txtStoryDescStoryDialog;
+
+        txtStoryTitleStoryDialog = storyDescDialog.findViewById(R.id.txtStoryTitleStoryDialog);
+        txtCloseStoryDialog = storyDescDialog.findViewById(R.id.txtCloseStoryDialog);
+        txtStoryDescStoryDialog = storyDescDialog.findViewById(R.id.txtStoryDescStoryDialog);
+
+        storyViewModel.getStory(storyId);
+        storyViewModel.getStoryResult().observe(requireActivity(), story -> {
+            if(story != null){
+                Story.StoryData storyData = story.getStoryData().get(0);
+
+                txtStoryTitleStoryDialog.setText(storyData.getTitle());
+                txtStoryDescStoryDialog.setText(storyData.getStory_desc());
+            }
+        });
+
+        txtCloseStoryDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                storyDescDialog.dismiss();
+            }
+        });
+
+        storyDescDialog.show();
+    }
+
+    private void navigateToBattle(View view, int levelId){
+        battleViewModel.getBattleQuestion(levelId, 0);
+        battleViewModel.getBattleQuestionResult().observe(requireActivity(), battle -> {
+            if(battle != null){
+                Bundle bundle = new Bundle();
+                bundle.putInt("levelId", levelId);
+                bundle.putInt("questionAmount", battle.getQuestionAmount());
+                bundle.putString("mode", "story");
+                Navigation.findNavController(view).navigate(R.id.action_storyActivity_to_battleFragment, bundle);
+            }
+        });
+    }
 }

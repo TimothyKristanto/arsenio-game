@@ -126,18 +126,8 @@ class BattleController extends Controller
 
             $array = collect(explode('-', $questionId));
 
-            $randomizedQuestion = $question->random();
-
-            if($lastQuestionId != 'n'){
-                $randomizedQuestion = $question[$lastQuestionId];
-            }
-
-            if($userHealth == 'r'){
-                $userHealth = Student::where('student_id', Auth::user()->id)->first()->characterExp->health;
-            }
-
             if($answerCorrect == 'f' || $answerCorrect == 'n'){
-                if($array->count() - 1 != 'n'){
+                if($array[$array->count() - 1] != 'n'){
                     $array->forget($array->count() - 1);
                 }
                 $questionId = $array->join('-');
@@ -153,6 +143,10 @@ class BattleController extends Controller
                         $question->forget($answerId);
                     }
                 }
+            }
+
+            if($userHealth == 'r'){
+                $userHealth = Student::where('student_id', Auth::user()->id)->first()->characterExp->health;
             }
 
             $battleStatus = '';
@@ -189,11 +183,11 @@ class BattleController extends Controller
                     $rewards[0]->reward_amount = floor($rewards[0]->reward_amount / 2);
                     $rewards[1]->reward_amount = floor($rewards[1]->reward_amount / 2);
 
-                    $totalExp = $student->total_exp + ($rewards[1]->reward_amount);
-                    $golds = $student->golds + ($rewards[0]->reward_amount);
+                    $totalExp = $totalExp + ($rewards[1]->reward_amount);
+                    $golds = $golds + ($rewards[0]->reward_amount);
                 }else{
-                    $totalExp = $student->total_exp + $rewards[1]->reward_amount;
-                    $golds = $student->golds + $rewards[0]->reward_amount;
+                    $totalExp = $totalExp + $rewards[1]->reward_amount;
+                    $golds = $golds + $rewards[0]->reward_amount;
 
                     if($id % 5 != 0 && $id < 25){
                         $storyLevelProgress = $id + 1;
@@ -205,11 +199,15 @@ class BattleController extends Controller
                 $exp = CharacterExp::where('level_up_exp', '<=', $totalExp)
                             ->orderBy('level_up_exp', 'desc')
                             ->first();
+                
+                $expId = $student->exp_id;
 
-                $expId = $exp->exp_id;
+                if($exp != null){
+                    $expId = $exp->exp_id;
 
-                if($exp->level_up_exp <= $totalExp){
-                    $expId = $exp->exp_id + 1;
+                    if($exp->level_up_exp <= $totalExp){
+                        $expId = $exp->exp_id + 1;
+                    }
                 }
 
                 GameLog::create([
@@ -252,6 +250,12 @@ class BattleController extends Controller
                     'studentItem'=>$studentItem,
                     'countdown'=>$countdown
                 ]);
+            }
+
+            $randomizedQuestion = $question->random();
+
+            if($lastQuestionId != 'n'){
+                $randomizedQuestion = $question[$lastQuestionId];
             }
             
             $battleQuestionId = $question->search($randomizedQuestion);

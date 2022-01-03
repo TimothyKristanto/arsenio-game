@@ -58,7 +58,7 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="31dp"
+        android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
         android:src="@drawable/gold"
@@ -80,7 +80,7 @@
     <ImageView
         android:id="@+id/arsenio_logo"
         android:layout_width="30dp"
-        android:layout_height="29dp"
+        android:layout_height="30dp"
         android:layout_marginStart="16dp"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="@+id/navbar"

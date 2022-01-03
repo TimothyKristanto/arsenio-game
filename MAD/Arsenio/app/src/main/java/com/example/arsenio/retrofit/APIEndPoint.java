@@ -1,6 +1,8 @@
 package com.example.arsenio.retrofit;
 
 import com.example.arsenio.models.Abyss;
+import com.example.arsenio.models.BattlePlayerEnemy;
+import com.example.arsenio.models.BattleQuestion;
 import com.example.arsenio.models.Home;
 import com.example.arsenio.models.RegisterResponse;
 import com.example.arsenio.models.Story;
@@ -39,4 +41,10 @@ public interface APIEndPoint {
     
     @GET("abyss")
     Call<Abyss> getAbyss();
+
+    @GET("battle/{levelId}/{questionIndex}")
+    Call<BattleQuestion> getBattleQuestion(@Path("levelId") int levelId, @Path("questionIndex") int questionIndex);
+
+    @GET("battle/{levelId}")
+    Call<BattlePlayerEnemy> getBattle(@Path("levelId") int levelId);
 }
