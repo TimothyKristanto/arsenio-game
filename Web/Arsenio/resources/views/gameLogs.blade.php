@@ -25,7 +25,7 @@
                             <tr>
                                 <td>{{ $i }}</td>
                                 <td>{{ $gameLog->table }}</td>
-                                <td>User {{ $user->name }}</td>
+                                <td>User {{ $gameLog->student->user->username }}</td>
                                 <td class="w-25">{{ $gameLog->log_desc }}</td>
                                 <td>{{ $gameLog->log_path }}</td>
                                 <td>{{ $gameLog->log_ip }}</td>

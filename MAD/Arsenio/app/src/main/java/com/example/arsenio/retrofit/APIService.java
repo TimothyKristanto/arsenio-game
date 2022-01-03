@@ -1,9 +1,9 @@
 package com.example.arsenio.retrofit;
 
-import android.media.session.MediaSession;
-
 import com.example.arsenio.helper.Const;
 import com.example.arsenio.models.Abyss;
+import com.example.arsenio.models.BattlePlayerEnemy;
+import com.example.arsenio.models.BattleQuestion;
 import com.example.arsenio.models.Home;
 import com.example.arsenio.models.RegisterResponse;
 import com.example.arsenio.models.Story;
@@ -80,5 +80,13 @@ public class APIService {
     
     public Call<Abyss> getAbyss(){
         return apiEndPoint.getAbyss();
+    }
+
+    public Call<BattleQuestion> getBattleQuestion(int levelId, int questionIndex){
+        return apiEndPoint.getBattleQuestion(levelId, questionIndex);
+    }
+
+    public Call<BattlePlayerEnemy> getBattle(int levelId){
+        return apiEndPoint.getBattle(levelId);
     }
 }

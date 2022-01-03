@@ -42,10 +42,7 @@ public class HomeFragmentRVAdapter extends RecyclerView.Adapter<HomeFragmentRVAd
             holder.imgBgHomeFragmentViewholder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("story_id", 1);
-                    bundle.putInt("storyLevelProgress", storyLevelProgress);
-                    Navigation.findNavController(view).navigate(R.id.action_homeActivity_to_storyActivity, bundle);
+                    navigateToStory(view, 1);
                 }
             });
         }
@@ -56,15 +53,18 @@ public class HomeFragmentRVAdapter extends RecyclerView.Adapter<HomeFragmentRVAd
             holder.imgBgHomeFragmentViewholder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("story_id", 2);
-                    bundle.putInt("storyLevelProgress", storyLevelProgress);
-                    Navigation.findNavController(view).navigate(R.id.action_homeActivity_to_storyActivity, bundle);
+                    navigateToStory(view, 2);
                 }
             });
         }else if(position == 1 && position > (storyLevelProgress / 10) - 1){
             holder.imgBgHomeFragmentViewholder.setImageResource(R.drawable.chapter2_locked);
         }
+    }
+
+    private void navigateToStory(View view, int storyId){
+        Bundle bundle = new Bundle();
+        bundle.putInt("storyId", storyId);
+        Navigation.findNavController(view).navigate(R.id.action_homeActivity_to_storyActivity, bundle);
     }
 
     @Override

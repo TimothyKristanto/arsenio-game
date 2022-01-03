@@ -55,16 +55,18 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="31dp"
+        android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="5dp"
         android:src="@drawable/gold"
-        app:layout_constraintEnd_toStartOf="@+id/txtGoldHomeFragment"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/navbar"
+        app:layout_constraintEnd_toStartOf="@+id/txtGoldAbyssFragment"
+        app:layout_constraintTop_toTopOf="@+id/navbar" />
 
     <TextView
-        android:id="@+id/txtGoldHomeFragment"
+        android:id="@+id/txtGoldAbyssFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -77,7 +79,7 @@
     <ImageView
         android:id="@+id/arsenio_logo"
         android:layout_width="30dp"
-        android:layout_height="29dp"
+        android:layout_height="30dp"
         android:layout_marginStart="16dp"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="@+id/navbar"

@@ -1,7 +1,7 @@
 body {
     font-family: "MedievalSharp", cursive;
     font-weight: bolder;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 img {
@@ -741,7 +741,7 @@ nav {
     margin-top: 50px;
 }
 
-.item-price{
+.item-price {
     position: absolute;
     color: #7f4f24;
     background-color: #f4bc73;
@@ -754,14 +754,14 @@ nav {
     z-index: 6;
 }
 
-.item-price-text{
+.item-price-text {
     vertical-align: middle;
     margin-left: 50px;
     margin-right: 10px;
     font-weight: bolder;
 }
 
-.item-price img{
+.item-price img {
     position: absolute;
     vertical-align: middle;
     width: 30px;
@@ -780,7 +780,7 @@ nav {
     z-index: 10;
     color: #fff;
     background-color: #71411d;
-    border: rgba(255, 255, 255, 0.5) 2px solid ;
+    border: rgba(255, 255, 255, 0.5) 2px solid;
     text-align: center;
     font-weight: bold;
     font-size: medium;
