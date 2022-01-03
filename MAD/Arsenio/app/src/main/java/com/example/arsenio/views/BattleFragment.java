@@ -41,7 +41,7 @@ public class BattleFragment extends Fragment {
     private ImageView imgBackgroundBattleFragment, imgEnemyBattleFragment;
 
     private CountDownTimer questionTimer;
-    private Dialog pauseDialog;
+    private Dialog pauseDialog, winDialog, loseDialog;
     private BattleViewModel battleViewModel;
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ArrayList<Integer> listQuestionIndex;
@@ -104,7 +104,7 @@ public class BattleFragment extends Fragment {
 
         initView(view);
         setUI();
-        setTimerCountdown();
+        setTimerCountdown(view);
         setListener();
     }
 
@@ -123,6 +123,8 @@ public class BattleFragment extends Fragment {
         imgEnemyBattleFragment = view.findViewById(R.id.imgEnemyBattleFragment);
 
         pauseDialog = new Dialog(requireActivity());
+        winDialog = new Dialog(requireActivity());
+        loseDialog = new Dialog(requireActivity());
         sharedPreferenceHelper = SharedPreferenceHelper.getInstance(requireActivity());
         battleViewModel = new ViewModelProvider(requireActivity()).get(BattleViewModel.class);
         battleViewModel.init(sharedPreferenceHelper.getAccessToken());
@@ -198,12 +200,6 @@ public class BattleFragment extends Fragment {
         });
     }
 
-    private void printList(){
-        for (int i : listQuestionIndex){
-            Log.d(TAG, "value: " + i);
-        }
-    }
-
     private void setListener(){
         btnPauseBattleFragment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -224,17 +220,15 @@ public class BattleFragment extends Fragment {
                     txtPlayerHealthBattleFragment.setText("" + userHealth);
                 }
 
-                printList();
-
                 if(userHealth > 0 && listQuestionIndex.size() > 0){
                     questionIndex = new Random().nextInt(listQuestionIndex.size());
                     getQuestion(questionIndex);
-                }else{
-                    checkWinner();
-                }
 
-                questionTimer.cancel();
-                setTimerCountdown();
+                    questionTimer.cancel();
+                    setTimerCountdown(view);
+                }else{
+                    checkWinner(view);
+                }
             }
         });
 
@@ -249,17 +243,15 @@ public class BattleFragment extends Fragment {
                     txtPlayerHealthBattleFragment.setText("" + userHealth);
                 }
 
-                printList();
-
                 if(userHealth > 0 && listQuestionIndex.size() > 0){
                     questionIndex = new Random().nextInt(listQuestionIndex.size());
                     getQuestion(questionIndex);
-                }else{
-                    checkWinner();
-                }
 
-                questionTimer.cancel();
-                setTimerCountdown();
+                    questionTimer.cancel();
+                    setTimerCountdown(view);
+                }else{
+                    checkWinner(view);
+                }
             }
         });
 
@@ -274,17 +266,15 @@ public class BattleFragment extends Fragment {
                     txtPlayerHealthBattleFragment.setText("" + userHealth);
                 }
 
-                printList();
-
                 if(userHealth > 0 && listQuestionIndex.size() > 0){
                     questionIndex = new Random().nextInt(listQuestionIndex.size());
                     getQuestion(questionIndex);
-                }else{
-                    checkWinner();
-                }
 
-                questionTimer.cancel();
-                setTimerCountdown();
+                    questionTimer.cancel();
+                    setTimerCountdown(view);
+                }else{
+                    checkWinner(view);
+                }
             }
         });
 
@@ -299,27 +289,106 @@ public class BattleFragment extends Fragment {
                     txtPlayerHealthBattleFragment.setText("" + userHealth);
                 }
 
-                printList();
-
                 if(userHealth > 0 && listQuestionIndex.size() > 0){
                     questionIndex = new Random().nextInt(listQuestionIndex.size());
                     getQuestion(questionIndex);
-                }else{
-                    checkWinner();
-                }
 
-                questionTimer.cancel();
-                setTimerCountdown();
+                    questionTimer.cancel();
+                    setTimerCountdown(view);
+                }else{
+                    checkWinner(view);
+                }
             }
         });
     }
 
-    private void checkWinner(){
+    private void checkWinner(View view){
+        questionTimer.cancel();
+
         if(userHealth <= 0){
-
+            txtPlayerHealthBattleFragment.setText("0");
+            showLoseDialog(view);
         }else if(listQuestionIndex.size() <= 0){
-
+            showWinDialog(view);
         }
+    }
+
+    private void showLoseDialog(View battleView){
+        loseDialog.setContentView(R.layout.battle_win_lose_dialog);
+        loseDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView txtTitleWinLoseDailog, txtGoldWinLoseDialog, txtExpWinLoseDialog, txtExitWinLoseDialog;
+        Button btnReplayWinLoseDialog;
+        ImageView imgCharacterWinLoseDialog;
+
+        txtExitWinLoseDialog = loseDialog.findViewById(R.id.txtExitWinLoseDialog);
+        txtGoldWinLoseDialog = loseDialog.findViewById(R.id.txtGoldWinLoseDialog);
+        txtExpWinLoseDialog = loseDialog.findViewById(R.id.txtExpWinLoseDialog);
+        txtTitleWinLoseDailog = loseDialog.findViewById(R.id.txtTitleWinLoseDailog);
+        btnReplayWinLoseDialog = loseDialog.findViewById(R.id.btnReplayWinLoseDialog);
+        imgCharacterWinLoseDialog = loseDialog.findViewById(R.id.imgCharacterWinLoseDialog);
+
+        txtTitleWinLoseDailog.setText("Anda Kalah");
+        txtGoldWinLoseDialog.setText("x0");
+        txtExpWinLoseDialog.setText("x0");
+        imgCharacterWinLoseDialog.setImageResource(R.drawable.downed_character);
+
+        txtExitWinLoseDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loseDialog.dismiss();
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("storyId", levelId / 10);
+                Navigation.findNavController(battleView).navigate(R.id.action_battleFragment_to_storyActivity, bundle);
+            }
+        });
+
+        btnReplayWinLoseDialog.setVisibility(View.VISIBLE);
+
+        btnReplayWinLoseDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loseDialog.dismiss();
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("levelId", levelId);
+                bundle.putInt("questionAmount", questionAmount);
+                Navigation.findNavController(battleView).navigate(R.id.action_battleFragment_self, bundle);
+            }
+        });
+
+        loseDialog.show();
+    }
+
+    private void showWinDialog(View battleView){
+        winDialog.setContentView(R.layout.battle_win_lose_dialog);
+        winDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView txtTitleWinLoseDailog, txtGoldWinLoseDialog, txtExpWinLoseDialog, txtExitWinLoseDialog;
+        ImageView imgCharacterWinLoseDialog;
+
+        txtExitWinLoseDialog = winDialog.findViewById(R.id.txtExitWinLoseDialog);
+        txtGoldWinLoseDialog = winDialog.findViewById(R.id.txtGoldWinLoseDialog);
+        txtExpWinLoseDialog = winDialog.findViewById(R.id.txtExpWinLoseDialog);
+        txtTitleWinLoseDailog = winDialog.findViewById(R.id.txtTitleWinLoseDailog);
+        imgCharacterWinLoseDialog = winDialog.findViewById(R.id.imgCharacterWinLoseDialog);
+
+        txtTitleWinLoseDailog.setText("Anda Menang");
+        imgCharacterWinLoseDialog.setImageResource(R.drawable.battle_character);
+
+        txtExitWinLoseDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                winDialog.dismiss();
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("storyId", levelId / 10);
+                Navigation.findNavController(battleView).navigate(R.id.action_battleFragment_to_storyActivity, bundle);
+            }
+        });
+
+        winDialog.show();
     }
 
     private void showPauseDialog(View battleView) {
@@ -363,7 +432,18 @@ public class BattleFragment extends Fragment {
 
                     @Override
                     public void onFinish() {
+                        userHealth -= enemyDamage;
+                        txtPlayerHealthBattleFragment.setText("" + userHealth);
 
+                        if(userHealth > 0 && listQuestionIndex.size() > 0){
+                            questionIndex = new Random().nextInt(listQuestionIndex.size());
+                            getQuestion(questionIndex);
+
+                            questionTimer.cancel();
+                            setTimerCountdown(battleView);
+                        }else {
+                            checkWinner(battleView);
+                        }
                     }
                 }.start();
             }
@@ -372,7 +452,7 @@ public class BattleFragment extends Fragment {
         pauseDialog.show();
     }
 
-    private void setTimerCountdown(){
+    private void setTimerCountdown(View view){
         questionTimer = new CountDownTimer(26000, 1000){
 
             @Override
@@ -383,7 +463,18 @@ public class BattleFragment extends Fragment {
 
             @Override
             public void onFinish() {
-                txtTimerBattleFragment.setText("00");
+                userHealth -= enemyDamage;
+                txtPlayerHealthBattleFragment.setText("" + userHealth);
+
+                if(userHealth > 0 && listQuestionIndex.size() > 0){
+                    questionIndex = new Random().nextInt(listQuestionIndex.size());
+                    getQuestion(questionIndex);
+
+                    questionTimer.cancel();
+                    setTimerCountdown(view);
+                }else{
+                    checkWinner(view);
+                }
             }
         }.start();
     }
