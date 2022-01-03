@@ -124,6 +124,14 @@
                     <h4 class="reward_exp mx-2">EXP</h4>
                     <h4>x{{ $mode == 'abyss' ? $rewards[1] : '0' }}</h4>
                 </div>
+                
+                @if ($mode == 'abyss')
+                    <div class="d-flex justify-content-center my-4">
+                        <h4 class="reward_exp mx-2">Score</h4>
+                        <h4>x{{ $abyssScore }}</h4>
+                    </div>
+                @endif
+                
 
                 <img src="/images/DownedBattleCharacter.png" class="reward-character">
             @endif
