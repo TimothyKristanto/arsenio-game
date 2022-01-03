@@ -10,7 +10,6 @@
                     <tr>
                         <th>No</th>
                         <th>Table</th>
-                        <th>Student</th>
                         <th>Log desc</th>
                         <th>Log path</th>
                         <th>Log ip</th>
@@ -25,7 +24,6 @@
                             <tr>
                                 <td>{{ $i }}</td>
                                 <td>{{ $gameLog->table }}</td>
-                                <td>User {{ $gameLog->student->user->username }}</td>
                                 <td class="w-25">{{ $gameLog->log_desc }}</td>
                                 <td>{{ $gameLog->log_path }}</td>
                                 <td>{{ $gameLog->log_ip }}</td>
