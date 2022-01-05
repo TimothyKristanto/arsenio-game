@@ -107,7 +107,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtInputPasswordRegister"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:textColorHint="@color/wood_brown_light3"
                 app:layout_constraintEnd_toEndOf="@+id/txtInputEmailRegister"
                 app:layout_constraintStart_toStartOf="@+id/tampilan3"
@@ -117,7 +117,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="match_parent"
                     android:inputType="textPassword"
                     android:password="true"
                     tools:ignore="SpeakableTextPresentCheck" />
@@ -138,7 +138,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtInputKonfirmasiPasswordRegister"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:textColorHint="@color/wood_brown_light3"
                 app:layout_constraintEnd_toEndOf="@+id/txtInputPasswordRegister"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -149,7 +149,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="match_parent"
                     android:inputType="textPassword"
                     android:password="true"
                     tools:ignore="SpeakableTextPresentCheck" />
