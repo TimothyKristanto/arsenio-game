@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class StoryController extends Controller
 {
     //
-    function show($id){
+    public function show($id){
         $student = Student::where('user_id', Auth::user()->id)->get();
         $story = Story::where('story_id', $id)->get();
     

@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.arsenio.models.BattlePlayerEnemy;
 import com.example.arsenio.models.BattleQuestion;
+import com.example.arsenio.models.BattleReward;
 import com.example.arsenio.repositories.BattleRepository;
 
 public class BattleViewModel extends AndroidViewModel {
@@ -37,6 +38,30 @@ public class BattleViewModel extends AndroidViewModel {
     }
     public LiveData<BattlePlayerEnemy> getBattleResult(){
         return resultBattle;
+    }
+
+    private MutableLiveData<BattleReward> resultBattleReward = new MutableLiveData<>();
+    public void updateStudentBattleData(int levelId){
+        resultBattleReward = battleRepository.updateBattleStudentData(levelId);
+    }
+    public LiveData<BattleReward> updateStudentBattleDataResult(){
+        return resultBattleReward;
+    }
+
+    private MutableLiveData<BattleQuestion> resultAbyssBattleQuestion = new MutableLiveData<>();
+    public void getAbyssBattleQuestion(int questionIndex){
+        resultAbyssBattleQuestion = battleRepository.getAbyssBattleQuestion(questionIndex);
+    }
+    public LiveData<BattleQuestion> getAbyssBattleQuestionResult(){
+        return resultAbyssBattleQuestion;
+    }
+
+    private MutableLiveData<BattleReward> resultAbyssBattleReward = new MutableLiveData<>();
+    public void updateAbyssBattleStudentData(long battleScore){
+        resultAbyssBattleReward = battleRepository.updateAbyssBattleStudentData(battleScore);
+    }
+    public LiveData<BattleReward> updateAbyssBattleStudentDataResult(){
+        return resultAbyssBattleReward;
     }
 
     @Override

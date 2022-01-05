@@ -15,8 +15,8 @@ class EnemyResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'name'=>$this->enemy->name,
-            'damage'=>$this->enemy->damage,
+            'name'=>$this->name,
+            'damage'=>$this->damage
         ];
     }
 }

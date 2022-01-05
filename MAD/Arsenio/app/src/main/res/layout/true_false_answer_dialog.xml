@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="800dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imgCharacterTrueFalseDialog"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:layout_marginTop="60dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/battle_character" />
+
+    <View
+        android:id="@+id/viewTrueFalseDialog"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/rounded_corners"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/imgCharacterTrueFalseDialog"
+        app:layout_constraintEnd_toEndOf="@+id/imgCharacterTrueFalseDialog"
+        app:layout_constraintStart_toStartOf="@+id/imgCharacterTrueFalseDialog" />
+
+    <ImageView
+        android:id="@+id/imgHeartTrueFalseDialog"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
+        android:foreground="@drawable/heart"
+        android:foregroundTint="#FF0000"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/viewTrueFalseDialog"
+        app:layout_constraintStart_toStartOf="@+id/viewTrueFalseDialog"
+        app:layout_constraintTop_toTopOf="@+id/viewTrueFalseDialog" />
+
+    <TextView
+        android:id="@+id/txtHealthReduceTrueFalseDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="-20"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imgHeartTrueFalseDialog"
+        app:layout_constraintStart_toEndOf="@+id/imgHeartTrueFalseDialog"
+        app:layout_constraintTop_toTopOf="@+id/imgHeartTrueFalseDialog" />
+
+    <ImageView
+        android:id="@+id/imgCorrectWrongTrueFalseDialog"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/txtCorrectWrongTrueFalseDialog"
+        app:layout_constraintEnd_toStartOf="@+id/txtCorrectWrongTrueFalseDialog"
+        app:layout_constraintTop_toTopOf="@+id/txtCorrectWrongTrueFalseDialog"
+        app:layout_constraintVertical_bias="0.512"
+        app:srcCompat="@drawable/ic_baseline_correct_24" />
+
+    <TextView
+        android:id="@+id/txtCorrectWrongTrueFalseDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="JAWABAN BENAR"
+        android:textColor="#0DE7A9"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtScoreTrueFalseDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

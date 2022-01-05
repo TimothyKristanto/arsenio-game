@@ -31,8 +31,8 @@ class EnemySeeder extends Seeder
         ]);
 
         DB::table('senrup_enemies')->insert([
-            'name' => 'Serigala Kekar',
-            'image' => '/images/MonsterSerigala.png',
+            'name' => 'Golem',
+            'image' => '/images/MonsterGolem.png',
             'damage' => 35,
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now()

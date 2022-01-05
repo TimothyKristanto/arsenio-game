@@ -12,10 +12,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,11 +39,12 @@ import java.util.Random;
  */
 public class BattleFragment extends Fragment {
     private Button btnPauseBattleFragment, btnAnswerABattleFragment, btnAnswerBBattleFragment, btnAnswerCBattleFragment, btnAnswerDBattleFragment, btnUseItemBattleFragment;
-    private TextView txtTimerBattleFragment, txtPlayerHealthBattleFragment, txtEnemyHealthBattleFragment, txtQuestionBattleFragment;
-    private ImageView imgBackgroundBattleFragment, imgEnemyBattleFragment;
+    private TextView txtTimerBattleFragment, txtPlayerHealthBattleFragment, txtEnemyHealthBattleFragment, txtQuestionBattleFragment, txtScoreBattleFragment;
+    private ImageView imgBackgroundBattleFragment, imgEnemyBattleFragment, imgEnemyHeartBattleFragment;
+    private View viewEnemyStatusBattleFragment;
 
     private CountDownTimer questionTimer;
-    private Dialog pauseDialog, winDialog, loseDialog;
+    private Dialog pauseDialog, winDialog, loseDialog, correctDialog, wrongDialog;
     private BattleViewModel battleViewModel;
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ArrayList<Integer> listQuestionIndex;
@@ -50,6 +53,7 @@ public class BattleFragment extends Fragment {
     private String modeBattle, answerA, answerB, answerC, answerD, correctAnswer;
     private int levelId, questionAmount, questionIndex, userHealth, enemyDamage;
     private static final String TAG = "BattleFragment";
+    private long score, countScoreAnimation;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -121,16 +125,23 @@ public class BattleFragment extends Fragment {
         btnAnswerBBattleFragment = view.findViewById(R.id.btnAnswerBBattleFragment);
         btnAnswerABattleFragment = view.findViewById(R.id.btnAnswerABattleFragment);
         imgEnemyBattleFragment = view.findViewById(R.id.imgEnemyBattleFragment);
+        imgEnemyHeartBattleFragment = view.findViewById(R.id.imgEnemyHeartBattleFragment);
+        viewEnemyStatusBattleFragment = view.findViewById(R.id.viewEnemyStatusBattleFragment);
+        txtScoreBattleFragment = view.findViewById(R.id.txtScoreBattleFragment);
 
         pauseDialog = new Dialog(requireActivity());
         winDialog = new Dialog(requireActivity());
         loseDialog = new Dialog(requireActivity());
+        correctDialog = new Dialog(requireActivity());
+        wrongDialog = new Dialog(requireActivity());
         sharedPreferenceHelper = SharedPreferenceHelper.getInstance(requireActivity());
         battleViewModel = new ViewModelProvider(requireActivity()).get(BattleViewModel.class);
         battleViewModel.init(sharedPreferenceHelper.getAccessToken());
         listQuestionIndex = new ArrayList<>();
 
         modeBattle = getArguments().getString("mode");
+
+        score = 0;
     }
 
     private void setUI(){
@@ -140,64 +151,287 @@ public class BattleFragment extends Fragment {
         initEnemy();
         initPlayer();
 
-        if(levelId > 20){
-            imgBackgroundBattleFragment.setImageResource(R.drawable.story_gua);
-        }else if(levelId > 10){
-            imgBackgroundBattleFragment.setImageResource(R.drawable.story_hutan);
+        if(modeBattle.equals("story")) {
+            txtScoreBattleFragment.setVisibility(View.INVISIBLE);
+
+            if (levelId > 20) {
+                imgBackgroundBattleFragment.setImageResource(R.drawable.story_gua);
+            } else if (levelId > 10) {
+                imgBackgroundBattleFragment.setImageResource(R.drawable.story_hutan);
+            }
+
+            for (int i = 0; i < questionAmount; i++) {
+                listQuestionIndex.add(i);
+            }
+        }else{
+            imgBackgroundBattleFragment.setImageResource(R.drawable.bg_battle_abyss);
+
+            txtScoreBattleFragment.setText("Score " + score);
+            txtScoreBattleFragment.setVisibility(View.VISIBLE);
         }
 
-        for(int i = 0; i < questionAmount; i++){
-            listQuestionIndex.add(i);
-        }
-
-        questionIndex = new Random().nextInt(listQuestionIndex.size());
+        randomInt();
         getQuestion(questionIndex);
     }
 
     private void initEnemy(){
-        txtEnemyHealthBattleFragment.setText("" + (questionAmount * 20));
+        if(modeBattle.equals("story")){
+            txtEnemyHealthBattleFragment.setText("" + (questionAmount * 20));
 
-        if(levelId == 25){
-            imgEnemyBattleFragment.setImageResource(R.drawable.monster_penyihir);
-        }else if(levelId < 25 && levelId > 20){
-            imgEnemyBattleFragment.setImageResource(R.drawable.monster_serigala);
-        }else if(levelId == 15){
-            imgEnemyBattleFragment.setImageResource(R.drawable.monster_iblis);
+            if(levelId == 25){
+                imgEnemyBattleFragment.setImageResource(R.drawable.monster_penyihir);
+            }else if(levelId < 25 && levelId > 20){
+                imgEnemyBattleFragment.setImageResource(R.drawable.monster_golem);
+            }else if(levelId == 15){
+                imgEnemyBattleFragment.setImageResource(R.drawable.monster_iblis);
+            }
+        }else{
+            imgEnemyBattleFragment.setImageResource(R.drawable.monster_abyss);
+
+            imgEnemyHeartBattleFragment.setVisibility(View.INVISIBLE);
+            txtEnemyHealthBattleFragment.setVisibility(View.INVISIBLE);
+            viewEnemyStatusBattleFragment.setVisibility(View.INVISIBLE);
+            txtScoreBattleFragment.setVisibility(View.VISIBLE);
+
+            txtScoreBattleFragment.setText("Score 0");
         }
+
     }
 
     private void initPlayer(){
         battleViewModel.getBattle(levelId);
         battleViewModel.getBattleResult().observe(requireActivity(), battlePlayerEnemy -> {
             BattlePlayerEnemy.BattleStudentData student = battlePlayerEnemy.getBattleStudentData().get(0);
-            BattlePlayerEnemy.Enemy enemy = battlePlayerEnemy.getEnemy().get(0);
-
-            enemyDamage = enemy.getDamage();
             userHealth = student.getHealth();
             txtPlayerHealthBattleFragment.setText("" + userHealth);
+
+            BattlePlayerEnemy.Enemy enemy = battlePlayerEnemy.getEnemy();
+            enemyDamage = enemy.getDamage();
         });
     }
 
     private void getQuestion(int questionIndex){
-        battleViewModel.getBattleQuestion(levelId, listQuestionIndex.get(questionIndex));
-        battleViewModel.getBattleQuestionResult().observe(requireActivity(), battle -> {
-            if(battle != null){
-                // set texts
-                BattleQuestion.Question question = battle.getQuestion();
+        if(modeBattle.equals("story")){
+            battleViewModel.getBattleQuestion(levelId, listQuestionIndex.get(questionIndex));
+            battleViewModel.getBattleQuestionResult().observe(requireActivity(), battle -> {
+                if(battle != null){
+                    BattleQuestion.Question question = battle.getQuestion();
 
-                answerA = question.getAnswer_a();
-                answerB = question.getAnswer_b();
-                answerC = question.getAnswer_c();
-                answerD = question.getAnswer_d();
-                correctAnswer = question.getCorrect_answer();
+                    answerA = question.getAnswer_a();
+                    answerB = question.getAnswer_b();
+                    answerC = question.getAnswer_c();
+                    answerD = question.getAnswer_d();
+                    correctAnswer = question.getCorrect_answer();
 
-                txtQuestionBattleFragment.setText(question.getQuestion());
-                btnAnswerABattleFragment.setText("A. " + answerA);
-                btnAnswerBBattleFragment.setText("B. " + answerB);
-                btnAnswerCBattleFragment.setText("C. " + answerC);
-                btnAnswerDBattleFragment.setText("D. " + answerD);
+                    txtQuestionBattleFragment.setText(question.getQuestion());
+                    btnAnswerABattleFragment.setText("A. " + answerA);
+                    btnAnswerBBattleFragment.setText("B. " + answerB);
+                    btnAnswerCBattleFragment.setText("C. " + answerC);
+                    btnAnswerDBattleFragment.setText("D. " + answerD);
+                }
+            });
+        }else{
+            battleViewModel.getAbyssBattleQuestion(questionIndex);
+            battleViewModel.getAbyssBattleQuestionResult().observe(requireActivity(), battleQuestion -> {
+                if(battleQuestion != null){
+                    BattleQuestion.Question question = battleQuestion.getQuestion();
+
+                    answerA = question.getAnswer_a();
+                    answerB = question.getAnswer_b();
+                    answerC = question.getAnswer_c();
+                    answerD = question.getAnswer_d();
+                    correctAnswer = question.getCorrect_answer();
+
+                    txtQuestionBattleFragment.setText(question.getQuestion());
+                    btnAnswerABattleFragment.setText("A. " + answerA);
+                    btnAnswerBBattleFragment.setText("B. " + answerB);
+                    btnAnswerCBattleFragment.setText("C. " + answerC);
+                    btnAnswerDBattleFragment.setText("D. " + answerD);
+                }
+            });
+        }
+    }
+
+    private void answerCorrect(){
+        questionTimer.cancel();
+        showCorrectAnswerDialog();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(modeBattle.equals("story")){
+                    listQuestionIndex.remove(questionIndex);
+                    txtEnemyHealthBattleFragment.setText("" + (listQuestionIndex.size() * 20));
+                }else{
+                    score += 250;
+                    txtScoreBattleFragment.setText("Score " + score);
+                }
             }
-        });
+        }, modeBattle.equals("story") ? 6100 : 8100);
+    }
+
+    private void answerWrong(){
+        questionTimer.cancel();
+        showWrongAnswerDialog();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                userHealth -= enemyDamage;
+                txtPlayerHealthBattleFragment.setText("" + userHealth);
+            }
+        }, modeBattle.equals("story") ? 6100 : 8100);
+    }
+
+    private void showWrongAnswerDialog(){
+        wrongDialog.setContentView(R.layout.true_false_answer_dialog);
+        wrongDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        ImageView imgCorrectWrongTrueFalseDialog, imgCharacterTrueFalseDialog, imgHeartTrueFalseDialog;
+        View viewTrueFalseDialog;
+        TextView txtHealthReduceTrueFalseDialog, txtCorrectWrongTrueFalseDialog;
+
+        imgCorrectWrongTrueFalseDialog = wrongDialog.findViewById(R.id.imgCorrectWrongTrueFalseDialog);
+        imgCharacterTrueFalseDialog = wrongDialog.findViewById(R.id.imgCharacterTrueFalseDialog);
+        imgHeartTrueFalseDialog = wrongDialog.findViewById(R.id.imgHeartTrueFalseDialog);
+        viewTrueFalseDialog = wrongDialog.findViewById(R.id.viewTrueFalseDialog);
+        txtHealthReduceTrueFalseDialog = wrongDialog.findViewById(R.id.txtHealthReduceTrueFalseDialog);
+        txtCorrectWrongTrueFalseDialog = wrongDialog.findViewById(R.id.txtCorrectWrongTrueFalseDialog);
+
+        imgCorrectWrongTrueFalseDialog.setImageResource(R.drawable.ic_baseline_wrong_24);
+        txtCorrectWrongTrueFalseDialog.setText("JAWABAN SALAH");
+        txtCorrectWrongTrueFalseDialog.setTextColor(Color.parseColor("#FF0000"));
+        txtHealthReduceTrueFalseDialog.setText("-" + enemyDamage);
+
+        wrongDialog.show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                imgCorrectWrongTrueFalseDialog.setVisibility(View.INVISIBLE);
+                txtCorrectWrongTrueFalseDialog.setVisibility(View.INVISIBLE);
+
+                imgCharacterTrueFalseDialog.setVisibility(View.VISIBLE);
+                imgHeartTrueFalseDialog.setVisibility(View.VISIBLE);
+                viewTrueFalseDialog.setVisibility(View.VISIBLE);
+                txtHealthReduceTrueFalseDialog.setVisibility(View.VISIBLE);
+
+                imgHeartTrueFalseDialog.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in));
+                viewTrueFalseDialog.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in));
+                txtHealthReduceTrueFalseDialog.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in));
+            }
+        }, 3000);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                wrongDialog.dismiss();
+            }
+        }, modeBattle.equals("story") ? 6000 : 8000);
+    }
+
+    private void showCorrectAnswerDialog(){
+        correctDialog.setContentView(R.layout.true_false_answer_dialog);
+        correctDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        ImageView imgCorrectWrongTrueFalseDialog, imgCharacterTrueFalseDialog, imgHeartTrueFalseDialog;
+        View viewTrueFalseDialog;
+        TextView txtHealthReduceTrueFalseDialog, txtCorrectWrongTrueFalseDialog, txtScoreTrueFalseDialog;
+
+        imgCorrectWrongTrueFalseDialog = correctDialog.findViewById(R.id.imgCorrectWrongTrueFalseDialog);
+        imgCharacterTrueFalseDialog = correctDialog.findViewById(R.id.imgCharacterTrueFalseDialog);
+        imgHeartTrueFalseDialog = correctDialog.findViewById(R.id.imgHeartTrueFalseDialog);
+        viewTrueFalseDialog = correctDialog.findViewById(R.id.viewTrueFalseDialog);
+        txtHealthReduceTrueFalseDialog = correctDialog.findViewById(R.id.txtHealthReduceTrueFalseDialog);
+        txtCorrectWrongTrueFalseDialog = correctDialog.findViewById(R.id.txtCorrectWrongTrueFalseDialog);
+        txtScoreTrueFalseDialog = correctDialog.findViewById(R.id.txtScoreTrueFalseDialog);
+
+        if(modeBattle.equals("story")) {
+            txtHealthReduceTrueFalseDialog.setText("-20");
+            if (levelId == 25) {
+                imgCharacterTrueFalseDialog.setImageResource(R.drawable.monster_penyihir);
+            } else if (levelId < 25 && levelId > 20) {
+                imgCharacterTrueFalseDialog.setImageResource(R.drawable.monster_golem);
+            } else if (levelId == 15) {
+                imgCharacterTrueFalseDialog.setImageResource(R.drawable.monster_iblis);
+            } else if (levelId < 15) {
+                imgCharacterTrueFalseDialog.setImageResource(R.drawable.monster_skeleton);
+            }
+        }
+
+        correctDialog.show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                imgCorrectWrongTrueFalseDialog.setVisibility(View.INVISIBLE);
+                txtCorrectWrongTrueFalseDialog.setVisibility(View.INVISIBLE);
+
+                if(modeBattle.equals("story")) {
+                    imgCharacterTrueFalseDialog.setVisibility(View.VISIBLE);
+                    imgHeartTrueFalseDialog.setVisibility(View.VISIBLE);
+                    viewTrueFalseDialog.setVisibility(View.VISIBLE);
+                    txtHealthReduceTrueFalseDialog.setVisibility(View.VISIBLE);
+
+                    imgHeartTrueFalseDialog.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in));
+                    viewTrueFalseDialog.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in));
+                    txtHealthReduceTrueFalseDialog.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in));
+                }else{
+                    txtScoreTrueFalseDialog.setVisibility(View.VISIBLE);
+                    txtScoreTrueFalseDialog.setText("Score 0");
+
+                    countScoreAnimation = score;
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            txtScoreTrueFalseDialog.setText("Score " + countScoreAnimation);
+
+                            if(countScoreAnimation < score + 250){
+                                countScoreAnimation++;
+                                new Handler().postDelayed(this, 1);
+                            }
+                        }
+                    }, 1);
+                }
+            }
+        }, 3000);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                correctDialog.dismiss();
+            }
+        }, modeBattle.equals("story") ? 6000 : 8000);
+    }
+
+    private void checkHealth(View view){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(modeBattle.equals("story")) {
+                    if (userHealth > 0 && listQuestionIndex.size() > 0) {
+                        randomInt();
+                        getQuestion(questionIndex);
+
+                        questionTimer.cancel();
+                        setTimerCountdown(view);
+                    } else {
+                        checkWinner(view);
+                    }
+                }else{
+                    if (userHealth > 0) {
+                        randomInt();
+                        getQuestion(questionIndex);
+
+                        questionTimer.cancel();
+                        setTimerCountdown(view);
+                    } else {
+                        checkWinner(view);
+                    }
+                }
+            }
+        }, modeBattle.equals("story") ? 6100 : 8100);
     }
 
     private void setListener(){
@@ -213,22 +447,12 @@ public class BattleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(answerA.equals(correctAnswer)){
-                    listQuestionIndex.remove(questionIndex);
-                    txtEnemyHealthBattleFragment.setText("" + (listQuestionIndex.size() * 20));
+                    answerCorrect();
                 }else{
-                    userHealth -= enemyDamage;
-                    txtPlayerHealthBattleFragment.setText("" + userHealth);
+                    answerWrong();
                 }
 
-                if(userHealth > 0 && listQuestionIndex.size() > 0){
-                    questionIndex = new Random().nextInt(listQuestionIndex.size());
-                    getQuestion(questionIndex);
-
-                    questionTimer.cancel();
-                    setTimerCountdown(view);
-                }else{
-                    checkWinner(view);
-                }
+                checkHealth(view);
             }
         });
 
@@ -236,22 +460,12 @@ public class BattleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(answerB.equals(correctAnswer)){
-                    listQuestionIndex.remove(questionIndex);
-                    txtEnemyHealthBattleFragment.setText("" + (listQuestionIndex.size() * 20));
+                    answerCorrect();
                 }else{
-                    userHealth -= enemyDamage;
-                    txtPlayerHealthBattleFragment.setText("" + userHealth);
+                    answerWrong();
                 }
 
-                if(userHealth > 0 && listQuestionIndex.size() > 0){
-                    questionIndex = new Random().nextInt(listQuestionIndex.size());
-                    getQuestion(questionIndex);
-
-                    questionTimer.cancel();
-                    setTimerCountdown(view);
-                }else{
-                    checkWinner(view);
-                }
+                checkHealth(view);
             }
         });
 
@@ -259,22 +473,12 @@ public class BattleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(answerC.equals(correctAnswer)){
-                    listQuestionIndex.remove(questionIndex);
-                    txtEnemyHealthBattleFragment.setText("" + (listQuestionIndex.size() * 20));
+                    answerCorrect();
                 }else{
-                    userHealth -= enemyDamage;
-                    txtPlayerHealthBattleFragment.setText("" + userHealth);
+                    answerWrong();
                 }
 
-                if(userHealth > 0 && listQuestionIndex.size() > 0){
-                    questionIndex = new Random().nextInt(listQuestionIndex.size());
-                    getQuestion(questionIndex);
-
-                    questionTimer.cancel();
-                    setTimerCountdown(view);
-                }else{
-                    checkWinner(view);
-                }
+                checkHealth(view);
             }
         });
 
@@ -282,22 +486,12 @@ public class BattleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(answerD.equals(correctAnswer)){
-                    listQuestionIndex.remove(questionIndex);
-                    txtEnemyHealthBattleFragment.setText("" + (listQuestionIndex.size() * 20));
+                    answerCorrect();
                 }else{
-                    userHealth -= enemyDamage;
-                    txtPlayerHealthBattleFragment.setText("" + userHealth);
+                    answerWrong();
                 }
 
-                if(userHealth > 0 && listQuestionIndex.size() > 0){
-                    questionIndex = new Random().nextInt(listQuestionIndex.size());
-                    getQuestion(questionIndex);
-
-                    questionTimer.cancel();
-                    setTimerCountdown(view);
-                }else{
-                    checkWinner(view);
-                }
+                checkHealth(view);
             }
         });
     }
@@ -305,58 +499,87 @@ public class BattleFragment extends Fragment {
     private void checkWinner(View view){
         questionTimer.cancel();
 
-        if(userHealth <= 0){
+        if (userHealth <= 0) {
             txtPlayerHealthBattleFragment.setText("0");
             showLoseDialog(view);
-        }else if(listQuestionIndex.size() <= 0){
+        } else if (modeBattle.equals("story") && listQuestionIndex.size() <= 0) {
             showWinDialog(view);
         }
+
+    }
+
+    private void showAbyssDialog(View battleView){
+
     }
 
     private void showLoseDialog(View battleView){
         loseDialog.setContentView(R.layout.battle_win_lose_dialog);
         loseDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        TextView txtTitleWinLoseDailog, txtGoldWinLoseDialog, txtExpWinLoseDialog, txtExitWinLoseDialog;
+        TextView txtTitleWinLoseDialog, txtGoldWinLoseDialog, txtExpWinLoseDialog, txtExitWinLoseDialog, txtScoreWinLoseDialog, txtBattleScoreWinLoseDialog;
         Button btnReplayWinLoseDialog;
         ImageView imgCharacterWinLoseDialog;
 
         txtExitWinLoseDialog = loseDialog.findViewById(R.id.txtExitWinLoseDialog);
         txtGoldWinLoseDialog = loseDialog.findViewById(R.id.txtGoldWinLoseDialog);
         txtExpWinLoseDialog = loseDialog.findViewById(R.id.txtExpWinLoseDialog);
-        txtTitleWinLoseDailog = loseDialog.findViewById(R.id.txtTitleWinLoseDailog);
+        txtTitleWinLoseDialog = loseDialog.findViewById(R.id.txtTitleWinLoseDailog);
         btnReplayWinLoseDialog = loseDialog.findViewById(R.id.btnReplayWinLoseDialog);
         imgCharacterWinLoseDialog = loseDialog.findViewById(R.id.imgCharacterWinLoseDialog);
-
-        txtTitleWinLoseDailog.setText("Anda Kalah");
-        txtGoldWinLoseDialog.setText("x0");
-        txtExpWinLoseDialog.setText("x0");
-        imgCharacterWinLoseDialog.setImageResource(R.drawable.downed_character);
+        txtScoreWinLoseDialog = loseDialog.findViewById(R.id.txtScoreWinLoseDialog);
+        txtBattleScoreWinLoseDialog = loseDialog.findViewById(R.id.txtBattleScoreWinLoseDialog);
 
         txtExitWinLoseDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loseDialog.dismiss();
 
-                Bundle bundle = new Bundle();
-                bundle.putInt("storyId", levelId / 10);
-                Navigation.findNavController(battleView).navigate(R.id.action_battleFragment_to_storyActivity, bundle);
+                if(modeBattle.equals("story")){
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("storyId", levelId / 10);
+                    Navigation.findNavController(battleView).navigate(R.id.action_battleFragment_to_storyActivity, bundle);
+                }else{
+                    Navigation.findNavController(battleView).navigate(R.id.action_battleFragment_to_abyssActivity);
+                }
             }
         });
 
-        btnReplayWinLoseDialog.setVisibility(View.VISIBLE);
+        imgCharacterWinLoseDialog.setImageResource(R.drawable.downed_character);
 
-        btnReplayWinLoseDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loseDialog.dismiss();
+        if(modeBattle.equals("story")) {
+            txtTitleWinLoseDialog.setText("Anda Kalah");
+            txtGoldWinLoseDialog.setText("+0");
+            txtExpWinLoseDialog.setText("+0");
 
-                Bundle bundle = new Bundle();
-                bundle.putInt("levelId", levelId);
-                bundle.putInt("questionAmount", questionAmount);
-                Navigation.findNavController(battleView).navigate(R.id.action_battleFragment_self, bundle);
-            }
-        });
+            btnReplayWinLoseDialog.setVisibility(View.VISIBLE);
+
+            btnReplayWinLoseDialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    loseDialog.dismiss();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("levelId", levelId);
+                    bundle.putInt("questionAmount", questionAmount);
+                    bundle.putString("mode", modeBattle);
+                    Navigation.findNavController(battleView).navigate(R.id.action_battleFragment_self, bundle);
+                }
+            });
+        }else{
+            txtTitleWinLoseDialog.setText("Permainan Berakhir");
+            txtBattleScoreWinLoseDialog.setText("" + score);
+
+            battleViewModel.updateAbyssBattleStudentData(score);
+            battleViewModel.updateAbyssBattleStudentDataResult().observe(requireActivity(), battleReward -> {
+                if(battleReward != null){
+                    txtGoldWinLoseDialog.setText("+" + battleReward.getGold_rewards());
+                    txtExpWinLoseDialog.setText("+" + battleReward.getExp_rewards());
+                }
+            });
+
+            txtScoreWinLoseDialog.setVisibility(View.VISIBLE);
+            txtBattleScoreWinLoseDialog.setVisibility(View.VISIBLE);
+        }
 
         loseDialog.show();
     }
@@ -373,6 +596,15 @@ public class BattleFragment extends Fragment {
         txtExpWinLoseDialog = winDialog.findViewById(R.id.txtExpWinLoseDialog);
         txtTitleWinLoseDailog = winDialog.findViewById(R.id.txtTitleWinLoseDailog);
         imgCharacterWinLoseDialog = winDialog.findViewById(R.id.imgCharacterWinLoseDialog);
+
+        // get rewards and set rewards here
+        battleViewModel.updateStudentBattleData(levelId);
+        battleViewModel.updateStudentBattleDataResult().observe(requireActivity(), battleReward -> {
+            if(battleReward != null){
+                txtGoldWinLoseDialog.setText("+" + battleReward.getGold_rewards());
+                txtExpWinLoseDialog.setText("+" + battleReward.getExp_rewards());
+            }
+        });
 
         txtTitleWinLoseDailog.setText("Anda Menang");
         imgCharacterWinLoseDialog.setImageResource(R.drawable.battle_character);
@@ -436,7 +668,7 @@ public class BattleFragment extends Fragment {
                         txtPlayerHealthBattleFragment.setText("" + userHealth);
 
                         if(userHealth > 0 && listQuestionIndex.size() > 0){
-                            questionIndex = new Random().nextInt(listQuestionIndex.size());
+                            randomInt();
                             getQuestion(questionIndex);
 
                             questionTimer.cancel();
@@ -467,7 +699,7 @@ public class BattleFragment extends Fragment {
                 txtPlayerHealthBattleFragment.setText("" + userHealth);
 
                 if(userHealth > 0 && listQuestionIndex.size() > 0){
-                    questionIndex = new Random().nextInt(listQuestionIndex.size());
+                    randomInt();
                     getQuestion(questionIndex);
 
                     questionTimer.cancel();
@@ -477,6 +709,14 @@ public class BattleFragment extends Fragment {
                 }
             }
         }.start();
+    }
+
+    private void randomInt(){
+        if(modeBattle.equals("story")){
+            questionIndex = new Random().nextInt(listQuestionIndex.size());
+        }else{
+            questionIndex = new Random().nextInt(questionAmount);
+        }
     }
 
 

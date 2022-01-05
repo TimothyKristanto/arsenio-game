@@ -31,8 +31,11 @@ Route::group(['middleware'=>'auth:api'], function(){
     Route::apiResource('home', HomeController::class);
     Route::get('/story/{id}', [StoryController::class, 'show']);
     Route::get('/abyss', [AbyssController::class, 'show']);
-    Route::get('/battle/{levelId}/{questionIndex}', [BattleController::class, 'show']);
+    Route::get('/battle/{levelId}/{questionIndex}', [BattleController::class, 'storyShow']);
     Route::get('/battle/{levelId}', [BattleController::class, 'index']);
+    Route::post('/battle/{levelId}', [BattleController::class, 'storyUpdate']);
+    Route::get('/abyss/battle/{questionIndex}', [BattleController::class, 'abyssShow']);
+    Route::post('/abyss/battle/{battleScore}', [BattleController::class, 'abyssUpdate']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
