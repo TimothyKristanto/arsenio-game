@@ -68,4 +68,9 @@ public interface APIEndPoint {
 
     @POST("abyss/battle/{battleScore}")
     Call<BattleReward> updateAbyssBattleStudentData(@Path("battleScore") long battleScore);
+
+    @POST("battle/{bandageAmount}/{jamuAmount}/{hourglassAmount}")
+    Call<JsonObject> updateStudentBattleItem(@Path("bandageAmount") int bandageAmount,
+                                             @Path("jamuAmount") int jamuAmount,
+                                             @Path("hourglassAmount") int hourglassAmount);
 }

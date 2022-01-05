@@ -40,6 +40,7 @@ Route::group(['middleware'=>'auth:api'], function(){
     Route::post('/battle/{levelId}', [BattleController::class, 'storyUpdate']);
     Route::get('/abyss/battle/{questionIndex}', [BattleController::class, 'abyssShow']);
     Route::post('/abyss/battle/{battleScore}', [BattleController::class, 'abyssUpdate']);
+    Route::post('/battle/{bandageAmount}/{jamuAmount}/{hourglassAmount}', [BattleController::class, 'battleItemUpdate']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
