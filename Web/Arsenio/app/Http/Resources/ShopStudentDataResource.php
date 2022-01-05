@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class StoryLevelResource extends JsonResource
+class ShopStudentDataResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,7 +15,7 @@ class StoryLevelResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'level_id'=>$this->level_id,
+            'golds'=>$this->golds
         ];
     }
 }

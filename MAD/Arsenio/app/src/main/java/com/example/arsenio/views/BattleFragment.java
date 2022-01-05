@@ -388,7 +388,7 @@ public class BattleFragment extends Fragment {
                             txtScoreTrueFalseDialog.setText("Score " + countScoreAnimation);
 
                             if(countScoreAnimation < score + 250){
-                                countScoreAnimation++;
+                                countScoreAnimation += 2;
                                 new Handler().postDelayed(this, 1);
                             }
                         }
@@ -434,7 +434,19 @@ public class BattleFragment extends Fragment {
         }, modeBattle.equals("story") ? 6100 : 8100);
     }
 
+    private void showItemDialog(){
+
+    }
+
     private void setListener(){
+        btnUseItemBattleFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                TODO: buat item dialog
+                showItemDialog();
+            }
+        });
+
         btnPauseBattleFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -505,10 +517,6 @@ public class BattleFragment extends Fragment {
         } else if (modeBattle.equals("story") && listQuestionIndex.size() <= 0) {
             showWinDialog(view);
         }
-
-    }
-
-    private void showAbyssDialog(View battleView){
 
     }
 
