@@ -4,6 +4,7 @@ import com.example.arsenio.helper.Const;
 import com.example.arsenio.models.Abyss;
 import com.example.arsenio.models.BattlePlayerEnemy;
 import com.example.arsenio.models.BattleQuestion;
+import com.example.arsenio.models.BattleReward;
 import com.example.arsenio.models.Home;
 import com.example.arsenio.models.RegisterResponse;
 import com.example.arsenio.models.Shop;
@@ -93,5 +94,17 @@ public class APIService {
 
     public Call<BattlePlayerEnemy> getBattle(int levelId){
         return apiEndPoint.getBattle(levelId);
+    }
+
+    public Call<BattleReward> updateBattleStudentData(int levelId){
+        return apiEndPoint.updateBattleStudentData(levelId);
+    }
+
+    public Call<BattleQuestion> getAbyssBattleQuestion(int questionIndex) {
+        return apiEndPoint.getAbyssBattleQuestion(questionIndex);
+    }
+
+    public Call<BattleReward> updateAbyssBattleStudentData(long battleScore){
+        return apiEndPoint.updateAbyssBattleStudentData(battleScore);
     }
 }

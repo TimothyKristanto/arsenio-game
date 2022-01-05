@@ -7,7 +7,7 @@ import java.util.List;
 public class BattlePlayerEnemy {
 
     private List<BattleStudentData> battleStudentData;
-    private List<Enemy> enemy;
+    private Enemy enemy;
 
     public static BattlePlayerEnemy objectFromData(String str) {
 
@@ -22,29 +22,12 @@ public class BattlePlayerEnemy {
         this.battleStudentData = battleStudentData;
     }
 
-    public List<Enemy> getEnemy() {
+    public Enemy getEnemy() {
         return enemy;
     }
 
-    public void setEnemy(List<Enemy> enemy) {
+    public void setEnemy(Enemy enemy) {
         this.enemy = enemy;
-    }
-
-    public static class BattleStudentData {
-        private int health;
-
-        public static BattleStudentData objectFromData(String str) {
-
-            return new Gson().fromJson(str, BattleStudentData.class);
-        }
-
-        public int getHealth() {
-            return health;
-        }
-
-        public void setHealth(int health) {
-            this.health = health;
-        }
     }
 
     public static class Enemy {
@@ -70,6 +53,23 @@ public class BattlePlayerEnemy {
 
         public void setDamage(int damage) {
             this.damage = damage;
+        }
+    }
+
+    public static class BattleStudentData {
+        private int health;
+
+        public static BattleStudentData objectFromData(String str) {
+
+            return new Gson().fromJson(str, BattleStudentData.class);
+        }
+
+        public int getHealth() {
+            return health;
+        }
+
+        public void setHealth(int health) {
+            this.health = health;
         }
     }
 }

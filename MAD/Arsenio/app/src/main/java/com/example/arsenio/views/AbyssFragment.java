@@ -21,6 +21,7 @@ import com.example.arsenio.helper.SharedPreferenceHelper;
 import com.example.arsenio.models.Abyss;
 import com.example.arsenio.models.Home;
 import com.example.arsenio.viewmodels.AbyssViewModel;
+import com.example.arsenio.viewmodels.BattleViewModel;
 import com.example.arsenio.viewmodels.HomeViewModel;
 
 /**
@@ -33,6 +34,7 @@ public class AbyssFragment extends Fragment {
     private TextView abyss_lb1,abyss_lb2,abyss_lb3,abyss_lb4,abyss_lb5,txtGoldAbyssFragment;
 
     private SharedPreferenceHelper sharedPreferenceHelper;
+    private BattleViewModel battleViewModel;
     private AbyssViewModel abyssViewModel;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -127,6 +129,8 @@ public class AbyssFragment extends Fragment {
         sharedPreferenceHelper = SharedPreferenceHelper.getInstance(requireActivity());
         abyssViewModel = new ViewModelProvider(requireActivity()).get(AbyssViewModel.class);
         abyssViewModel.init(sharedPreferenceHelper.getAccessToken());
+        battleViewModel = new ViewModelProvider(requireActivity()).get(BattleViewModel.class);
+        battleViewModel.init(sharedPreferenceHelper.getAccessToken());
 
         btnHomeAbyssFragment = view.findViewById(R.id.btnHomeAbyssFragment);
         abyss_button = view.findViewById(R.id.abyss_button);
@@ -149,7 +153,14 @@ public class AbyssFragment extends Fragment {
         abyss_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Navigation.findNavController(view).navigate(R.id.);
+                battleViewModel.getAbyssBattleQuestion(0);
+                battleViewModel.getAbyssBattleQuestionResult().observe(requireActivity(), battleQuestion -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("mode", "abyss");
+                    bundle.putInt("levelId", 0);
+                    bundle.putInt("questionAmount", battleQuestion.getQuestionAmount());
+                    Navigation.findNavController(view).navigate(R.id.action_abyssActivity_to_battleFragment, bundle);
+                });
             }
         });
     }

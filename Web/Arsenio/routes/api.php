@@ -33,13 +33,26 @@ Route::group(['middleware'=>'auth:api'], function(){
     Route::apiResource('home', HomeController::class);
     Route::get('/story/{id}', [StoryController::class, 'show']);
     Route::get('/abyss', [AbyssController::class, 'show']);
+<<<<<<< HEAD
+    Route::get('/battle/{levelId}/{questionIndex}', [BattleController::class, 'storyShow']);
+||||||| 1412c65
+    Route::get('/battle/{levelId}/{questionIndex}', [BattleController::class, 'show']);
+=======
 
     Route::apiResource('/shop', ShopController::class);
     Route::get('/buy/{item_id}/{item_owned}/{golds}', [BuyController::class, 'buy']);
 
     Route::get('/battle/{levelId}/{questionIndex}', [BattleController::class, 'show']);
+>>>>>>> main
     Route::get('/battle/{levelId}', [BattleController::class, 'index']);
+<<<<<<< HEAD
+    Route::post('/battle/{levelId}', [BattleController::class, 'storyUpdate']);
+    Route::get('/abyss/battle/{questionIndex}', [BattleController::class, 'abyssShow']);
+    Route::post('/abyss/battle/{battleScore}', [BattleController::class, 'abyssUpdate']);
+||||||| 1412c65
+=======
 
+>>>>>>> main
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -3,6 +3,7 @@ package com.example.arsenio.retrofit;
 import com.example.arsenio.models.Abyss;
 import com.example.arsenio.models.BattlePlayerEnemy;
 import com.example.arsenio.models.BattleQuestion;
+import com.example.arsenio.models.BattleReward;
 import com.example.arsenio.models.Home;
 import com.example.arsenio.models.RegisterResponse;
 import com.example.arsenio.models.Shop;
@@ -38,7 +39,6 @@ public interface APIEndPoint {
     @GET("home")
     Call<Home> getHome();
 
-
     @GET("story/{id}")
     Call<Story> getStory(@Path("id") int id);
     
@@ -59,4 +59,13 @@ public interface APIEndPoint {
 
     @GET("battle/{levelId}")
     Call<BattlePlayerEnemy> getBattle(@Path("levelId") int levelId);
+
+    @POST("battle/{levelId}")
+    Call<BattleReward> updateBattleStudentData(@Path("levelId") int levelId);
+
+    @GET("abyss/battle/{questionIndex}")
+    Call<BattleQuestion> getAbyssBattleQuestion(@Path("questionIndex") int questionIndex);
+
+    @POST("abyss/battle/{battleScore}")
+    Call<BattleReward> updateAbyssBattleStudentData(@Path("battleScore") long battleScore);
 }
