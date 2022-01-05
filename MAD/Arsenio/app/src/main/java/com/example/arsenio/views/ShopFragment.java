@@ -7,15 +7,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +25,6 @@ import com.example.arsenio.R;
 import com.example.arsenio.helper.SharedPreferenceHelper;
 import com.example.arsenio.models.Shop;
 import com.example.arsenio.viewmodels.ShopViewModel;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -101,7 +96,8 @@ public class ShopFragment extends Fragment {
     private ImageView logoArsenioShopFragment, imgHomeShopFragment,
             minusAmountBandage, plusAmountBandage,
             minusAmountHourglass, plusAmountHourglass,
-            minusAmountJamu, plusAmountJamu;
+            minusAmountJamu, plusAmountJamu,
+            refreshViewBtn;
 
     //  Variables
     private SharedPreferenceHelper sharedPreferenceHelper;
@@ -113,12 +109,13 @@ public class ShopFragment extends Fragment {
     private int amountBandage, amountHourglass, amountJamu,
             bandagePrice, hourglassPrice, jamuPrice,
             totalBandage, totalHourglass, totalJamu,
-            goldOwned;
+            goldOwned, golds;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        loadingRefresh();
         initView(view);
 
         onClickListener();
@@ -154,6 +151,7 @@ public class ShopFragment extends Fragment {
 
             inputAmountBandage.setText(String.valueOf(amountBandage));
         });
+
             //Hourglass
         plusAmountHourglass.setOnClickListener(v -> {
             amountHourglass = Integer.parseInt(inputAmountHourglass.getText().toString());
@@ -172,6 +170,7 @@ public class ShopFragment extends Fragment {
 
             inputAmountHourglass.setText(String.valueOf(amountHourglass));
         });
+
             //Jamu
         plusAmountJamu.setOnClickListener(v -> {
             amountJamu = Integer.parseInt(inputAmountJamu.getText().toString());
@@ -196,33 +195,23 @@ public class ShopFragment extends Fragment {
         buyButtonBandage.setOnClickListener(v -> {
             amountBandage = Integer.parseInt(inputAmountBandage.getText().toString());
             if(amountBandage == 0){
-//                Snackbar snackbar = Snackbar.make(v, "Pembelian perban tidak berhasil, jumlah harus lebih dari nol", Snackbar.LENGTH_LONG);
-//                snackbar.getView().setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.wood_brown_dark2));
-//                snackbar.show();
                 Toast.makeText(requireActivity(), "Pembelian tidak berhasil, jumlah harus lebih dari nol", Toast.LENGTH_SHORT).show();
             }else{
                 shopViewModel.getItemsResult().observe(requireActivity(), shop -> {
                     goldOwned = shop.getShopStudentData().get(0).getGolds();
                     totalBandage = shop.getItemStudent().get(0).getItem_owned();
                 });
-                int counter = 0;
-                for (int i = 0; i < amountBandage; i++){
-                    if( goldOwned >= bandagePrice){
-                        goldOwned = goldOwned - bandagePrice;
-                        totalBandage = totalBandage + 1;
-                        shopViewModel.updateItemStudent(1, totalBandage, goldOwned);
-                        counter++;
-                    }else {
-//                    Snackbar snackbar = Snackbar.make(v, "Pembelian perban tidak berhasil, GOLD tidak cukup", Snackbar.LENGTH_LONG);
-//                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.wood_brown_dark2));
-//                    snackbar.show();
-                        Toast.makeText(requireActivity(), "Pembelian tidak berhasil, GOLD tidak cukup", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
+                int totalPrice = bandagePrice*amountBandage;
+                if( goldOwned >= totalPrice){
+                    goldOwned = goldOwned - totalPrice;
+                    totalBandage = totalBandage + amountBandage;
+                    shopViewModel.updateItemStudent(1, totalBandage, goldOwned);
+                    loadingRefresh();
+                    Toast.makeText(requireActivity(), "Anda telah membeli PERBAN sejumlah "+amountBandage, Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(requireActivity(), "Pembelian tidak berhasil, GOLD tidak cukup", Toast.LENGTH_SHORT).show();
                 }
                 inputAmountBandage.setText(""+0);
-                Toast.makeText(requireActivity(), "Anda telah membeli PERBAN sejumlah "+counter, Toast.LENGTH_SHORT).show();
-                cooldown();
             }
         });
 
@@ -236,21 +225,17 @@ public class ShopFragment extends Fragment {
                     goldOwned = shop.getShopStudentData().get(0).getGolds();
                     totalHourglass = shop.getItemStudent().get(2).getItem_owned();
                 });
-                int counter = 0;
-                for (int i = 0; i < amountHourglass; i++){
-                    if( goldOwned >= hourglassPrice){
-                        goldOwned = goldOwned - hourglassPrice;
-                        totalHourglass = totalHourglass + 1;
-                        shopViewModel.updateItemStudent(3, totalHourglass, goldOwned);
-                        counter++;
-                    }else {
-                        Toast.makeText(requireActivity(), "Pembelian tidak berhasil, GOLD tidak cukup", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
+                int totalPrice = hourglassPrice*amountHourglass;
+                if( goldOwned >= totalPrice){
+                    goldOwned = goldOwned - totalPrice;
+                    totalHourglass = totalHourglass + amountHourglass;
+                    shopViewModel.updateItemStudent(3, totalHourglass, goldOwned);
+                    loadingRefresh();
+                    Toast.makeText(requireActivity(), "Anda telah membeli JAM PASIR sejumlah "+amountHourglass, Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(requireActivity(), "Pembelian tidak berhasil, GOLD tidak cukup", Toast.LENGTH_SHORT).show();
                 }
                 inputAmountHourglass.setText(""+0);
-                Toast.makeText(requireActivity(), "Anda telah membeli JAM PASIR sejumlah "+counter, Toast.LENGTH_SHORT).show();
-                cooldown();
             }
         });
 
@@ -264,23 +249,22 @@ public class ShopFragment extends Fragment {
                     goldOwned = shop.getShopStudentData().get(0).getGolds();
                     totalJamu = shop.getItemStudent().get(1).getItem_owned();
                 });
-                int counter = 0;
-                for (int i = 0; i < amountJamu; i++){
-                    if( goldOwned >= jamuPrice){
-                        goldOwned = goldOwned - jamuPrice;
-                        totalJamu = totalJamu + 1;
-                        shopViewModel.updateItemStudent(2, totalJamu, goldOwned);
-                        counter++;
-                    }else {
-                        Toast.makeText(requireActivity(), "Pembelian tidak berhasil, GOLD tidak cukup", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
+                int totalPrice = jamuPrice*amountJamu;
+                if( goldOwned >= totalPrice){
+                    goldOwned = goldOwned - totalPrice;
+                    totalJamu = totalJamu + amountJamu;
+                    shopViewModel.updateItemStudent(2, totalJamu, goldOwned);
+                    loadingRefresh();
+                    Toast.makeText(requireActivity(), "Anda telah membeli JAMU sejumlah "+amountJamu, Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(requireActivity(), "Pembelian tidak berhasil, GOLD tidak cukup", Toast.LENGTH_SHORT).show();
                 }
                 inputAmountJamu.setText(""+0);
-                Toast.makeText(requireActivity(), "Anda telah membeli JAMU sejumlah "+counter, Toast.LENGTH_SHORT).show();
-                cooldown();
+
             }
         });
+
+
 
         //Navbar
         logoArsenioShopFragment.setOnClickListener(v -> {
@@ -293,21 +277,30 @@ public class ShopFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_shopActivity_to_homeActivity);
         });
 
+        //Refresh
+        refreshViewBtn.setOnClickListener(v -> {
+            resetView(getView());
+            loadingRefresh();
+        });
     }
 
-    private void cooldown() {
-        resetView(getView());
-        Toast.makeText(requireActivity(), "Tunggu 5 detik sebelum melakukan transaksi selanjutnya...", Toast.LENGTH_SHORT).show();
-        Toast.makeText(requireActivity(), "Tunggu 4 detik sebelum melakukan transaksi selanjutnya...", Toast.LENGTH_SHORT).show();
-        Toast.makeText(requireActivity(), "Tunggu 3 detik sebelum melakukan transaksi selanjutnya...", Toast.LENGTH_SHORT).show();
-        Toast.makeText(requireActivity(), "Tunggu 2 detik sebelum melakukan transaksi selanjutnya...", Toast.LENGTH_SHORT).show();
-        Toast.makeText(requireActivity(), "Tunggu 1 detik sebelum melakukan transaksi selanjutnya...", Toast.LENGTH_SHORT).show();
-    }
+//    private void cooldown() {
+//        final LoadingDialog loadingDialog = new LoadingDialog(requireActivity());
+//        loadingDialog.startLoadingDialog();
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                resetView(getView());
+//                loadingDialog.dismissDialog();
+//            }
+//        }, 3000);
+//    }
 
     private void resetView(View view) {
         shopViewModel.getItems();
         shopViewModel.getItemsResult().observe(requireActivity(), shop -> {
-            int golds = shop.getShopStudentData().get(0).getGolds();
+            golds = shop.getShopStudentData().get(0).getGolds();
             txtGoldShopFragment.setText(String.valueOf(golds));
 
             items = shop.getItem();
@@ -384,6 +377,8 @@ public class ShopFragment extends Fragment {
         inputAmountHourglass = view.findViewById(R.id.inputAmountHourglass);
         inputAmountJamu = view.findViewById(R.id.inputAmountJamu);
 
+        //Refresh
+        refreshViewBtn = view.findViewById(R.id.refreshViewBtn);
     }
 
     // Dialog Session
@@ -410,5 +405,20 @@ public class ShopFragment extends Fragment {
         detailItemSinglePrice.setText(price);
 
         dialogDetail.show();
+    }
+
+    private void loadingRefresh(){
+        dialogDetail = new Dialog(requireContext());
+        dialogDetail.setContentView(R.layout.loading_shop);
+        dialogDetail.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        dialogDetail.show();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialogDetail.dismiss();
+            }
+        }, 3000);
     }
 }

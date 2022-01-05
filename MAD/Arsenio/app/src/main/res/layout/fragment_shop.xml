@@ -137,7 +137,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="@color/wood_brown_dark2"
+        app:cardBackgroundColor="@color/wood_brown_dark1"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageBandages"
         app:layout_constraintEnd_toEndOf="@+id/imageBandages"
@@ -185,7 +185,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="@color/wood_brown_dark2"
+        app:cardBackgroundColor="@color/wood_brown_dark1"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageBandages"
         app:layout_constraintEnd_toEndOf="@+id/imageJamPasir"
@@ -234,7 +234,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="121dp"
         android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="@color/wood_brown_dark2"
+        app:cardBackgroundColor="@color/wood_brown_dark1"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageBandages"
         app:layout_constraintEnd_toEndOf="@+id/imageJamu"
@@ -673,5 +673,34 @@
         app:layout_constraintStart_toStartOf="@+id/shopCVActionBandages"
         app:layout_constraintTop_toTopOf="@+id/buyButtonHourglass"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <ImageView
+        android:id="@+id/refreshViewBtn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/wood_brown_dark2"
+        android:src="@drawable/ic_round_refresh_button"
+        app:layout_constraintEnd_toStartOf="@+id/imageBandages"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageBandages" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_corners"
+        android:backgroundTint="@color/wood_brown_dark2"
+        android:paddingStart="5dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="2dp"
+        android:text="Segarkan"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/refreshViewBtn"
+        app:layout_constraintStart_toStartOf="@+id/refreshViewBtn"
+        app:layout_constraintTop_toBottomOf="@+id/refreshViewBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
