@@ -1,7 +1,678 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.ShopFragment" />
+    android:background="@drawable/bg_shop"
+    tools:context=".views.ShopFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/navbarShop"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_bottom_corners"
+        android:backgroundTint="@color/navbar"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/logoArsenioShopFragment"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="@+id/navbarShop"
+        app:layout_constraintStart_toStartOf="@+id/navbarShop"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtGoldShopFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="0"
+        android:textAlignment="viewEnd"
+        app:layout_constraintBottom_toBottomOf="@+id/navbarShop"
+        app:layout_constraintEnd_toEndOf="@+id/navbarShop"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtArsenioShopFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Arsenio"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/logoArsenioShopFragment"
+        app:layout_constraintStart_toEndOf="@+id/logoArsenioShopFragment"
+        app:layout_constraintTop_toTopOf="@+id/logoArsenioShopFragment" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="TOKO"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/navbarShop"
+        app:layout_constraintEnd_toStartOf="@+id/divider"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/navbarShop"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="2dp"
+        android:layout_height="20dp"
+        android:background="?android:attr/listDivider"
+        android:foreground="@color/wood_brown_dark2"
+        app:layout_constraintBottom_toBottomOf="@+id/navbarShop"
+        app:layout_constraintEnd_toEndOf="@+id/navbarShop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgHomeShopFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/home"
+        app:layout_constraintBottom_toBottomOf="@+id/navbarShop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/divider"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/gold"
+        app:layout_constraintBottom_toBottomOf="@+id/navbarShop"
+        app:layout_constraintEnd_toStartOf="@+id/txtGoldShopFragment"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageBandages"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/shopitembandages"
+        app:layout_constraintBottom_toBottomOf="@+id/imageJamPasir"
+        app:layout_constraintEnd_toStartOf="@+id/imageJamPasir"
+        app:layout_constraintTop_toTopOf="@+id/imageJamPasir" />
+
+    <ImageView
+        android:id="@+id/imageJamPasir"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/shopitemhourglass"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <ImageView
+        android:id="@+id/imageJamu"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="32dp"
+        android:src="@drawable/shopitemjamu"
+        app:layout_constraintBottom_toBottomOf="@+id/imageJamPasir"
+        app:layout_constraintStart_toEndOf="@+id/imageJamPasir"
+        app:layout_constraintTop_toTopOf="@+id/imageJamPasir" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_ownedItem1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/wood_brown_dark2"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageBandages"
+        app:layout_constraintEnd_toEndOf="@+id/imageBandages"
+        app:layout_constraintStart_toStartOf="@+id/shopCVActionBandages"
+        app:layout_constraintTop_toTopOf="@+id/imageBandages"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="8dp"
+                android:text="Dimiliki :"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/txtAmountBandage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:text="0"
+                android:textAlignment="textEnd"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView11"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_ownedItem2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/wood_brown_dark2"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageBandages"
+        app:layout_constraintEnd_toEndOf="@+id/imageJamPasir"
+        app:layout_constraintStart_toStartOf="@+id/imageJamPasir"
+        app:layout_constraintTop_toTopOf="@+id/imageJamPasir"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="8dp"
+                android:text="Dimiliki :"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/txtAmountHourglass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:text="0"
+                android:textAlignment="textEnd"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_ownedItem3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="121dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/wood_brown_dark2"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageBandages"
+        app:layout_constraintEnd_toEndOf="@+id/imageJamu"
+        app:layout_constraintStart_toStartOf="@+id/imageJamu"
+        app:layout_constraintTop_toTopOf="@+id/imageJamu"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="8dp"
+                android:text="Dimiliki :"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/txtAmountJamu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:text="0"
+                android:textAlignment="textEnd"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView14"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnDetailBandage"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_button"
+        android:padding="5dp"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:text="Detail"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/imageBandages"
+        app:layout_constraintTop_toBottomOf="@+id/imageBandages"
+        tools:ignore="TouchTargetSizeCheck,DuplicateClickableBoundsCheck" />
+
+    <Button
+        android:id="@+id/btnDetailHourglass"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:padding="5dp"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:text="Detail"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/imageJamPasir"
+        app:layout_constraintTop_toTopOf="@+id/btnDetailBandage"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/btnDetailJamu"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:padding="5dp"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:text="Detail"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/btnDetailHourglass"
+        app:layout_constraintStart_toStartOf="@+id/imageJamu"
+        app:layout_constraintTop_toTopOf="@+id/btnDetailHourglass"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_goldbandage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/wood_brown_dark1"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageBandages"
+        app:layout_constraintTop_toTopOf="@+id/btnDetailBandage">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/gold1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/gold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtBandagePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:shadowColor="@color/white"
+                android:text="-"
+                android:textAlignment="textEnd"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/gold1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.12"
+                app:layout_constraintStart_toEndOf="@+id/gold1"
+                app:layout_constraintTop_toTopOf="@+id/gold1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_goldhourglass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/wood_brown_dark1"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_goldbandage"
+        app:layout_constraintEnd_toEndOf="@+id/imageJamPasir">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/gold2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/gold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtHourglassPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:shadowColor="@color/white"
+                android:text="-"
+                android:textAlignment="textEnd"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/gold2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.12"
+                app:layout_constraintStart_toEndOf="@+id/gold2"
+                app:layout_constraintTop_toTopOf="@+id/gold2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_goldjamu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/wood_brown_dark1"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_goldhourglass"
+        app:layout_constraintEnd_toEndOf="@+id/imageJamu">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/gold3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/gold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtJamuPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:shadowColor="@color/white"
+                android:text="-"
+                android:textAlignment="textEnd"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/gold3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.12"
+                app:layout_constraintStart_toEndOf="@+id/gold3"
+                app:layout_constraintTop_toTopOf="@+id/gold3" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/shopCVActionBandages"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/navbar"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageBandages"
+        app:layout_constraintStart_toStartOf="@+id/imageBandages"
+        app:layout_constraintTop_toBottomOf="@+id/btnDetailBandage">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/minusAmountBandage"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/minus_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/inputAmountBandage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:editable="true"
+                android:ems="10"
+                android:inputType="number"
+                android:numeric="integer"
+                android:selectAllOnFocus="false"
+                android:singleLine="true"
+                android:text="0"
+                android:textAlignment="center"
+                android:textColor="@color/wood_brown_dark2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/plusAmountBandage"
+                app:layout_constraintStart_toEndOf="@+id/minusAmountBandage"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <ImageView
+                android:id="@+id/plusAmountBandage"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/plus_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/shopCVActionJamPasir"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/navbar"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageJamPasir"
+        app:layout_constraintStart_toStartOf="@+id/imageJamPasir"
+        app:layout_constraintTop_toTopOf="@+id/shopCVActionBandages">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/minusAmountJamPasir"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/minus_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/minus_button" />
+
+            <EditText
+                android:id="@+id/inputAmountHourglass"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:editable="true"
+                android:ems="10"
+                android:inputType="number"
+                android:numeric="integer"
+                android:selectAllOnFocus="false"
+                android:singleLine="true"
+                android:text="0"
+                android:textAlignment="center"
+                android:textColor="@color/wood_brown_dark2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/plusAmountJamPasir"
+                app:layout_constraintStart_toEndOf="@+id/minusAmountJamPasir"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <ImageView
+                android:id="@+id/plusAmountJamPasir"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/plus_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/shopCVActionJamu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/navbar"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageJamu"
+        app:layout_constraintStart_toStartOf="@+id/imageJamu"
+        app:layout_constraintTop_toTopOf="@+id/shopCVActionJamPasir">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/minusAmountJamu"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/minus_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/minus_button" />
+
+            <EditText
+                android:id="@+id/inputAmountJamu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:editable="true"
+                android:ems="10"
+                android:inputType="number"
+                android:numeric="integer"
+                android:selectAllOnFocus="false"
+                android:singleLine="true"
+                android:text="0"
+                android:textAlignment="center"
+                android:textColor="@color/wood_brown_dark2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/plusAmountJamu"
+                app:layout_constraintStart_toEndOf="@+id/minusAmountJamu"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <ImageView
+                android:id="@+id/plusAmountJamu"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/plus_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/buyButtonJamu"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_corners"
+        android:backgroundTint="@color/forest_green_dark1"
+        android:text="Beli Jamu"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageJamu"
+        app:layout_constraintStart_toStartOf="@+id/imageJamu"
+        app:layout_constraintTop_toTopOf="@+id/buyButtonHourglass"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/buyButtonHourglass"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_corners"
+        android:backgroundTint="@color/forest_green_dark1"
+        android:text="Beli Jam Pasir"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageJamPasir"
+        app:layout_constraintStart_toStartOf="@+id/imageJamPasir"
+        app:layout_constraintTop_toBottomOf="@+id/shopCVActionJamPasir"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/buyButtonBandage"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_corners"
+        android:backgroundTint="@color/forest_green_dark1"
+        android:text="Beli Perban"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageBandages"
+        app:layout_constraintStart_toStartOf="@+id/shopCVActionBandages"
+        app:layout_constraintTop_toTopOf="@+id/buyButtonHourglass"
+        tools:ignore="TouchTargetSizeCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
