@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class NavbarResource extends JsonResource
+class StoryStudentDataResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,7 +15,8 @@ class NavbarResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'golds'=>$this->golds
+            'golds'=>$this->golds,
+            'story_level_progress'=>$this->story_level_progress
         ];
     }
 }

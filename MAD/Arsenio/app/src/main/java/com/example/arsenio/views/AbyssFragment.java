@@ -30,7 +30,7 @@ import com.example.arsenio.viewmodels.HomeViewModel;
  */
 public class AbyssFragment extends Fragment {
     private ImageView btnHomeAbyssFragment,abyss_button;
-    private TextView abyss_lb1,abyss_lb2,abyss_lb3,abyss_lb4,abyss_lb5;
+    private TextView abyss_lb1,abyss_lb2,abyss_lb3,abyss_lb4,abyss_lb5,txtGoldAbyssFragment;
 
     private SharedPreferenceHelper sharedPreferenceHelper;
     private AbyssViewModel abyssViewModel;
@@ -95,6 +95,9 @@ public class AbyssFragment extends Fragment {
         abyssViewModel.getAbyss();
         abyssViewModel.getAbyssResult().observe(requireActivity(), abyss -> {
             if(abyss != null){
+                int golds = abyss.getStudent().get(0).getGolds();
+                txtGoldAbyssFragment.setText(String.valueOf(golds));
+
                 int jumlah = abyss.getStudent_leaderboard().size();
                 if(jumlah>=1){
                     Abyss.StudentLeaderboard student1 = abyss.getStudent_leaderboard().get(0);
@@ -132,6 +135,7 @@ public class AbyssFragment extends Fragment {
         abyss_lb3 = view.findViewById(R.id.abyss_lb3);
         abyss_lb4 = view.findViewById(R.id.abyss_lb4);
         abyss_lb5 = view.findViewById(R.id.abyss_lb5);
+        txtGoldAbyssFragment =  view.findViewById(R.id.txtGoldAbyssFragment);
     }
 
     private void setListener(){

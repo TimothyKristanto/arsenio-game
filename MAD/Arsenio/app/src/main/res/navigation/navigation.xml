@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_storyActivity_to_abyssActivity"
             app:destination="@id/abyssActivity" />
+        <action
+            android:id="@+id/action_storyActivity_to_battleFragment"
+            app:destination="@id/battleFragment" />
     </fragment>
     <fragment
         android:id="@+id/abyssActivity"
@@ -52,5 +55,23 @@
         <action
             android:id="@+id/action_abyssActivity_to_homeActivity"
             app:destination="@id/homeActivity" />
+        <action
+            android:id="@+id/action_abyssActivity_to_battleFragment"
+            app:destination="@id/battleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/battleFragment"
+        android:name="com.example.arsenio.views.BattleFragment"
+        android:label="fragment_battle"
+        tools:layout="@layout/fragment_battle" >
+        <action
+            android:id="@+id/action_battleFragment_to_storyActivity"
+            app:destination="@id/storyActivity" />
+        <action
+            android:id="@+id/action_battleFragment_to_abyssActivity"
+            app:destination="@id/abyssActivity" />
+        <action
+            android:id="@+id/action_battleFragment_self"
+            app:destination="@id/battleFragment" />
     </fragment>
 </navigation>

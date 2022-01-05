@@ -92,8 +92,8 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
-        setListener();
         setUI();
+        setListener();
     }
 
     private void setUI(){
