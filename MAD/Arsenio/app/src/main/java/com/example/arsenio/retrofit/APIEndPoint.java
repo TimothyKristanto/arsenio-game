@@ -53,11 +53,7 @@ public interface APIEndPoint {
             @Path("item_id") int item_id, // 1-3
             @Path("item_owned") int item_owned,
             @Path("golds") int golds);
-
-//    @PUT("shop/{shop}")
-//    Call<Shop.Navbar> updateGold(
-//            @Path("shop") int item_id,
-//            @Field("golds") int golds);
+  
     @GET("battle/{levelId}/{questionIndex}")
     Call<BattleQuestion> getBattleQuestion(@Path("levelId") int levelId, @Path("questionIndex") int questionIndex);
 

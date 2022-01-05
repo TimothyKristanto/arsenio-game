@@ -5,7 +5,6 @@ use App\Http\Controllers\API\AbyssController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Auth\LoginController;
-
 use App\Http\Controllers\API\BuyController;
 use App\Http\Controllers\API\BattleController;
 use App\Http\Controllers\API\HomeController;
