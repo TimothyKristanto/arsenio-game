@@ -204,11 +204,16 @@
         android:id="@+id/rvHomeFragment"
         android:layout_width="300dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:scrollIndicators="bottom"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="5dp"
         android:scrollbars="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/navbar_home"
+        tools:ignore="SpeakableTextPresentCheck"
         tools:listitem="@layout/rv_home_viewholder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
