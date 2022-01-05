@@ -115,7 +115,7 @@ public class ShopFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        loadingRefresh();
+        loadingRefresh(0);
         initView(view);
 
         onClickListener();
@@ -206,7 +206,7 @@ public class ShopFragment extends Fragment {
                     goldOwned = goldOwned - totalPrice;
                     totalBandage = totalBandage + amountBandage;
                     shopViewModel.updateItemStudent(1, totalBandage, goldOwned);
-                    loadingRefresh();
+                    loadingRefresh(1);
                     Toast.makeText(requireActivity(), "Anda telah membeli PERBAN sejumlah "+amountBandage, Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(requireActivity(), "Pembelian tidak berhasil, GOLD tidak cukup", Toast.LENGTH_SHORT).show();
@@ -230,7 +230,7 @@ public class ShopFragment extends Fragment {
                     goldOwned = goldOwned - totalPrice;
                     totalHourglass = totalHourglass + amountHourglass;
                     shopViewModel.updateItemStudent(3, totalHourglass, goldOwned);
-                    loadingRefresh();
+                    loadingRefresh(1);
                     Toast.makeText(requireActivity(), "Anda telah membeli JAM PASIR sejumlah "+amountHourglass, Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(requireActivity(), "Pembelian tidak berhasil, GOLD tidak cukup", Toast.LENGTH_SHORT).show();
@@ -254,7 +254,7 @@ public class ShopFragment extends Fragment {
                     goldOwned = goldOwned - totalPrice;
                     totalJamu = totalJamu + amountJamu;
                     shopViewModel.updateItemStudent(2, totalJamu, goldOwned);
-                    loadingRefresh();
+                    loadingRefresh(1);
                     Toast.makeText(requireActivity(), "Anda telah membeli JAMU sejumlah "+amountJamu, Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(requireActivity(), "Pembelian tidak berhasil, GOLD tidak cukup", Toast.LENGTH_SHORT).show();
@@ -279,23 +279,10 @@ public class ShopFragment extends Fragment {
 
         //Refresh
         refreshViewBtn.setOnClickListener(v -> {
-            resetView(getView());
-            loadingRefresh();
+            loadingRefresh(1);
         });
     }
 
-//    private void cooldown() {
-//        final LoadingDialog loadingDialog = new LoadingDialog(requireActivity());
-//        loadingDialog.startLoadingDialog();
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                resetView(getView());
-//                loadingDialog.dismissDialog();
-//            }
-//        }, 3000);
-//    }
 
     private void resetView(View view) {
         shopViewModel.getItems();
@@ -407,11 +394,13 @@ public class ShopFragment extends Fragment {
         dialogDetail.show();
     }
 
-    private void loadingRefresh(){
+    private void loadingRefresh(int param){
         dialogDetail = new Dialog(requireContext());
         dialogDetail.setContentView(R.layout.loading_shop);
         dialogDetail.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
+        if(param == 1){
+            resetView(getView());
+        }
         dialogDetail.show();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

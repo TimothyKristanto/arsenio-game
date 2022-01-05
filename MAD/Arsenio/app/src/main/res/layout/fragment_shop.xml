@@ -103,20 +103,24 @@
         android:id="@+id/imageBandages"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="24dp"
         android:src="@drawable/shopitembandages"
         app:layout_constraintBottom_toBottomOf="@+id/imageJamPasir"
-        app:layout_constraintEnd_toStartOf="@+id/imageJamPasir"
-        app:layout_constraintTop_toTopOf="@+id/imageJamPasir" />
+        app:layout_constraintEnd_toStartOf="@+id/imageJamu"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageJamu" />
 
     <ImageView
         android:id="@+id/imageJamPasir"
         android:layout_width="170dp"
         android:layout_height="170dp"
+        android:layout_marginStart="24dp"
         android:src="@drawable/shopitemhourglass"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageJamu"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
 
@@ -124,11 +128,12 @@
         android:id="@+id/imageJamu"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        android:layout_marginStart="32dp"
         android:src="@drawable/shopitemjamu"
-        app:layout_constraintBottom_toBottomOf="@+id/imageJamPasir"
-        app:layout_constraintStart_toEndOf="@+id/imageJamPasir"
-        app:layout_constraintTop_toTopOf="@+id/imageJamPasir" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_ownedItem1"
@@ -187,7 +192,7 @@
         android:layout_marginBottom="16dp"
         app:cardBackgroundColor="@color/wood_brown_dark1"
         app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageBandages"
+        app:layout_constraintBottom_toBottomOf="@+id/imageJamPasir"
         app:layout_constraintEnd_toEndOf="@+id/imageJamPasir"
         app:layout_constraintStart_toStartOf="@+id/imageJamPasir"
         app:layout_constraintTop_toTopOf="@+id/imageJamPasir"
@@ -232,11 +237,10 @@
         android:id="@+id/cv_ownedItem3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="121dp"
         android:layout_marginBottom="16dp"
         app:cardBackgroundColor="@color/wood_brown_dark1"
         app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageBandages"
+        app:layout_constraintBottom_toBottomOf="@+id/imageJamu"
         app:layout_constraintEnd_toEndOf="@+id/imageJamu"
         app:layout_constraintStart_toStartOf="@+id/imageJamu"
         app:layout_constraintTop_toTopOf="@+id/imageJamu"
@@ -296,6 +300,7 @@
         android:id="@+id/btnDetailHourglass"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_button"
         android:padding="5dp"
         android:paddingStart="7dp"
@@ -303,13 +308,14 @@
         android:text="Detail"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/imageJamPasir"
-        app:layout_constraintTop_toTopOf="@+id/btnDetailBandage"
+        app:layout_constraintTop_toBottomOf="@+id/imageJamPasir"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/btnDetailJamu"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_button"
         android:padding="5dp"
         android:paddingStart="7dp"
@@ -318,7 +324,7 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/btnDetailHourglass"
         app:layout_constraintStart_toStartOf="@+id/imageJamu"
-        app:layout_constraintTop_toTopOf="@+id/btnDetailHourglass"
+        app:layout_constraintTop_toBottomOf="@+id/imageJamu"
         tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.cardview.widget.CardView
@@ -370,8 +376,8 @@
         app:cardBackgroundColor="@color/wood_brown_dark1"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cv_goldbandage"
-        app:layout_constraintEnd_toEndOf="@+id/imageJamPasir">
+        app:layout_constraintEnd_toEndOf="@+id/imageJamPasir"
+        app:layout_constraintTop_toTopOf="@+id/btnDetailHourglass">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -412,8 +418,8 @@
         app:cardBackgroundColor="@color/wood_brown_dark1"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cv_goldhourglass"
-        app:layout_constraintEnd_toEndOf="@+id/imageJamu">
+        app:layout_constraintEnd_toEndOf="@+id/imageJamu"
+        app:layout_constraintTop_toTopOf="@+id/btnDetailJamu">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -512,12 +518,13 @@
         android:id="@+id/shopCVActionJamPasir"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:backgroundTint="@color/navbar"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="@+id/imageJamPasir"
         app:layout_constraintStart_toStartOf="@+id/imageJamPasir"
-        app:layout_constraintTop_toTopOf="@+id/shopCVActionBandages">
+        app:layout_constraintTop_toBottomOf="@+id/btnDetailHourglass">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -572,12 +579,13 @@
         android:id="@+id/shopCVActionJamu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:backgroundTint="@color/navbar"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="@+id/imageJamu"
         app:layout_constraintStart_toStartOf="@+id/imageJamu"
-        app:layout_constraintTop_toTopOf="@+id/shopCVActionJamPasir">
+        app:layout_constraintTop_toBottomOf="@+id/btnDetailJamu">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -632,6 +640,7 @@
         android:id="@+id/buyButtonJamu"
         android:layout_width="0dp"
         android:layout_height="40dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_corners"
         android:backgroundTint="@color/forest_green_dark1"
         android:text="Beli Jamu"
@@ -640,7 +649,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageJamu"
         app:layout_constraintStart_toStartOf="@+id/imageJamu"
-        app:layout_constraintTop_toTopOf="@+id/buyButtonHourglass"
+        app:layout_constraintTop_toBottomOf="@+id/shopCVActionJamu"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
@@ -663,6 +672,7 @@
         android:id="@+id/buyButtonBandage"
         android:layout_width="0dp"
         android:layout_height="40dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_corners"
         android:backgroundTint="@color/forest_green_dark1"
         android:text="Beli Perban"
@@ -671,7 +681,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageBandages"
         app:layout_constraintStart_toStartOf="@+id/shopCVActionBandages"
-        app:layout_constraintTop_toTopOf="@+id/buyButtonHourglass"
+        app:layout_constraintTop_toBottomOf="@+id/shopCVActionBandages"
         tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
@@ -681,9 +691,10 @@
         android:background="@drawable/rounded_button"
         android:backgroundTint="@color/wood_brown_dark2"
         android:src="@drawable/ic_round_refresh_button"
-        app:layout_constraintEnd_toStartOf="@+id/imageBandages"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageBandages" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageJamPasir"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView21"
@@ -702,5 +713,22 @@
         app:layout_constraintEnd_toEndOf="@+id/refreshViewBtn"
         app:layout_constraintStart_toStartOf="@+id/refreshViewBtn"
         app:layout_constraintTop_toBottomOf="@+id/refreshViewBtn" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#40000000"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text='Jika data tidak berubah, harap tekan tombol "SEGARKAN" di sisi kanan layar'
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buyButtonJamu"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
