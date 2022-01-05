@@ -33,10 +33,13 @@ Route::group(['middleware'=>'auth:api'], function(){
     Route::apiResource('home', HomeController::class);
     Route::get('/story/{id}', [StoryController::class, 'show']);
     Route::get('/abyss', [AbyssController::class, 'show']);
+
     Route::apiResource('/shop', ShopController::class);
     Route::get('/buy/{item_id}/{item_owned}/{golds}', [BuyController::class, 'buy']);
+
     Route::get('/battle/{levelId}/{questionIndex}', [BattleController::class, 'show']);
     Route::get('/battle/{levelId}', [BattleController::class, 'index']);
+
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

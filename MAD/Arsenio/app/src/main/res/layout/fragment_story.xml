@@ -192,8 +192,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-  
-  <View
+
+    <View
         android:id="@+id/viewStoryDescStoryFragment"
         android:layout_width="60dp"
         android:layout_height="70dp"
