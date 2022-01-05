@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501" />
+        app:layout_constraintVertical_bias="0.541" />
 
     <ImageView
         android:id="@+id/monster"
@@ -35,6 +35,7 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:background="@drawable/rounded_bottom_corners"
+        android:backgroundTint="@color/navbar"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,10 +94,12 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="ABYSS"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/navbar"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/divider2"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -107,7 +110,7 @@
         android:layout_marginStart="8dp"
         android:src="@drawable/home"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintStart_toEndOf="@+id/divider2"
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <ImageView
@@ -198,5 +201,16 @@
         app:layout_constraintEnd_toEndOf="@+id/abyss_lb4"
         app:layout_constraintStart_toStartOf="@+id/abyss_lb4"
         app:layout_constraintTop_toBottomOf="@+id/abyss_lb4" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="2dp"
+        android:layout_height="20dp"
+        android:background="?android:attr/listDivider"
+        android:foreground="@color/wood_brown_dark2"
+        app:layout_constraintBottom_toBottomOf="@+id/navbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

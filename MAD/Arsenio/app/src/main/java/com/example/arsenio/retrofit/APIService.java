@@ -7,6 +7,7 @@ import com.example.arsenio.models.BattleQuestion;
 import com.example.arsenio.models.BattleReward;
 import com.example.arsenio.models.Home;
 import com.example.arsenio.models.RegisterResponse;
+import com.example.arsenio.models.Shop;
 import com.example.arsenio.models.Story;
 import com.example.arsenio.models.TokenResponse;
 import com.google.gson.JsonObject;
@@ -82,6 +83,10 @@ public class APIService {
     public Call<Abyss> getAbyss(){
         return apiEndPoint.getAbyss();
     }
+
+    public Call<Shop> getItems(){return apiEndPoint.getItems();}
+
+    public Call<JsonObject> updateItemStudent(int item_id, int item_owned, int golds){return apiEndPoint.updateItemStudent(item_id, item_owned, golds);}
 
     public Call<BattleQuestion> getBattleQuestion(int levelId, int questionIndex){
         return apiEndPoint.getBattleQuestion(levelId, questionIndex);
