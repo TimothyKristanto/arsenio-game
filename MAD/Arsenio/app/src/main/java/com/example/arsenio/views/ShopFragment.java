@@ -145,12 +145,13 @@ public class ShopFragment extends Fragment {
         });
         minusAmountBandage.setOnClickListener(v -> {
             amountBandage = Integer.parseInt(inputAmountBandage.getText().toString());
-            if(amountBandage == 0){
-                amountBandage = 0;
-            }else{
+            if(amountBandage <= 1){
+                txtBandagePrice.setText(String.valueOf(bandagePrice));
+            }else if(amountBandage > 1){
                 amountBandage--;
+                txtBandagePrice.setText(String.valueOf(bandagePrice*amountBandage));
             }
-            txtBandagePrice.setText(String.valueOf(bandagePrice*amountBandage));
+
             inputAmountBandage.setText(String.valueOf(amountBandage));
         });
             //Hourglass
@@ -162,12 +163,13 @@ public class ShopFragment extends Fragment {
         });
         minusAmountHourglass.setOnClickListener(v -> {
             amountHourglass = Integer.parseInt(inputAmountHourglass.getText().toString());
-            if(amountHourglass == 0){
-                amountHourglass = 0;
-            }else{
+            if(amountHourglass <= 1){
+                txtHourglassPrice.setText(String.valueOf(hourglassPrice));
+            }else if(amountHourglass > 1){
                 amountHourglass--;
+                txtHourglassPrice.setText(String.valueOf(amountHourglass*hourglassPrice));
             }
-            txtHourglassPrice.setText(String.valueOf(amountHourglass*hourglassPrice));
+
             inputAmountHourglass.setText(String.valueOf(amountHourglass));
         });
             //Jamu
@@ -179,12 +181,13 @@ public class ShopFragment extends Fragment {
         });
         minusAmountJamu.setOnClickListener(v -> {
             amountJamu = Integer.parseInt(inputAmountJamu.getText().toString());
-            if(amountJamu == 0){
-                amountJamu = 0;
-            }else{
+            if(amountJamu <= 1){
+                txtJamuPrice.setText(String.valueOf(jamuPrice));
+            }else if(amountJamu > 1){
                 amountJamu--;
+                txtJamuPrice.setText(String.valueOf(amountJamu*jamuPrice));
             }
-            txtJamuPrice.setText(String.valueOf(amountJamu*jamuPrice));
+
             inputAmountJamu.setText(String.valueOf(amountJamu));
         });
 
@@ -199,7 +202,7 @@ public class ShopFragment extends Fragment {
                 Toast.makeText(requireActivity(), "Pembelian tidak berhasil, jumlah harus lebih dari nol", Toast.LENGTH_SHORT).show();
             }else{
                 shopViewModel.getItemsResult().observe(requireActivity(), shop -> {
-                    goldOwned = shop.getNavbar().get(0).getGolds();
+                    goldOwned = shop.getShopStudentData().get(0).getGolds();
                     totalBandage = shop.getItemStudent().get(0).getItem_owned();
                 });
                 int counter = 0;
@@ -230,7 +233,7 @@ public class ShopFragment extends Fragment {
                 Toast.makeText(requireActivity(), "Pembelian tidak berhasil, jumlah harus lebih dari nol", Toast.LENGTH_SHORT).show();
             }else{
                 shopViewModel.getItemsResult().observe(requireActivity(), shop -> {
-                    goldOwned = shop.getNavbar().get(0).getGolds();
+                    goldOwned = shop.getShopStudentData().get(0).getGolds();
                     totalHourglass = shop.getItemStudent().get(2).getItem_owned();
                 });
                 int counter = 0;
@@ -258,7 +261,7 @@ public class ShopFragment extends Fragment {
                 Toast.makeText(requireActivity(), "Pembelian tidak berhasil, jumlah harus lebih dari nol", Toast.LENGTH_SHORT).show();
             }else{
                 shopViewModel.getItemsResult().observe(requireActivity(), shop -> {
-                    goldOwned = shop.getNavbar().get(0).getGolds();
+                    goldOwned = shop.getShopStudentData().get(0).getGolds();
                     totalJamu = shop.getItemStudent().get(1).getItem_owned();
                 });
                 int counter = 0;
@@ -304,7 +307,7 @@ public class ShopFragment extends Fragment {
     private void resetView(View view) {
         shopViewModel.getItems();
         shopViewModel.getItemsResult().observe(requireActivity(), shop -> {
-            int golds = shop.getNavbar().get(0).getGolds();
+            int golds = shop.getShopStudentData().get(0).getGolds();
             txtGoldShopFragment.setText(String.valueOf(golds));
 
             items = shop.getItem();

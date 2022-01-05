@@ -7,6 +7,7 @@ use App\Http\Resources\HomeResource;
 use App\Http\Resources\ItemResource;
 use App\Http\Resources\NavbarResource;
 use App\Http\Resources\ShopResource;
+use App\Http\Resources\ShopStudentDataResource;
 use App\Models\Item;
 use App\Models\ItemStudentRelation;
 use App\Models\Student;
@@ -30,7 +31,7 @@ class ShopController extends Controller
         return [
             'item'=>ItemResource::collection($items),
             'itemStudent'=>ShopResource::collection($itemStudent),
-            'navbar'=>NavbarResource::collection($studentGold),
+            'shopStudentData'=>ShopStudentDataResource::collection($studentGold),
         ];
     }
 

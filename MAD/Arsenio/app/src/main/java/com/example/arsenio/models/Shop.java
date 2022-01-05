@@ -5,10 +5,9 @@ import com.google.gson.Gson;
 import java.util.List;
 
 public class Shop {
-
     private List<Item> item;
     private List<ItemStudent> itemStudent;
-    private List<Navbar> navbar;
+    private List<ShopStudentData> shopStudentData;
 
     public static Shop objectFromData(String str) {
 
@@ -31,12 +30,12 @@ public class Shop {
         this.itemStudent = itemStudent;
     }
 
-    public List<Navbar> getNavbar() {
-        return navbar;
+    public List<ShopStudentData> getShopStudentData() {
+        return shopStudentData;
     }
 
-    public void setNavbar(List<Navbar> navbar) {
-        this.navbar = navbar;
+    public void setShopStudentData(List<ShopStudentData> shopStudentData) {
+        this.shopStudentData = shopStudentData;
     }
 
     public static class Item {
@@ -127,12 +126,12 @@ public class Shop {
         }
     }
 
-    public static class Navbar {
+    public static class ShopStudentData {
         private int golds;
 
-        public static Navbar objectFromData(String str) {
+        public static ShopStudentData objectFromData(String str) {
 
-            return new Gson().fromJson(str, Navbar.class);
+            return new Gson().fromJson(str, ShopStudentData.class);
         }
 
         public int getGolds() {
