@@ -8,6 +8,11 @@ import com.example.arsenio.models.BattlePlayerEnemy;
 import com.example.arsenio.models.BattleQuestion;
 import com.example.arsenio.models.BattleReward;
 import com.example.arsenio.retrofit.APIService;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -140,6 +145,35 @@ public class BattleRepository {
 
             @Override
             public void onFailure(Call<BattleReward> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
+        return result;
+    }
+
+    public MutableLiveData<String> updateStudentBattleItem(int bandageAmount, int jamuAmount, int hourglassAmount){
+        MutableLiveData<String> result = new MutableLiveData<>();
+
+        apiService.updateStudentBattleItem(bandageAmount, jamuAmount, hourglassAmount).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if(response.isSuccessful()){
+                    if(response.body() != null){
+                        try{
+                            JSONObject object = new JSONObject(new Gson().toJson(response.body()));
+                            String msg = object.getString("message");
+                            Log.d(TAG, "onResponse: " + msg);
+                            result.postValue(msg);
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
                 Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });

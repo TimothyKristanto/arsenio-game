@@ -107,4 +107,8 @@ public class APIService {
     public Call<BattleReward> updateAbyssBattleStudentData(long battleScore){
         return apiEndPoint.updateAbyssBattleStudentData(battleScore);
     }
+
+    public Call<JsonObject> updateStudentBattleItem(int bandageAmount, int jamuAmount, int hourglassAmount){
+        return apiEndPoint.updateStudentBattleItem(bandageAmount, jamuAmount, hourglassAmount);
+    }
 }

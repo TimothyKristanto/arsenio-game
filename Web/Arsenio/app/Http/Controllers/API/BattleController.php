@@ -9,6 +9,7 @@ use App\Http\Resources\EnemyResource;
 use App\Http\Resources\QuestionResource;
 use App\Models\CharacterExp;
 use App\Models\Enemy;
+use App\Models\ItemStudentRelation;
 use App\Models\LevelRewardRelation;
 use App\Models\Question;
 use App\Models\StoryLevel;
@@ -151,6 +152,29 @@ class BattleController extends Controller
         return [
             'gold_rewards'=>floor($goldReward),
             'exp_rewards'=>floor($expReward)
+        ];
+    }
+
+    public function battleItemUpdate($bandageAmount, $jamuAmount, $hourglassAmount){
+        $student = Student::where('user_id', Auth::user()->id)->first();
+        
+        ItemStudentRelation::where('student_id', $student->student_id)
+                        ->where('item_id', 1)->update([
+                            'item_owned'=>$bandageAmount
+                        ]);
+
+        ItemStudentRelation::where('student_id', $student->student_id)
+                        ->where('item_id', 2)->update([
+                            'item_owned'=>$jamuAmount
+                        ]);
+
+        ItemStudentRelation::where('student_id', $student->student_id)
+                        ->where('item_id', 3)->update([
+                            'item_owned'=>$hourglassAmount
+                        ]);
+
+        return [
+            'message'=>'Student items updated successfully'
         ];
     }
 }

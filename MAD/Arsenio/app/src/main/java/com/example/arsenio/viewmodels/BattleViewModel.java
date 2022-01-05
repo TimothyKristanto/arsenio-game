@@ -64,6 +64,14 @@ public class BattleViewModel extends AndroidViewModel {
         return resultAbyssBattleReward;
     }
 
+    public MutableLiveData<String> resultUpdateStudentBattleItem = new MutableLiveData<>();
+    public void updateStudentBattleItem(int bandageAmount, int jamuAmount, int hourglassAmount){
+        resultUpdateStudentBattleItem = battleRepository.updateStudentBattleItem(bandageAmount, jamuAmount, hourglassAmount);
+    }
+    public LiveData<String> updateStudentBattleItemResult(){
+        return resultUpdateStudentBattleItem;
+    }
+
     @Override
     protected void onCleared() {
         super.onCleared();

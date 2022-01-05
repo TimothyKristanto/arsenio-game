@@ -21,13 +21,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.arsenio.R;
 import com.example.arsenio.helper.SharedPreferenceHelper;
 import com.example.arsenio.models.BattlePlayerEnemy;
 import com.example.arsenio.models.BattleQuestion;
 import com.example.arsenio.viewmodels.BattleViewModel;
+import com.example.arsenio.viewmodels.ShopViewModel;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -44,14 +44,15 @@ public class BattleFragment extends Fragment {
     private View viewEnemyStatusBattleFragment;
 
     private CountDownTimer questionTimer;
-    private Dialog pauseDialog, winDialog, loseDialog, correctDialog, wrongDialog;
+    private Dialog pauseDialog, winDialog, loseDialog, correctDialog, wrongDialog, battleItemDialog;
     private BattleViewModel battleViewModel;
     private SharedPreferenceHelper sharedPreferenceHelper;
     private ArrayList<Integer> listQuestionIndex;
+    private ShopViewModel shopViewModel;
 
     private long timer;
     private String modeBattle, answerA, answerB, answerC, answerD, correctAnswer;
-    private int levelId, questionAmount, questionIndex, userHealth, enemyDamage;
+    private int levelId, questionAmount, questionIndex, userHealth, enemyDamage, bandageAmount, jamuAmount, hourglassAmount;
     private static final String TAG = "BattleFragment";
     private long score, countScoreAnimation;
 
@@ -138,10 +139,22 @@ public class BattleFragment extends Fragment {
         battleViewModel = new ViewModelProvider(requireActivity()).get(BattleViewModel.class);
         battleViewModel.init(sharedPreferenceHelper.getAccessToken());
         listQuestionIndex = new ArrayList<>();
+        battleItemDialog = new Dialog(requireActivity());
+        shopViewModel = new ViewModelProvider(requireActivity()).get(ShopViewModel.class);
+        shopViewModel.init(sharedPreferenceHelper.getAccessToken());
 
         modeBattle = getArguments().getString("mode");
 
         score = 0;
+
+        shopViewModel.getItems();
+        shopViewModel.getItemsResult().observe(requireActivity(), shop -> {
+            if(shop != null){
+                bandageAmount = shop.getItemStudent().get(0).getItem_owned();
+                jamuAmount = shop.getItemStudent().get(1).getItem_owned();
+                hourglassAmount = shop.getItemStudent().get(2).getItem_owned();
+            }
+        });
     }
 
     private void setUI(){
@@ -434,8 +447,134 @@ public class BattleFragment extends Fragment {
         }, modeBattle.equals("story") ? 6100 : 8100);
     }
 
-    private void showItemDialog(){
+    private void updateStudentItem(){
+        battleViewModel.updateStudentBattleItem(bandageAmount, jamuAmount, hourglassAmount);
+        battleViewModel.updateStudentBattleItemResult().observe(requireActivity(), s -> {
+            if(s != null){
+                Log.d(TAG, "updateStudentItem: " + s);
+            }
+        });
+    }
 
+    private void showItemDialog(View battleView){
+        battleItemDialog.setContentView(R.layout.battle_item_dialog);
+        battleItemDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        ImageView imgBandageBattleItemDialog, imgJamuBattleItemDialog, imgHourglassBattleItemDialog;
+        TextView txtCloseBattleItemDialog, txtBandageAmountBattleItemDialog, txtJamuAmountBattleItemDialog, txtHourglassAmountBattleItemDialog;
+
+        imgBandageBattleItemDialog = battleItemDialog.findViewById(R.id.imgBandageBattleItemDialog);
+        imgJamuBattleItemDialog = battleItemDialog.findViewById(R.id.imgJamuBattleItemDialog);
+        imgHourglassBattleItemDialog = battleItemDialog.findViewById(R.id.imgHourglassBattleItemDialog);
+        txtCloseBattleItemDialog = battleItemDialog.findViewById(R.id.txtCloseBattleItemDialog);
+        txtBandageAmountBattleItemDialog = battleItemDialog.findViewById(R.id.txtBandageAmountBattleItemDialog);
+        txtJamuAmountBattleItemDialog = battleItemDialog.findViewById(R.id.txtJamuAmountBattleItemDialog);
+        txtHourglassAmountBattleItemDialog = battleItemDialog.findViewById(R.id.txtHourglassAmountBattleItemDialog);
+
+        txtBandageAmountBattleItemDialog.setText("" + bandageAmount);
+        txtJamuAmountBattleItemDialog.setText("" + jamuAmount);
+        txtHourglassAmountBattleItemDialog.setText("" + hourglassAmount);
+
+        imgBandageBattleItemDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(bandageAmount > 0){
+                    bandageAmount--;
+                    txtBandageAmountBattleItemDialog.setText("" + bandageAmount);
+
+                    battleViewModel.getBattle(levelId);
+                    battleViewModel.getBattleResult().observe(requireActivity(), battlePlayerEnemy -> {
+                        if(battlePlayerEnemy != null){
+                            userHealth += 10;
+                            int maxUserHealth = battlePlayerEnemy.getBattleStudentData().get(0).getHealth();
+
+                            if(userHealth > maxUserHealth){
+                                userHealth = maxUserHealth;
+                            }
+
+                            txtPlayerHealthBattleFragment.setText("" + userHealth);
+                        }
+                    });
+
+                    updateStudentItem();
+                }
+            }
+        });
+
+        imgJamuBattleItemDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(jamuAmount > 0){
+                    jamuAmount--;
+                    txtJamuAmountBattleItemDialog.setText("" + jamuAmount);
+
+                    battleViewModel.getBattle(levelId);
+                    battleViewModel.getBattleResult().observe(requireActivity(), battlePlayerEnemy -> {
+                        if(battlePlayerEnemy != null){
+                            int maxUserHealth = battlePlayerEnemy.getBattleStudentData().get(0).getHealth();
+
+                            userHealth = maxUserHealth;
+
+                            txtPlayerHealthBattleFragment.setText("" + userHealth);
+                        }
+                    });
+
+                    updateStudentItem();
+                }
+            }
+        });
+
+        imgHourglassBattleItemDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(hourglassAmount > 0){
+                    hourglassAmount--;
+                    txtHourglassAmountBattleItemDialog.setText("" + hourglassAmount);
+
+                    questionTimer.cancel();
+                    timer += 10;
+
+                    if(timer > 25){
+                        timer = 25;
+                    }
+
+                    questionTimer = new CountDownTimer(timer * 1000, 1000) {
+                        @Override
+                        public void onTick(long l) {
+                            timer = l / 1000;
+                            txtTimerBattleFragment.setText("" + timer);
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            userHealth -= enemyDamage;
+                            txtPlayerHealthBattleFragment.setText("" + userHealth);
+
+                            if(userHealth > 0 && listQuestionIndex.size() > 0){
+                                randomInt();
+                                getQuestion(questionIndex);
+
+                                questionTimer.cancel();
+                                setTimerCountdown(battleView);
+                            }else {
+                                checkWinner(battleView);
+                            }
+                        }
+                    }.start();
+
+                    updateStudentItem();
+                }
+            }
+        });
+
+        battleItemDialog.show();
+
+        txtCloseBattleItemDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                battleItemDialog.dismiss();
+            }
+        });
     }
 
     private void setListener(){
@@ -443,7 +582,7 @@ public class BattleFragment extends Fragment {
             @Override
             public void onClick(View view) {
 //                TODO: buat item dialog
-                showItemDialog();
+                showItemDialog(view);
             }
         });
 

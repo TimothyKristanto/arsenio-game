@@ -17,7 +17,6 @@ class ItemSeeder extends Seeder
         DB::table('senrup_items')->insert([
             'name'=>'Perban',
             'image'=>'/images/ShopItemBandages.png',
-            'amount' => 1,
             'single_price' => 250,
             'description' => 'Menambah darah pemain sebanyak 10',
             'created_at'=>\Carbon\Carbon::now(),
@@ -27,7 +26,6 @@ class ItemSeeder extends Seeder
         DB::table('senrup_items')->insert([
             'name'=>'Jamu',
             'image'=>'/images/ShopItemJamu.png',
-            'amount' => 1,
             'single_price' => 1500,
             'description' => 'Mengisi penuh nyawa pemain',
             'created_at'=>\Carbon\Carbon::now(),
@@ -37,7 +35,6 @@ class ItemSeeder extends Seeder
         DB::table('senrup_items')->insert([
             'name'=>'Jam Pasir',
             'image'=>'/images/ShopItemHourglass.png',
-            'amount' => 1,
             'single_price' => 400,
             'description' => 'Memperlama waktu menjawab sebuah soal selama 10 detik',
             'created_at'=>\Carbon\Carbon::now(),

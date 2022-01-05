@@ -28,11 +28,9 @@ public class HomeViewModel extends AndroidViewModel {
     }
 
     private MutableLiveData<Home> resultHome = new MutableLiveData<>();
-
     public void getHome(){
         resultHome = homeRepository.getHome();
     }
-
     public LiveData<Home> getHomeResult(){
         return resultHome;
     }
