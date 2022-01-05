@@ -23,7 +23,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="124dp"
+        android:layout_marginStart="130dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="124dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView5"
@@ -39,7 +39,7 @@
                 android:id="@+id/tampilan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
                 android:text="Nama :"
                 android:textColor="@color/wood_brown_dark2"
                 android:textSize="16sp"
@@ -51,7 +51,7 @@
                 android:id="@+id/txtInputNamaRegister"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="45dp"
+                android:layout_marginEnd="35dp"
                 android:textColorHint="@color/wood_brown_light3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tampilan"
@@ -59,8 +59,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#00000000"
+                    android:layout_height="48dp"
                     android:inputType="text"
                     tools:ignore="SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -88,8 +87,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#00000000"
+                    android:layout_height="48dp"
                     android:inputType="textEmailAddress"
                     tools:ignore="SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -119,8 +117,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#00000000"
+                    android:layout_height="48dp"
                     android:inputType="textPassword"
                     android:password="true"
                     tools:ignore="SpeakableTextPresentCheck" />
@@ -152,21 +149,23 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#00000000"
+                    android:layout_height="48dp"
                     android:inputType="textPassword"
-                    android:password="true" />
+                    android:password="true"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnDaftarRegister"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_corners"
                 android:backgroundTint="@color/wood_brown_dark2"
                 android:enabled="true"
                 android:fontFamily="@font/medievalsharp"
+                android:minHeight="48dp"
                 android:text="Daftar"
                 android:textColor="@color/wood_brown_light2"
                 android:textStyle="bold"
@@ -197,6 +196,7 @@
         android:layout_width="200dp"
         android:layout_height="205dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/feather_change_auth" />

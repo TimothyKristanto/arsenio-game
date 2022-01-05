@@ -7,9 +7,10 @@ import java.util.List;
 public class Story {
 
     private List<StoryData> storyData;
-    private List<Navbar> navbar;
+    private List<StoryStudentData> storyStudentData;
 
     public static Story objectFromData(String str) {
+
         return new Gson().fromJson(str, Story.class);
     }
 
@@ -21,12 +22,12 @@ public class Story {
         this.storyData = storyData;
     }
 
-    public List<Navbar> getNavbar() {
-        return navbar;
+    public List<StoryStudentData> getStoryStudentData() {
+        return storyStudentData;
     }
 
-    public void setNavbar(List<Navbar> navbar) {
-        this.navbar = navbar;
+    public void setStoryStudentData(List<StoryStudentData> storyStudentData) {
+        this.storyStudentData = storyStudentData;
     }
 
     public static class StoryData {
@@ -64,12 +65,13 @@ public class Story {
         }
     }
 
-    public static class Navbar {
+    public static class StoryStudentData {
         private int golds;
+        private int story_level_progress;
 
-        public static Navbar objectFromData(String str) {
+        public static StoryStudentData objectFromData(String str) {
 
-            return new Gson().fromJson(str, Navbar.class);
+            return new Gson().fromJson(str, StoryStudentData.class);
         }
 
         public int getGolds() {
@@ -78,6 +80,14 @@ public class Story {
 
         public void setGolds(int golds) {
             this.golds = golds;
+        }
+
+        public int getStory_level_progress() {
+            return story_level_progress;
+        }
+
+        public void setStory_level_progress(int story_level_progress) {
+            this.story_level_progress = story_level_progress;
         }
     }
 }
