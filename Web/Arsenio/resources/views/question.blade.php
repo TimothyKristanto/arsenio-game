@@ -11,6 +11,7 @@
                         <th>No</th>
                         <th>Question</th>
                         <th>Correct answer</th>
+                        <th>Story level</th>
                         <th>Customize question</th>
                     </tr>
                 </thead>
@@ -23,6 +24,7 @@
                             <td>{{ $i }}</td>
                             <td class="w-50">{{ $question->question }}</td>
                             <td class="w-25">{{ $question->correct_answer }}</td>
+                            <td>{{ $question->level_id }}</td>
                             <td class="w-50">
                                 <a href="{{ route('question.show', $question->question_id) }}" class="btn btn-success">Show</a>
                                 <a href="{{ route('question.edit', $question->question_id) }}" class="btn btn-warning">Edit</a>

@@ -72,7 +72,14 @@ class ShopController extends Controller
                     'log_ip'=>UserSystemInfoHelper::get_ip(),
                 ]);
 
-                return back()->with('itemDesc', 'Emas Anda tidak mencukupi');
+                return view('shop', [
+                    'page'=>'TOKO',
+                    'student'=>$student,
+                    'user'=>$student->user,
+                    'items'=> $items,
+                    'itemStudent' => ItemStudentRelation::where('student_id', $student->student_id)->get(),
+                    'itemDesc' => 'Emas Anda tidak mencukupi'
+                ]);
             }
 
             return view('shop', [
@@ -81,6 +88,7 @@ class ShopController extends Controller
                 'user'=>$student->user,
                 'items'=> $items,
                 'itemStudent' => ItemStudentRelation::where('student_id', $student->student_id)->get(),
+                'itemDesc' => ''
             ]);
 
         }
@@ -91,6 +99,7 @@ class ShopController extends Controller
             'user'=>$student->user,
             'items'=> $items,
             'itemStudent' => $itemStudent,
+            'itemDesc' => ''
         ]);
     }
 }

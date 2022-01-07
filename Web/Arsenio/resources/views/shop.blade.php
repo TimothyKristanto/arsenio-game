@@ -5,10 +5,10 @@
 @section('mainContent')
 
     <body class="shop-bg">
-        @if(session()->has('itemDesc'))
+        @if($itemDesc != '' || $itemDesc != null)
             <div class="d-flex justify-content-center">
                 <div class="alert alert-warning alert-dismissable fade show item-desc-alert" role="alert">
-                    {{ session('itemDesc') }}
+                    {{ $itemDesc }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>

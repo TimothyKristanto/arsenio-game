@@ -226,7 +226,7 @@
     }
 
     function changePageWithCountdown(item){
-        window.location.href = "/battle/{{ $mode == 'story' ? $levelId : 'n' }}/{{ $mode }}/n/{{ $mode == 'story' ? $questionId : 'n' }}/{{ $userHealth }}/f/{{ $mode == 'abyss' ? $abyssScore : 'n' }}/" + item + "/" + second + "/{{ $battleQuestionId }}";
+        window.location.href = "/battle/{{ $mode == 'story' ? $levelId : 'n' }}/{{ $mode }}/t/{{ $questionId }}/{{ $userHealth }}/f/{{ $mode == 'abyss' ? $abyssScore : 'n' }}/" + item + "/" + second + "/{{ $battleQuestionId }}";
     }
 
     function showBattleStat(){
