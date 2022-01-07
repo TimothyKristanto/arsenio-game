@@ -300,6 +300,8 @@ public class BattleFragment extends Fragment {
         wrongDialog.setContentView(R.layout.true_false_answer_dialog);
         wrongDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        wrongDialog.setCancelable(false);
+
         ImageView imgCorrectWrongTrueFalseDialog, imgCharacterTrueFalseDialog, imgHeartTrueFalseDialog;
         View viewTrueFalseDialog;
         TextView txtHealthReduceTrueFalseDialog, txtCorrectWrongTrueFalseDialog;
@@ -346,6 +348,8 @@ public class BattleFragment extends Fragment {
     private void showCorrectAnswerDialog(){
         correctDialog.setContentView(R.layout.true_false_answer_dialog);
         correctDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        correctDialog.setCancelable(false);
 
         ImageView imgCorrectWrongTrueFalseDialog, imgCharacterTrueFalseDialog, imgHeartTrueFalseDialog;
         View viewTrueFalseDialog;
