@@ -315,6 +315,11 @@ public class BattleFragment extends Fragment {
 
         imgCorrectWrongTrueFalseDialog.setImageResource(R.drawable.ic_baseline_wrong_24);
         txtCorrectWrongTrueFalseDialog.setText("JAWABAN SALAH");
+
+        if(timer <= 0){
+            txtCorrectWrongTrueFalseDialog.setText("WAKTU HABIS!");
+        }
+
         txtCorrectWrongTrueFalseDialog.setTextColor(Color.parseColor("#FF0000"));
         txtHealthReduceTrueFalseDialog.setText("-" + enemyDamage);
 
@@ -551,18 +556,8 @@ public class BattleFragment extends Fragment {
 
                         @Override
                         public void onFinish() {
-                            userHealth -= enemyDamage;
-                            txtPlayerHealthBattleFragment.setText("" + userHealth);
-
-                            if(userHealth > 0 && listQuestionIndex.size() > 0){
-                                randomInt();
-                                getQuestion(questionIndex);
-
-                                questionTimer.cancel();
-                                setTimerCountdown(battleView);
-                            }else {
-                                checkWinner(battleView);
-                            }
+                            answerWrong();
+                            checkHealth(view);
                         }
                     }.start();
 
@@ -815,18 +810,8 @@ public class BattleFragment extends Fragment {
 
                     @Override
                     public void onFinish() {
-                        userHealth -= enemyDamage;
-                        txtPlayerHealthBattleFragment.setText("" + userHealth);
-
-                        if(userHealth > 0 && listQuestionIndex.size() > 0){
-                            randomInt();
-                            getQuestion(questionIndex);
-
-                            questionTimer.cancel();
-                            setTimerCountdown(battleView);
-                        }else {
-                            checkWinner(battleView);
-                        }
+                        answerWrong();
+                        checkHealth(battleView);
                     }
                 }.start();
             }
@@ -846,18 +831,8 @@ public class BattleFragment extends Fragment {
 
             @Override
             public void onFinish() {
-                userHealth -= enemyDamage;
-                txtPlayerHealthBattleFragment.setText("" + userHealth);
-
-                if(userHealth > 0 && listQuestionIndex.size() > 0){
-                    randomInt();
-                    getQuestion(questionIndex);
-
-                    questionTimer.cancel();
-                    setTimerCountdown(view);
-                }else{
-                    checkWinner(view);
-                }
+                answerWrong();
+                checkHealth(view);
             }
         }.start();
     }

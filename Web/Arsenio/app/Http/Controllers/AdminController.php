@@ -22,10 +22,12 @@ class AdminController extends Controller
 
     function showGameLogs(){
         $gameLogs = GameLog::all();
+        $user = User::where('id', Auth::user()->id)->first();
 
         return view('gameLogs', [
             'page'=>'ADMIN: See game logs',
-            'gameLogs'=>$gameLogs
+            'gameLogs'=>$gameLogs,
+            'user'=>$user
         ]);
     }
 

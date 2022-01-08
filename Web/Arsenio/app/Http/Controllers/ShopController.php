@@ -18,7 +18,14 @@ class ShopController extends Controller
         $itemStudent = ItemStudentRelation::where('student_id', $student->student_id)->get();
 
         if($showItemDetail == 'show'){
-            return back()->with('itemDesc', 'Item ' . $items[$item_id - 1]->name . ': ' . $items[$item_id - 1]->description);
+            return view('shop', [
+                'page'=>'TOKO',
+                'student'=>$student,
+                'user'=>$student->user,
+                'items'=> $items,
+                'itemStudent' => ItemStudentRelation::where('student_id', $student->student_id)->get(),
+                'itemDesc' => 'Item ' . $items[$item_id - 1]->name . ': ' . $items[$item_id - 1]->description
+            ]);
         }
 
         GameLog::create([

@@ -43,7 +43,7 @@
         <h1>Kami mendeteksi ukuran layar web Anda tidak memenuhi syarat</h1>
         <br>
         <br>
-        <h3>Silahkan mengunduh permainan kami melalui link ini untuk melanjutkan permainan</h3>
+        <h3>Silahkan mengunduh permainan kami versi mobile <a class="text-white" href="https://drive.google.com/file/d/1yS_fyZGlxQEAcvhg3vDdefn1jpj_mPGw/view?usp=sharing">DISINI</a></h3>
     </div>
 </body>
 </html>
