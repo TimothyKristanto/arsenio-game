@@ -10,7 +10,7 @@
             
             <div class="form-group mt-3">
                 <label for="question">Pertanyaan</label>
-                <input type="text" class="form-control" name="question" id="question" value="{{ $question->question }}" required>
+                <input type="text" class="form-control" name="question" id="question" required>
             </div>
 
             <div class="form-group mt-3">
