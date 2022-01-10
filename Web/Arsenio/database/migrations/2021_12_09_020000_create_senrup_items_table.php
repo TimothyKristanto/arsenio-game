@@ -17,7 +17,6 @@ class CreateSenrupItemsTable extends Migration
             $table->id('item_id');
             $table->string('name');
             $table->string('image');
-            $table->integer('amount');
             $table->integer('single_price');
             $table->text('description');
             $table->timestamps();
