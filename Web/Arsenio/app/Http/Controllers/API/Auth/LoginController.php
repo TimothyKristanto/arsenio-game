@@ -36,7 +36,7 @@ class LoginController extends Controller
                 if (Auth::attempt($user)) {
                     $user = User::findOrFail(Auth::id());
 
-                    $response = Http::asForm()->post('http://arsenio.test/oauth/token', [
+                    $response = Http::asForm()->post('https://playarsenio.000webhostapp.com/oauth/token', [
                         'grant_type' => 'password',
                         'client_id' => $this->client->id,
                         'client_secret' => $this->client->secret,
@@ -71,7 +71,7 @@ class LoginController extends Controller
             'refresh_token'=>'refresh token diperlukan',
         ]);
 
-        $response = Http::asForm()->post('http://arsenio.test/oauth/token', [
+        $response = Http::asForm()->post('https://playarsenio.000webhostapp.com/oauth/token', [
             'grant_type' => 'refresh_token',
             'refresh_token' => $request->refresh_token,
             'client_id' => $this->client->id,
