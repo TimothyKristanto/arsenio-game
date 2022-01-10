@@ -146,7 +146,7 @@ class BattleController extends Controller
             }
 
             if($userHealth == 'r'){
-                $userHealth = Student::where('student_id', Auth::user()->id)->first()->characterExp->health;
+                $userHealth = Student::where('user_id', Auth::user()->id)->first()->characterExp->health;
             }
 
             $battleStatus = '';
